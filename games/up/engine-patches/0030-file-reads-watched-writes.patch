@@ -1,0 +1,17 @@
+diff --git a/host/src/fileio.cpp b/host/src/fileio.cpp
+--- a/host/src/fileio.cpp
++++ b/host/src/fileio.cpp
+@@ -90,11 +90,8 @@
+     if (size && !GuestDisc().Read(f.file.lsn + first, last - first, sectors.data())) return -5;
+     Memory& m = GuestMemory();
+     const u32 skip = f.position - first * kSectorSize;
+-    if (u8* out = m.Translate(buffer, size); out && size) {
+-        std::memcpy(out, sectors.data() + skip, size);
+-    } else {
+-        for (u32 i = 0; i < size; ++i) m.Write(buffer + i, sectors[skip + i], 1);
+-    }
++    // WriteBytes: a plain copy, or (while writes are watched) every byte through Write, seen.
++    m.WriteBytes(buffer, sectors.data() + skip, size);
+     f.position += size;
+     return s32(size);
+ }
