@@ -1,20 +1,19 @@
 entries:
   PCSX2 Savestate Version.id  size=36  compressed=36  method=0
-  PCSX2 Internal Structures.dat  size=129962  compressed=2622  method=93
-  eeMemory.bin  size=33554432  compressed=1886275  method=93
-  iopMemory.bin  size=2097152  compressed=92228  method=93
-  eeHwRegs.bin  size=65536  compressed=173  method=93
+  PCSX2 Internal Structures.dat  size=129962  compressed=2540  method=93
+  eeMemory.bin  size=33554432  compressed=1886066  method=93
+  iopMemory.bin  size=2097152  compressed=92230  method=93
+  eeHwRegs.bin  size=65536  compressed=154  method=93
   iopHwRegs.bin  size=65536  compressed=202  method=93
-  Scratchpad.bin  size=16384  compressed=157  method=93
+  Scratchpad.bin  size=16384  compressed=18  method=93
   vu0Memory.bin  size=4096  compressed=18  method=93
   vu1Memory.bin  size=16384  compressed=18  method=93
   vu0MicroMem.bin  size=4096  compressed=18  method=93
   vu1MicroMem.bin  size=16384  compressed=25  method=93
-  SPU2.bin  size=2178992  compressed=283  method=93
+  SPU2.bin  size=2178992  compressed=281  method=93
   USB.bin  size=8491  compressed=85  method=93
   PAD.bin  size=228  compressed=86  method=93
-  GS.bin  size=4194813  compressed=8951  method=93
-  Screenshot.png  size=17046  compressed=17046  method=0
+  GS.bin  size=4194813  compressed=179  method=93
 eeMemory: 33554432 bytes
 0x00795F70 = 0x00000000
 0x00795F74 = 0x00000000
@@ -38,7 +37,7 @@ eeMemory: 33554432 bytes
 0x00331230 = 0x27BDFFD0
 0x0043E880 = 0x27BDFFA0
 0x009E40B0 = 0x00000000
-non-zero pages: 1511 of 8192
+non-zero pages: 1510 of 8192
   0x00000000..0x00018000
   0x00019000..0x00025000
   0x00075000..0x00077000
@@ -56,4 +55,4 @@ non-zero pages: 1511 of 8192
   0x007B6000..0x007B8000
   0x007BD000..0x007BE000
   0x01FA8000..0x01FA9000
-  0x01FFE000..0x02000000
+  0x01FFF000..0x02000000
