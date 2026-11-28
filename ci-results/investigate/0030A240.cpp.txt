@@ -1,0 +1,56 @@
+void F_0030A240(lifted::Context& c) {
+    const u32 entry_ra = (u32)c.r[31], entry_sp = (u32)c.r[29];
+    (void)entry_ra; (void)entry_sp;
+    c.r[29] = lifted::Sx32((u32)c.r[29] + 0xFFFFFFB0u);
+    generated::Write64((u32)c.r[29] + 0x30u, c.r[31]);
+    { u32 q = ((u32)c.r[29] + 0x20u) & ~0xFu; generated::Write64(q, c.r[18]); generated::Write64(q + 8, c.rh[18]); }
+    { u32 q = ((u32)c.r[29] + 0x10u) & ~0xFu; generated::Write64(q, c.r[17]); generated::Write64(q + 8, c.rh[17]); }
+    c.r[18] = c.r[4] + 0ull;
+    { u32 q = ((u32)c.r[29] + 0x0u) & ~0xFu; generated::Write64(q, c.r[16]); generated::Write64(q + 8, c.rh[16]); }
+    c.r[17] = c.r[6] + 0ull;
+    c.r[2] = generated::ReadS32((u32)c.r[5] + 0x0u);
+    c.r[4] = lifted::Sx32((u32)c.r[18] + 0x19Cu);
+    generated::Write32((u32)c.r[29] + 0x48u, (u32)c.r[2]);
+    c.r[5] = lifted::Sx32((u32)c.r[29] + 0x48u); c.r[31] = 0x0030A270ull; lifted::Call(c, 0x003097C0u);
+    { bool t; t = c.r[2] == 0ull; if (t) goto L_0030A280; }
+    c.r[2] = generated::ReadS16((u32)c.r[2] + 0x4u); goto L_0030A284;
+L_0030A280:
+    c.r[2] = lifted::Sx32((u32)0ull + 0xFFFFFFFFu);
+L_0030A284:
+    c.r[16] = (c.r[2] << 48);
+    c.r[16] = (u64)((s64)c.r[16] >> 48);
+    c.r[2] = generated::ReadS32((u32)c.r[18] + 0x198u);
+    c.r[3] = lifted::Sx32((u32)c.r[16] << 2);
+    c.r[3] = lifted::Sx32((u32)c.r[3] + (u32)c.r[16]);
+    c.r[3] = lifted::Sx32((u32)c.r[3] << 1);
+    c.r[3] = lifted::Sx32((u32)c.r[3] + (u32)c.r[16]);
+    c.r[3] = lifted::Sx32((u32)c.r[3] << 2);
+    c.r[3] = lifted::Sx32((u32)c.r[2] + (u32)c.r[3]);
+    c.r[2] = generated::ReadS32((u32)c.r[3] + 0x28u);
+    c.r[2] = lifted::Sx32((u32)c.r[2] + 0x1u);
+    generated::Write32((u32)c.r[3] + 0x28u, (u32)c.r[2]);
+    c.r[2] = generated::ReadS32((u32)c.r[3] + 0x8u);
+    { bool t; t = c.r[2] == 0ull; if (t) goto L_0030A2E8; }
+    { u32 target = (u32)c.r[2]; c.r[31] = 0x0030A2C8ull; lifted::Call(c, target); }
+    c.r[4] = c.r[18] + 0ull;
+    c.r[6] = c.r[17] + 0ull;
+    c.r[7] = c.r[16] + 0ull;
+    c.r[5] = c.r[2] + 0ull;
+    c.r[8] = lifted::Sx32((u32)0ull + 0x8u); c.r[31] = 0x0030A2E0ull; lifted::Call(c, 0x0030B0D0u);
+    c.r[31] = generated::ReadU64((u32)c.r[29] + 0x30u); goto L_0030A310;
+L_0030A2E8:
+    c.r[2] = generated::ReadS32((u32)c.r[3] + 0xCu);
+    { u32 target = (u32)c.r[2]; c.r[31] = 0x0030A2F4ull; lifted::Call(c, target); }
+    c.r[4] = c.r[18] + 0ull;
+    c.r[6] = c.r[17] + 0ull;
+    c.r[7] = c.r[16] + 0ull;
+    c.r[5] = c.r[2] + 0ull;
+    c.r[8] = lifted::Sx32((u32)0ull + 0x8u); c.r[31] = 0x0030A30Cull; lifted::Call(c, 0x0030B0D0u);
+    c.r[31] = generated::ReadU64((u32)c.r[29] + 0x30u);
+L_0030A310:
+    { u32 q = ((u32)c.r[29] + 0x20u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[18] = lo; c.rh[18] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x10u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[17] = lo; c.rh[17] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x0u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[16] = lo; c.rh[16] = hi; }
+    c.r[29] = lifted::Sx32((u32)c.r[29] + 0x50u); return;
+    lifted::TailCall(c, 0x0030A324u, entry_ra, entry_sp);  /* runs off the end */
+}

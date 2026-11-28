@@ -1,0 +1,6 @@
+functions scanned: 19502
+loads of the wanted ids: 4
+func_003DD378  0x003dd3c0  id 0x003dd2a0  next calls: func_003DC3A0
+func_0044CDC0  0x0044cdec  id 0x01000001  next calls: func_003DF798
+func_0044D190  0x0044d1b4  id 0x0044d4a0  next calls: func_002DCB70
+func_0044D4A0  0x0044d4cc  id 0x01000002  next calls: func_003DFC38 func_003E0050

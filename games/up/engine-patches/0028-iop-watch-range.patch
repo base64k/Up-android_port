@@ -1,0 +1,90 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -22,7 +22,10 @@
+ 
+ #include <chrono>
+ #include <cstdio>
++#include <cstdlib>
+ #include <cstring>
++#include <deque>
++#include <string>
+ #include <algorithm>
+ #include <set>
+ #include <thread>
+@@ -187,10 +190,19 @@
+ 
+ namespace {
+ 
+-// What a stop on a bad instruction shows: the instruction that jumped there (the
+-// one run before it) and the registers of the thread that ran it. A word that is
+-// data (here 0x00000001 in an IOP buffer) means a jump to a stale or wrong address.
++// The last changes of the watched IOP range (PS2HOST_IOP_WATCH, see WatchIopRange),
++// kept to be printed when the IOP stops on a bad instruction.
++std::deque<std::string>& IopWatchRing() {
++    static std::deque<std::string> ring;
++    return ring;
++}
++
++// What a stop on a bad instruction shows: the watched range's last changes (the
++// stop's report), the instruction that jumped there (the one run before it) and
++// the registers of the thread that ran it. A word that is data (here 0x00000001
++// in an IOP buffer) means a jump to a stale or wrong address.
+ std::string JumpInfo(Vm& vm, const Context& c) {
++    for (const std::string& line : IopWatchRing()) std::fprintf(stderr, "%s\n", line.c_str());
+     std::string s = " (after the instruction at " + Hex(vm.previous_executing) + " = " +
+                     Hex(vm.Read(vm.previous_executing, 4)) + "; registers";
+     for (int i = 0; i < 32; ++i) s += (i % 8 == 0 ? "\n  r" : " r") + std::to_string(i) + "=" + Hex(c.r[i]);
+@@ -495,6 +507,44 @@
+         std::fprintf(stderr, "[host] LOADER DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
+ }
+ 
++// Diagnostic (PS2HOST_IOP_WATCH=LO-HI, IOP addresses in hex): each byte of that
++// range that changed since the last scheduling point is kept (the last 2000) and
++// printed when the IOP stops on a bad instruction, with the thread that ran last
++// and its last instruction. A change made by a DMA (the EE's SIF transfers) comes
++// in between those, so the last instruction shows where it was when it was seen.
++void WatchIopRange(Vm& vm) {
++    static bool checked = false, armed = false;
++    static u32 lo = 0, size = 0;
++    static std::vector<u8> seen;
++    if (!checked) {
++        checked = true;
++        unsigned a = 0, b = 0;
++        const char* env = std::getenv("PS2HOST_IOP_WATCH");
++        if (env && std::sscanf(env, "%x-%x", &a, &b) == 2 && b > a) {
++            lo = a;
++            size = b - a;
++            if (const u8* p = vm.At(lo, size)) {
++                seen.assign(p, p + size);
++                armed = true;
++            }
++        }
++    }
++    if (!armed) return;
++    const u8* p = vm.At(lo, size);
++    if (!p) return;
++    for (u32 i = 0; i < size; ++i) {
++        if (p[i] == seen[i]) continue;
++        char line[160];
++        std::snprintf(line, sizeof line, "[iopwatch] %08X: %02X -> %02X, thread %u, last instruction %08X, at %llu us",
++                      unsigned(lo + i), unsigned(seen[i]), unsigned(p[i]), unsigned(vm.current),
++                      unsigned(vm.executing), static_cast<unsigned long long>(vm.NowUs()));
++        std::deque<std::string>& ring = IopWatchRing();
++        ring.emplace_back(line);
++        if (ring.size() > 2000) ring.pop_front();
++        seen[i] = p[i];
++    }
++}
++
+ void Run(u64 slice) {
+     Vm& vm = TheVm();
+     if (vm.threads.empty() && vm.alarms.empty() && vm.completions.empty() &&
+@@ -502,6 +552,7 @@
+     const u64 start = vm.instructions;
+     bool idle = !g_iop_held;        // nothing to run since the last Run: the sound may catch up
+     for (;;) {
++        WatchIopRange(vm);
+         ProbeLoader(vm);
+         const bool behind = SoundInterrupts(vm, idle);
+         idle = false;

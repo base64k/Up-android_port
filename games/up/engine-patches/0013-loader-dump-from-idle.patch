@@ -1,0 +1,75 @@
+diff --git a/host/include/ps2host/iop_vm.h b/host/include/ps2host/iop_vm.h
+index 7aa9184..ec7f1cb 100644
+--- a/host/include/ps2host/iop_vm.h
++++ b/host/include/ps2host/iop_vm.h
+@@ -62,6 +62,8 @@ void RpcCall(std::uint32_t server, std::uint32_t procedure, std::uint32_t size,
+    busy IOP can't hang the EE; the EE's idle wait gives it a short slice, so
+    a vertical blank is never kept waiting). */
+ void Run(std::uint64_t instructions = 20'000'000);
++// Log-only: the module loader's pc and the code around it.
++void DumpLoaderPc();
+ 
+ /* Log every library call a module makes (--iop-trace). */
+ void SetTrace(bool on);
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index f529b24..6a99b6e 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -447,6 +447,7 @@ void IopRpcAnswer(Vm& vm, const RpcRequest& done, u32 answer) {
+ 
+ // Log-only probe: the module loader's thread, while its start has not returned.
+ u32 g_probe_thread = 0;
++u32 g_loader_thread = 0;  // set at each module start, never cleared (for DumpLoaderPc)
+ bool g_probe_done = false;
+ std::chrono::steady_clock::time_point g_probe_start;
+ 
+@@ -466,6 +467,23 @@ void ProbeLoader(Vm& vm) {
+         std::fprintf(stderr, "[host] PROBE DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
+ }
+ 
++// Log-only: the loader thread's pc and the code around it, from any thread.
++void DumpLoaderPc() {
++    if (!g_loader_thread) return;
++    Vm& vm = TheVm();
++    auto it = vm.threads.find(g_loader_thread);
++    if (it == vm.threads.end()) {
++        std::fprintf(stderr, "[host] LOADER: thread %u is gone\n", unsigned(g_loader_thread));
++        return;
++    }
++    const u32 pc = it->second.c.pc;
++    std::fprintf(stderr, "[host] LOADER: pc %08X ra %08X sp %08X wait %d ready %d (current thread %u)\n",
++                 unsigned(pc), unsigned(it->second.c.r[31]), unsigned(it->second.c.r[29]),
++                 int(it->second.wait), int(it->second.ready), unsigned(vm.current));
++    for (u32 a = pc - 0x100; a <= pc + 0x40; a += 4)
++        std::fprintf(stderr, "[host] LOADER DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
++}
++
+ void Run(u64 slice) {
+     Vm& vm = TheVm();
+     if (vm.threads.empty() && vm.alarms.empty() && vm.completions.empty() &&
+@@ -714,6 +732,7 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     const auto wall_start = std::chrono::steady_clock::now();
+     bool dumped = false;
+     g_probe_thread = loader.id;
++    g_loader_thread = loader.id;
+     g_probe_done = false;
+     g_probe_start = wall_start;
+     while (vm.threads[loader.id].wait != Wait::Dormant && vm.NowUs() < deadline) {
+diff --git a/host/src/threads.cpp b/host/src/threads.cpp
+index 4ad200c..4896f0d 100644
+--- a/host/src/threads.cpp
++++ b/host/src/threads.cpp
+@@ -1094,11 +1094,13 @@ void RunThreads(const lifted::Context& initial, u32 entry, s64 loop_budget) {
+                 if (!TakeVblank(s)) continue;
+             }
+             DeliverFrame();
++            if (idle == 300) iop::DumpLoaderPc();
+             if (idle == 0)
+                 std::fprintf(stderr, "[host] EE idle: every thread waits, from %lld ms (wall)\n",
+                              (long long)std::chrono::duration_cast<std::chrono::milliseconds>(
+                                  std::chrono::steady_clock::now().time_since_epoch()).count() % 10000000);
+             if (++idle > kIdleFrames) {
++                iop::DumpLoaderPc();
+                 std::fprintf(stderr, "[host] EE idle: giving up after %llu frames, at %lld ms (wall)\n",
+                              (unsigned long long)idle,
+                              (long long)std::chrono::duration_cast<std::chrono::milliseconds>(

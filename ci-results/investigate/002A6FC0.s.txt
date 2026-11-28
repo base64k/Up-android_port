@@ -1,0 +1,39 @@
+== original assembly of 0x002A6FC0
+/**************************************************************************
+ * func_002A6FC0
+ *
+ * address      : 0x002a6fc0 .. 0x002a7030  (112 bytes, 28 instructions)
+ * discovered by: called
+ * called from  : 0x002a80e0, 0x002a816c
+ */
+glabel func_002A6FC0
+  002a6fc0  addiu      $sp, $sp, -0x50
+  002a6fc4  sd         $ra, 0x40($sp)
+  002a6fc8  sq         $s2, 0x30($sp)
+  002a6fcc  sq         $s1, 0x20($sp)
+  002a6fd0  daddu      $s2, $a0, $zero
+  002a6fd4  sq         $s0, 0x10($sp)
+  002a6fd8  daddu      $s1, $a1, $zero
+  002a6fdc  swc1       $f20, 0x0($sp)
+  002a6fe0  daddu      $s0, $a2, $zero
+  002a6fe4  jal        func_002A6D10
+  002a6fe8  mov.s      $f20, $f12                              # delay slot
+  002a6fec  daddu      $a1, $s1, $zero
+  002a6ff0  daddu      $a0, $s2, $zero
+  002a6ff4  jal        func_002A6EC0
+  002a6ff8  mov.s      $f12, $f20                              # delay slot
+  002a6ffc  lui        $v0, 0x3f80
+  002a7000  daddu      $a0, $s2, $zero
+  002a7004  mtc1       $v0, $f0
+  002a7008  daddu      $a1, $s0, $zero
+  002a700c  jal        func_002A6EC0
+  002a7010  sub.s      $f12, $f0, $f20                         # delay slot
+  002a7014  ld         $ra, 0x40($sp)
+  002a7018  lwc1       $f20, 0x0($sp)
+  002a701c  lq         $s2, 0x30($sp)
+  002a7020  lq         $s1, 0x20($sp)
+  002a7024  lq         $s0, 0x10($sp)
+  002a7028  jr         $ra
+  002a702c  addiu      $sp, $sp, 0x50                          # delay slot
+/* end of func_002A6FC0 */
+

@@ -1,0 +1,86 @@
+diff --git a/host/src/host.cpp b/host/src/host.cpp
+index ef94d7f..f17db64 100644
+--- a/host/src/host.cpp
++++ b/host/src/host.cpp
+@@ -23,6 +23,8 @@
+ #include <utility>
+ 
+ #include "ps2host/disc.h"
++
++namespace ps2host { extern std::string g_program_path; }
+ #include "ps2host/gs.h"
+ #include "ps2host/gs_blend.h"
+ #include "ps2host/iop_vm.h"
+@@ -950,6 +952,16 @@ int Run(const Options& options) {
+         // own start-up code then asks for its real one (SetupThread).
+         c.r[29] = kRdramSize - 0x10;
+         c.r[31] = 0;
++        // The program's own path, its argv[0] (the kernel gives it at SetupThread): the disc's
++        // boot path, or the ELF's name under cdrom0 for a run without a disc.
++        {
++            std::string self = options.disc_path.empty() ? std::string() : GuestDisc().BootPath();
++            if (self.empty()) {
++                const std::size_t slash = options.elf_path.find_last_of("/\\");
++                self = "cdrom0:\\" + options.elf_path.substr(slash == std::string::npos ? 0 : slash + 1) + ";1";
++            }
++            ps2host::g_program_path = self;
++        }
+         std::fprintf(stderr, "[host] entry %s\n", Describe(entry).c_str());
+         RunThreads(c, entry, options.loop_budget);
+     } catch (const GuestExit& exit) {
+diff --git a/host/src/kernel.cpp b/host/src/kernel.cpp
+index a89aa3a..ab13086 100644
+--- a/host/src/kernel.cpp
++++ b/host/src/kernel.cpp
+@@ -9,7 +9,9 @@
+  * so the report shows what the game asked for.
+  */
+ 
++#include <algorithm>
+ #include <atomic>
++#include <cstring>
+ #include <cstdio>
+ #include <map>
+ #include <string>
+@@ -19,6 +21,9 @@
+ 
+ namespace ps2host {
+ 
++// The program's own path, the kernel's argv[0] for it (set by the host before the run).
++std::string g_program_path;
++
+ namespace {
+ 
+ struct Kernel {
+@@ -97,6 +102,23 @@ const char* SyscallName(s32 service) {
+     return "?";
+ }
+ 
++// The arguments the kernel gives a program at SetupThread: a struct sargs at `args`
++// (argc, argv[16], payload[256]), which the start-up code (crt0) hands to main. argc = 1 and
++// argv[0] = the program's own path (cdrom0:\NAME;1), kept in the payload.
++static void WriteProgramArgs(u32 args) {
++    constexpr u32 kArgv = 4, kPayload = 4 + 16 * 4, kPayloadSize = 256;
++    Memory& m = GuestMemory();
++    u8* block = m.Translate(args, kPayload + kPayloadSize);
++    if (!block) return;
++    const std::size_t n = std::min<std::size_t>(g_program_path.size(), kPayloadSize - 1);
++    std::memset(block, 0, kPayload + kPayloadSize);
++    std::memcpy(block + kPayload, g_program_path.data(), n);
++    const u32 argc = 1, argv0 = args + kPayload;
++    std::memcpy(block, &argc, 4);
++    std::memcpy(block + kArgv, &argv0, 4);
++    std::fprintf(stderr, "[host] SetupThread: program args at %08X (argc 1, argv[0] \"%s\")\n", unsigned(args), g_program_path.c_str());
++}
++
+ void KernelSyscall(lifted::Context& c) {
+     const s32 service = s32(u32(c.r[3]));
+     const s32 number = service < 0 ? -service : service;
+@@ -147,6 +169,7 @@ void KernelSyscall(lifted::Context& c) {
+             // is the top of its stack, less the kernel's argument area.
+             const u32 base = stack == 0xFFFFFFFFu ? kRdramSize - size : stack;
+             k.stack_base = base;
++            if (const u32 args = Arg(c, 3)) WriteProgramArgs(args);
+             Return(c, base + size - 0x2A0);
+             return;
+         }

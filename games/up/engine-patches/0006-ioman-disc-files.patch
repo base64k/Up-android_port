@@ -1,0 +1,98 @@
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index 04dda20..fe7016f 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -559,9 +559,81 @@ Outcome SifCallRpcClient(Vm& vm, Context& c) {
+     return Outcome::Block;
+ }
+ 
+-// The IOP file manager (ioman) is not modelled: an open fails (-1, no such file),
+-// and the calls on an open file fail too. The trace shows what was asked.
+-Outcome IomanFail(Vm&, Context& c) { return Ret(c, u32(-1)); }
++// The IOP file manager (ioman), for the disc: a module opens a disc file, reads
++// and seeks it, and closes it. A descriptor names an open file's bytes and
++// its position; ioman_open reads the whole file from the disc at once.
++struct OpenDiscFile {
++    std::vector<u8> bytes;
++    u32 pos = 0;
++};
++
++std::map<u32, OpenDiscFile>& OpenDiscFiles() {
++    static std::map<u32, OpenDiscFile> files;
++    return files;
++}
++
++u32& NextDiscFd() {
++    static u32 next = 3;                            // 0-2: the console's stdio
++    return next;
++}
++
++// ioman_open(name, flags, ...): "cdrom0:\\DIR\\FILE;1" as the SDK writes it.
++// A file the disc does not have is -2 (ENOENT); the trace names the file.
++Outcome IomanOpen(Vm& vm, Context& c) {
++    const u32 name = A(vm, c, 0);
++    std::string path;
++    for (u32 i = 0; i < 256; ++i) {
++        const char ch = char(vm.Read(name + i, 1));
++        if (!ch) break;
++        path += ch;
++    }
++    if (path.rfind("cdrom0:", 0) == 0) path = path.substr(7);
++    OpenDiscFile file;
++    if (!GuestDisc().IsOpen() || !GuestDisc().ReadFile(path, &file.bytes)) {
++        Note("iop open " + path, "IOP: open " + path + ": not on the disc");
++        return Ret(c, u32(-2));
++    }
++    const u32 fd = NextDiscFd()++;
++    Note("iop open " + path, "IOP: open " + path + " as descriptor " + std::to_string(fd) + " (" +
++                                 std::to_string(file.bytes.size()) + " bytes)");
++    OpenDiscFiles()[fd] = std::move(file);
++    return Ret(c, fd);
++}
++
++// iomanX_close(fd)
++Outcome IomanClose(Vm& vm, Context& c) {
++    const u32 fd = A(vm, c, 0);
++    if (!OpenDiscFiles().erase(fd)) return Ret(c, u32(-9));          // EBADF
++    return Ret(c, 0);
++}
++
++// iomanX_read(fd, buffer, size): the bytes left, at most size.
++Outcome IomanRead(Vm& vm, Context& c) {
++    const u32 fd = A(vm, c, 0), buffer = A(vm, c, 1), size = A(vm, c, 2);
++    auto found = OpenDiscFiles().find(fd);
++    if (found == OpenDiscFiles().end()) return Ret(c, u32(-9));
++    OpenDiscFile& file = found->second;
++    const u32 left = file.pos < file.bytes.size() ? u32(file.bytes.size()) - file.pos : 0;
++    const u32 n = std::min(size, left);
++    for (u32 i = 0; i < n; ++i) vm.Write(buffer + i, file.bytes[file.pos + i], 1);
++    file.pos += n;
++    return Ret(c, n);
++}
++
++// iomanX_lseek(fd, offset, whence): SEEK_SET 0, SEEK_CUR 1, SEEK_END 2.
++Outcome IomanLseek(Vm& vm, Context& c) {
++    const u32 fd = A(vm, c, 0);
++    const s32 offset = s32(A(vm, c, 1));
++    const u32 whence = A(vm, c, 2);
++    auto found = OpenDiscFiles().find(fd);
++    if (found == OpenDiscFiles().end()) return Ret(c, u32(-9));
++    OpenDiscFile& file = found->second;
++    const s64 base = whence == 0 ? 0 : whence == 1 ? s64(file.pos) : s64(file.bytes.size());
++    const s64 target = base + offset;
++    if (target < 0) return Ret(c, u32(-22));                          // EINVAL
++    file.pos = u32(target);
++    return Ret(c, file.pos);
++}
+ 
+ // ---------------------------------------------------------------- semaphores
+ 
+@@ -1469,7 +1541,7 @@ const Map& Table() {
+         {{"thmsgbx", 8}, ReceiveMbx}, {{"thmsgbx", 9}, PollMbx},
+         {{"timrman", 4}, AllocHardTimer}, {{"timrman", 6}, FreeHardTimer},
+         {{"sifcmd", 15}, SifBindRpcClient}, {{"sifcmd", 16}, SifCallRpcClient},
+-        {{"ioman", 4}, IomanFail}, {{"ioman", 5}, IomanFail}, {{"ioman", 6}, IomanFail}, {{"ioman", 8}, IomanFail},
++        {{"ioman", 4}, IomanOpen}, {{"ioman", 5}, IomanClose}, {{"ioman", 6}, IomanRead}, {{"ioman", 8}, IomanLseek},
+         {{"timrman", 7}, SetTimerMode}, {{"timrman", 9}, SetTimerCounter}, {{"timrman", 10}, GetTimerCounter},
+         {{"timrman", 11}, SetTimerCompare}, {{"timrman", 20}, SetTimerHandler}, {{"timrman", 21}, SetOverflowHandler},
+         {{"timrman", 22}, SetupHardTimer},

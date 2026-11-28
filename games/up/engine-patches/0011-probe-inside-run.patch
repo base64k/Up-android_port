@@ -1,0 +1,58 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index 6436ac3..6c1d3dd 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -445,6 +445,27 @@ void IopRpcAnswer(Vm& vm, const RpcRequest& done, u32 answer) {
+     if (done.blocking) WakeRpcCaller(vm, done.client);
+ }
+ 
++// Log-only probe: the module loader's thread, while its start has not returned.
++u32 g_probe_thread = 0;
++bool g_probe_done = false;
++std::chrono::steady_clock::time_point g_probe_start;
++
++void ProbeLoader(Vm& vm) {
++    if (!g_probe_thread || g_probe_done) return;
++    if (std::chrono::steady_clock::now() - g_probe_start < std::chrono::milliseconds(20)) return;
++    g_probe_done = true;
++    std::fprintf(stderr, "[host] PROBE: current thread %u, instructions %llu\n", unsigned(vm.current),
++                 (unsigned long long)vm.instructions);
++    for (const auto& [id, t] : vm.threads)
++        std::fprintf(stderr, "[host] PROBE thread %u: pc %08X ra %08X sp %08X wait %d ready %d\n", unsigned(id),
++                     unsigned(t.c.pc), unsigned(t.c.r[31]), unsigned(t.c.r[29]), int(t.wait), int(t.ready));
++    auto it = vm.threads.find(g_probe_thread);
++    if (it == vm.threads.end()) return;
++    const u32 pc = it->second.c.pc;
++    for (u32 a = pc - 0x100; a <= pc + 0x40; a += 4)
++        std::fprintf(stderr, "[host] PROBE DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
++}
++
+ void Run(u64 slice) {
+     Vm& vm = TheVm();
+     if (vm.threads.empty() && vm.alarms.empty() && vm.completions.empty() &&
+@@ -452,6 +473,7 @@ void Run(u64 slice) {
+     const u64 start = vm.instructions;
+     bool idle = !g_iop_held;        // nothing to run since the last Run: the sound may catch up
+     for (;;) {
++        ProbeLoader(vm);
+         const bool behind = SoundInterrupts(vm, idle);
+         idle = false;
+         // Completion callbacks of finished SIF DMA (sceSifSetDmaIntr), as interrupts.
+@@ -688,6 +710,9 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     const u64 deadline = vm.NowUs() + 5000000;      // it may wait on timers: real time
+     const auto wall_start = std::chrono::steady_clock::now();
+     bool dumped = false;
++    g_probe_thread = loader.id;
++    g_probe_done = false;
++    g_probe_start = wall_start;
+     while (vm.threads[loader.id].wait != Wait::Dormant && vm.NowUs() < deadline) {
+         Run(1000000);       // short slices, so the look below comes soon after a spin starts
+         if (!dumped && std::chrono::steady_clock::now() - wall_start > std::chrono::milliseconds(200)) {
+@@ -708,6 +733,7 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     *result = s32(done.c.r[2]);
+     vm.Free(done.stack);
+     vm.threads.erase(loader.id);
++    g_probe_thread = 0;
+     std::fprintf(stderr, "[host] IOP: %s's start returned %d; running the IOP until it waits\n", path.c_str(), int(*result));
+     Run();
+     std::fprintf(stderr, "[host] IOP: %s loaded\n", path.c_str());

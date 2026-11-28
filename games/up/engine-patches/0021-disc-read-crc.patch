@@ -1,0 +1,50 @@
+diff --git a/host/include/ps2host/disc.h b/host/include/ps2host/disc.h
+index 16d096b..b3a3b3b 100644
+--- a/host/include/ps2host/disc.h
++++ b/host/include/ps2host/disc.h
+@@ -43,6 +43,7 @@ public:
+ 
+     /* Read `count` sectors' 2048 data bytes from `lsn`; false past the end. */
+     bool Read(u32 lsn, u32 count, u8* out);
++    bool ReadUnlogged(u32 lsn, u32 count, u8* out);
+     /* Read sectors as sceCdRead's data pattern asks: 2048 bytes (0), 2328 (1:
+        Mode 2 data with the form 2 area) or 2340 (2: header, subheader, data).
+        An .iso has no raw bytes: the header is made, the subheader zero. */
+diff --git a/host/src/disc.cpp b/host/src/disc.cpp
+index de6ca1a..f2ebe34 100644
+--- a/host/src/disc.cpp
++++ b/host/src/disc.cpp
+@@ -143,7 +143,33 @@ bool Disc::ReadBytes(u64 offset, u64 length, u8* out) {
+     return std::fread(out, 1, size_t(length), file_) == length;
+ }
+ 
++// CRC-32 (the zlib/PNG polynomial): the same value a checker gets from zlib.crc32.
++static u32 Crc32(const u8* p, std::size_t n) {
++    static u32 table[256];
++    static bool made = false;
++    if (!made) {
++        for (u32 i = 0; i < 256; ++i) {
++            u32 c = i;
++            for (int k = 0; k < 8; ++k) c = (c & 1) ? 0xEDB88320u ^ (c >> 1) : c >> 1;
++            table[i] = c;
++        }
++        made = true;
++    }
++    u32 crc = 0xFFFFFFFFu;
++    for (std::size_t i = 0; i < n; ++i) crc = table[(crc ^ p[i]) & 0xFF] ^ (crc >> 8);
++    return ~crc;
++}
++
++// Every read of the disc, with the CRC-32 of the 2048-byte sectors it gave.
++// scripts/disc_crc_check.py compares each with the same sectors of the image.
+ bool Disc::Read(u32 lsn, u32 count, u8* out) {
++    const bool ok = ReadUnlogged(lsn, count, out);
++    if (ok) std::fprintf(stderr, "[disc] read lsn %u count %u crc %08X\n", lsn, count,
++                         Crc32(out, std::size_t(count) * kSectorSize));
++    return ok;
++}
++
++bool Disc::ReadUnlogged(u32 lsn, u32 count, u8* out) {
+     if (patched_.empty() && files_.empty()) return BaseRead(lsn, count, out);
+     // The overlay's sectors one at a time, a run of the image's own at once.
+     for (u32 i = 0; i < count;) {

@@ -1,0 +1,1 @@
+command: games/up/build/linux/up/up games/up/extracted/SLUS_218.64 --disc ... --no-memcard --audio --iop-trace --virtual-time --watch-write 0x007A982C --watch-write 0x00795F94 --watch-write 0x00795F70 --timeout 150

@@ -1,0 +1,23 @@
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index fe7016f..2a6173d 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -528,6 +528,18 @@ Outcome SifBindRpcClient(Vm& vm, Context& c) {
+     vm.Write(client + kClientBuf, buffer, 4);
+     vm.Write(client + kClientCbuf, cbuffer, 4);
+     vm.Write(client + kClientServer, server, 4);
++    if (!server) {
++        // The server is not there yet. The library's bind waits for the other
++        // side's answer, so the caller's loop must not spin: this thread waits a
++        // millisecond, and the rest of the system (the EE's answer to the load
++        // that started this module, the EE's registrations) runs before it asks again.
++        if (Thread* t = vm.Current()) {
++            t->until_us = vm.NowUs() + 1000;
++            Return(c, 0);
++            vm.Block(c, Wait::Delay, 0);
++            return Outcome::Block;
++        }
++    }
+     return Ret(c, 0);
+ }
+ 

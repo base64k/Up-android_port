@@ -1,0 +1,229 @@
+=== EE function at 0x003F45F8 ===
+/**************************************************************************
+ * func_003F45F8
+ *
+ * address      : 0x003f45f8 .. 0x003f470c  (276 bytes, 69 instructions)
+ * discovered by: called
+ * called from  : 0x00216aa0, 0x00219758, 0x0022494c, 0x002260c8, 0x00231580, 0x00231628 (+348 more)
+ */
+glabel func_003F45F8
+  003f45f8  daddu      $a3, $a0, $zero
+  003f45fc  or         $t0, $a1, $a3
+  003f4600  andi       $v0, $t0, 0x7
+  003f4604  bne        $v0, $zero, .L004
+  003f4608  daddu      $v1, $a3, $zero                         # delay slot
+  003f460c  andi       $v0, $t0, 0xf
+  003f4610  lui        $t1, 0x101
+  003f4614  ori        $t1, $t1, 0x101
+  003f4618  dsll       $t1, $t1, 16
+  003f461c  ori        $t1, $t1, 0x101
+  003f4620  dsll       $t1, $t1, 16
+  003f4624  ori        $t1, $t1, 0x101
+  003f4628  lui        $a0, 0x8080
+  003f462c  ori        $a0, $a0, 0x8080
+  003f4630  dsll       $a0, $a0, 16
+  003f4634  ori        $a0, $a0, 0x8080
+  003f4638  dsll       $a0, $a0, 16
+  003f463c  ori        $a0, $a0, 0x8080
+  003f4640  bnel       $v0, $zero, .L001
+  003f4644  ld         $t2, 0x0($a1)                           # delay slot
+  003f4648  pcpyld     $t2, $t1, $t1
+  003f464c  lq         $t1, 0x0($a1)
+  003f4650  pcpyld     $t0, $a0, $a0
+  003f4654  psubb      $v0, $t1, $t2
+  003f4658  pnor       $v1, $zero, $t1
+  003f465c  pand       $v0, $v0, $v1
+  003f4660  pand       $v0, $v0, $t0
+  003f4664  pcpyud     $a0, $v0, $t1
+  003f4668  or         $v1, $v0, $a0
+  003f466c  bne        $v1, $zero, .L003
+  003f4670  daddu      $a2, $a3, $zero                         # delay slot
+.L000:
+  003f4674  sq         $t1, 0x0($a2)
+  003f4678  addiu      $a1, $a1, 0x10
+  003f467c  lq         $t1, 0x0($a1)
+  003f4680  psubb      $v0, $t1, $t2
+  003f4684  pnor       $v1, $zero, $t1
+  003f4688  pand       $v0, $v0, $v1
+  003f468c  pand       $v0, $v0, $t0
+  003f4690  pcpyud     $a0, $v0, $t1
+  003f4694  or         $v1, $v0, $a0
+  003f4698  beq        $v1, $zero, .L000
+  003f469c  addiu      $a2, $a2, 0x10                          # delay slot
+  003f46a0  b          .L004
+  003f46a4  daddu      $v1, $a2, $zero                         # delay slot
+.L001:
+  003f46a8  dsubu      $v0, $t2, $t1
+  003f46ac  nor        $v1, $zero, $t2
+  003f46b0  and        $v0, $v0, $v1
+  003f46b4  and        $v0, $v0, $a0
+  003f46b8  bne        $v0, $zero, .L003
+  003f46bc  daddu      $a2, $a3, $zero                         # delay slot
+.L002:
+  003f46c0  sd         $t2, 0x0($a2)
+  003f46c4  addiu      $a1, $a1, 0x8
+  003f46c8  ld         $t2, 0x0($a1)
+  003f46cc  nor        $v0, $zero, $t2
+  003f46d0  dsubu      $v1, $t2, $t1
+  003f46d4  and        $v1, $v1, $v0
+  003f46d8  and        $v1, $v1, $a0
+  003f46dc  beq        $v1, $zero, .L002
+  003f46e0  addiu      $a2, $a2, 0x8                           # delay slot
+.L003:
+  003f46e4  daddu      $v1, $a2, $zero
+.L004:
+  003f46e8  lbu        $v0, 0x0($a1)
+  003f46ec  addiu      $a1, $a1, 0x1
+  003f46f0  sb         $v0, 0x0($v1)
+  003f46f4  sll        $v0, $v0, 24
+  003f46f8  addiu      $v1, $v1, 0x1
+  003f46fc  bne        $v0, $zero, .L004
+  003f4700  nop                                                # delay slot
+  003f4704  jr         $ra
+  003f4708  daddu      $v0, $a3, $zero                         # delay slot
+/* end of func_003F45F8 */
+
+=== EE function at 0x003DDB68 ===
+/**************************************************************************
+ * func_003DDB68
+ *
+ * address      : 0x003ddb68 .. 0x003ddcdc  (372 bytes, 93 instructions)
+ * discovered by: called
+ * called from  : 0x003dcbb8
+ */
+glabel func_003DDB68
+  003ddb68  addiu      $sp, $sp, -0x80
+  003ddb6c  sd         $s5, 0x50($sp)
+  003ddb70  sd         $s4, 0x40($sp)
+  003ddb74  lui        $s5, 0x7a
+  003ddb78  sd         $s3, 0x30($sp)
+  003ddb7c  daddu      $s4, $zero, $zero
+  003ddb80  sd         $s2, 0x20($sp)
+  003ddb84  addiu      $s3, $s5, -0x4e30
+  003ddb88  sd         $s1, 0x10($sp)
+  003ddb8c  daddu      $s2, $a1, $zero
+  003ddb90  sd         $s0, 0x0($sp)
+  003ddb94  daddu      $s1, $zero, $zero
+  003ddb98  sd         $ra, 0x70($sp)
+  003ddb9c  daddu      $s0, $a0, $zero
+  003ddba0  sd         $s6, 0x60($sp)
+  003ddba4  lw         $v0, 0xc($s3)
+  003ddba8  bne        $v0, $zero, .L007
+  003ddbac  addiu      $v0, $zero, -0x1                        # delay slot
+  003ddbb0  jal        func_003E55E0
+  003ddbb4  nop                                                # delay slot
+  003ddbb8  daddu      $s6, $v0, $zero
+  003ddbbc  lui        $a0, 0x2000
+  003ddbc0  lui        $v0, 0x7a
+  003ddbc4  addiu      $v1, $zero, 0x1
+  003ddbc8  addiu      $v0, $v0, -0x4e00
+  003ddbcc  sw         $v1, 0xc($s3)
+  003ddbd0  or         $a2, $v0, $a0
+  003ddbd4  addiu      $t0, $zero, -0x1
+  003ddbd8  sw         $a2, 0x10($s3)
+  003ddbdc  addiu      $a3, $zero, 0xa
+  003ddbe0  addiu      $a1, $zero, 0xd
+  003ddbe4  addiu      $a0, $a2, 0xc
+.L000:
+  003ddbe8  addiu      $s2, $s2, -0x1
+  003ddbec  beql       $s2, $t0, .L003
+  003ddbf0  addiu      $s0, $s5, -0x4e30                       # delay slot
+  003ddbf4  lb         $v0, 0x0($s0)
+  003ddbf8  bne        $v0, $a3, .L001
+  003ddbfc  lbu        $v1, 0x0($s0)                           # delay slot
+  003ddc00  sb         $a1, 0x0($a0)
+  003ddc04  addiu      $s1, $s1, 0x1
+  003ddc08  slti       $v0, $s1, 0x100
+  003ddc0c  beq        $v0, $zero, .L002
+  003ddc10  addiu      $a0, $a0, 0x1                           # delay slot
+  003ddc14  lbu        $v1, 0x0($s0)
+.L001:
+  003ddc18  sb         $v1, 0x0($a0)
+  003ddc1c  addiu      $s1, $s1, 0x1
+  003ddc20  addiu      $s0, $s0, 0x1
+  003ddc24  addiu      $a0, $a0, 0x1
+  003ddc28  slti       $v0, $s1, 0x100
+  003ddc2c  bne        $v0, $zero, .L000
+  003ddc30  addiu      $s4, $s4, 0x1                           # delay slot
+.L002:
+  003ddc34  addiu      $s0, $s5, -0x4e30
+.L003:
+  003ddc38  addiu      $v0, $s1, 0xc
+  003ddc3c  sw         $v0, 0x4($s0)
+  003ddc40  lw         $v1, 0x4($s0)
+  003ddc44  lb         $a1, 0x7($a2)
+  003ddc48  lw         $a0, -0x4e30($s5)
+  003ddc4c  jal        func_003DD760
+  003ddc50  sh         $v1, 0x0($a2)                           # delay slot
+  003ddc54  bgez       $v0, .L004
+  003ddc58  nop                                                # delay slot
+  003ddc5c  sw         $zero, 0xc($s0)
+  003ddc60  beq        $s6, $zero, .L007
+  003ddc64  addiu      $v0, $zero, -0x1                        # delay slot
+  003ddc68  jal        func_003E5638
+  003ddc6c  nop                                                # delay slot
+  003ddc70  b          .L007
+  003ddc74  addiu      $v0, $zero, -0x1                        # delay slot
+.L004:
+  003ddc78  lw         $v0, 0xc($s0)
+  003ddc7c  beq        $v0, $zero, .L006
+  003ddc80  daddu      $s1, $s5, $zero                         # delay slot
+  003ddc84  nop
+.L005:
+  003ddc88  lw         $a0, -0x4e30($s1)
+  003ddc8c  jal        func_003DD790
+  003ddc90  nop                                                # delay slot
+  003ddc94  lw         $v0, 0xc($s0)
+  003ddc98  bne        $v0, $zero, .L005
+  003ddc9c  nop                                                # delay slot
+.L006:
+  003ddca0  beq        $s6, $zero, .L007
+  003ddca4  daddu      $v0, $s4, $zero                         # delay slot
+  003ddca8  jal        func_003E5638
+  003ddcac  nop                                                # delay slot
+  003ddcb0  daddu      $v0, $s4, $zero
+.L007:
+  003ddcb4  ld         $ra, 0x70($sp)
+  003ddcb8  ld         $s6, 0x60($sp)
+  003ddcbc  ld         $s5, 0x50($sp)
+  003ddcc0  ld         $s4, 0x40($sp)
+  003ddcc4  ld         $s3, 0x30($sp)
+  003ddcc8  ld         $s2, 0x20($sp)
+  003ddccc  ld         $s1, 0x10($sp)
+  003ddcd0  ld         $s0, 0x0($sp)
+  003ddcd4  jr         $ra
+  003ddcd8  addiu      $sp, $sp, 0x80                          # delay slot
+/* end of func_003DDB68 */
+
+=== EE function at 0x0030C3D0 ===
+/**************************************************************************
+ * func_0030C3D0
+ *
+ * address      : 0x0030c3d0 .. 0x0030c41c  (76 bytes, 19 instructions)
+ * discovered by: called
+ * called from  : 0x003a5814, 0x003a5920, 0x00426374, 0x004263a0, 0x004263e0, 0x00426444 (+1 more)
+ */
+glabel func_0030C3D0
+  0030c3d0  addiu      $sp, $sp, -0x10
+  0030c3d4  beq        $a1, $zero, .L000
+  0030c3d8  sd         $ra, 0x0($sp)                           # delay slot
+  0030c3dc  lb         $v1, 0x6b($a0)
+  0030c3e0  bne        $v1, $zero, .L001
+  0030c3e4  nop                                                # delay slot
+  0030c3e8  sb         $zero, 0x6c($a0)
+.L000:
+  0030c3ec  sb         $a1, 0x6b($a0)
+  0030c3f0  lb         $v1, 0x6c($a0)
+  0030c3f4  beq        $v1, $zero, .L001
+  0030c3f8  nop                                                # delay slot
+  0030c3fc  sb         $zero, 0x6b($a0)
+  0030c400  lw         $t9, 0x88($a0)
+  0030c404  lw         $t9, 0x30($t9)
+  0030c408  jalr       $t9
+  0030c40c  nop                                                # delay slot
+.L001:
+  0030c410  ld         $ra, 0x0($sp)
+  0030c414  jr         $ra
+  0030c418  addiu      $sp, $sp, 0x10                          # delay slot
+/* end of func_0030C3D0 */
+

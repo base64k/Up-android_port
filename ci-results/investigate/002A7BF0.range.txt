@@ -1,0 +1,481 @@
+== original assembly, 0x002A7BF0 to 0x002A82F0
+/**************************************************************************
+ * range_002A7BF0
+ *
+ * address      : 0x002a7bf0 .. 0x002a82f0  (1792 bytes, 448 instructions)
+ * discovered by: --range
+ * called from  : no direct calls (indirect or unreferenced)
+ */
+glabel range_002A7BF0
+  002a7bf0  addiu      $sp, $sp, -0x200
+  002a7bf4  lui        $at, 0x79
+  002a7bf8  sd         $ra, 0xa0($sp)
+  002a7bfc  sq         $fp, 0x90($sp)
+  002a7c00  sq         $s7, 0x80($sp)
+  002a7c04  daddu      $fp, $a0, $zero
+  002a7c08  sq         $s6, 0x70($sp)
+  002a7c0c  daddu      $s7, $a1, $zero
+  002a7c10  sq         $s5, 0x60($sp)
+  002a7c14  sq         $s4, 0x50($sp)
+  002a7c18  daddu      $s5, $a2, $zero
+  002a7c1c  sq         $s3, 0x40($sp)
+  002a7c20  sq         $s2, 0x30($sp)
+  002a7c24  sq         $s1, 0x20($sp)
+  002a7c28  sq         $s0, 0x10($sp)
+  002a7c2c  swc1       $f22, 0x8($sp)
+  002a7c30  swc1       $f21, 0x4($sp)
+  002a7c34  swc1       $f20, 0x0($sp)
+  002a7c38  lw         $v1, 0x4($a2)
+  002a7c3c  lw         $a0, 0x5f70($at)
+  002a7c40  dsll32     $v1, $v1, 0
+  002a7c44  dsra32     $a1, $v1, 8
+  002a7c48  lw         $v1, 0x8($a0)
+  002a7c4c  dsll32     $v1, $v1, 0
+  002a7c50  dsrl32     $v1, $v1, 14
+  002a7c54  slt        $at, $a1, $v1
+  002a7c58  beq        $at, $zero, .L000
+  002a7c5c  daddu      $s4, $a3, $zero                         # delay slot
+.L000:
+  002a7c60  lw         $v1, 0xc($a0)
+  002a7c64  sll        $a1, $a1, 4
+  002a7c68  lbu        $a2, 0x4($s5)
+  002a7c6c  addu       $a1, $v1, $a1
+  002a7c70  lbu        $v1, 0x0($a1)
+  002a7c74  bne        $v1, $a2, .L002
+  002a7c78  daddu      $s2, $zero, $zero                       # delay slot
+  002a7c7c  lhu        $a2, 0xe($a1)
+  002a7c80  ori        $v1, $zero, 0xffff
+  002a7c84  beq        $a2, $v1, .L001
+  002a7c88  nop                                                # delay slot
+  002a7c8c  jal        func_0030CB40
+  002a7c90  nop                                                # delay slot
+  002a7c94  b          .L002
+  002a7c98  daddu      $s2, $v0, $zero                         # delay slot
+.L001:
+  002a7c9c  b          .L002
+  002a7ca0  lw         $s2, 0x4($a1)                           # delay slot
+  002a7ca4  daddu      $s2, $zero, $zero
+.L002:
+  002a7ca8  lwc1       $f1, 0xd0($s7)
+  002a7cac  addiu      $v1, $zero, 0x1
+  002a7cb0  lwc1       $f0, 0xc8($s7)
+  002a7cb4  mtc1       $zero, $f20
+  002a7cb8  swc1       $f0, 0x1b0($sp)
+  002a7cbc  sw         $zero, 0x1b4($sp)
+  002a7cc0  swc1       $f1, 0x1b8($sp)
+  002a7cc4  lwc1       $f2, 0x1b0($sp)
+  002a7cc8  lwc1       $f1, 0x1b4($sp)
+  002a7ccc  lwc1       $f0, 0x1b8($sp)
+  002a7cd0  swc1       $f2, 0x180($sp)
+  002a7cd4  swc1       $f1, 0x184($sp)
+  002a7cd8  swc1       $f0, 0x188($sp)
+  002a7cdc  lw         $a0, 0x8($s5)
+  002a7ce0  bne        $a0, $v1, .L003
+  002a7ce4  daddu      $s0, $zero, $zero                       # delay slot
+  002a7ce8  lui        $v0, 0x3f80
+  002a7cec  daddu      $a0, $fp, $zero
+  002a7cf0  daddu      $a1, $s2, $zero
+  002a7cf4  addiu      $a2, $s5, 0x1c
+  002a7cf8  daddu      $t0, $s7, $zero
+  002a7cfc  daddu      $a3, $s4, $zero
+  002a7d00  jal        func_002A7030
+  002a7d04  sw         $v0, 0x0($s4)                           # delay slot
+  002a7d08  beq        $v0, $zero, .L020
+  002a7d0c  nop                                                # delay slot
+  002a7d10  addiu      $v1, $zero, 0x1
+  002a7d14  sb         $v1, 0x20($s4)
+  002a7d18  b          .L021
+  002a7d1c  ld         $ra, 0xa0($sp)                          # delay slot
+  002a7d20  daddu      $s0, $zero, $zero
+.L003:
+  002a7d24  b          .L014
+  002a7d28  nop                                                # delay slot
+.L004:
+  002a7d2c  sll        $v0, $s0, 3
+  002a7d30  addiu      $v1, $s5, 0x52
+  002a7d34  addu       $a0, $v0, $s0
+  002a7d38  sll        $a0, $a0, 1
+  002a7d3c  lw         $v0, 0x88($s2)
+  002a7d40  addu       $a0, $a0, $s0
+  002a7d44  sll        $a0, $a0, 2
+  002a7d48  addu       $v1, $v1, $a0
+  002a7d4c  lhu        $a1, 0x0($v1)
+  002a7d50  dsll32     $v0, $v0, 0
+  002a7d54  dsrl32     $v0, $v0, 14
+  002a7d58  slt        $at, $a1, $v0
+  002a7d5c  beq        $at, $zero, .L005
+  002a7d60  nop                                                # delay slot
+.L005:
+  002a7d64  nop
+  002a7d68  lw         $v1, 0x8c($s2)
+  002a7d6c  lw         $v0, 0x88($s2)
+  002a7d70  sll        $a0, $a1, 2
+  002a7d74  addu       $v1, $v1, $a0
+  002a7d78  dsll32     $v0, $v0, 0
+  002a7d7c  dsrl32     $v0, $v0, 14
+  002a7d80  slt        $at, $a1, $v0
+  002a7d84  beq        $at, $zero, .L006
+  002a7d88  lhu        $s6, 0x0($v1)                           # delay slot
+.L006:
+  002a7d8c  nop
+  002a7d90  lw         $v1, 0x8c($s2)
+  002a7d94  lw         $v0, 0x80($s2)
+  002a7d98  sll        $a0, $a1, 2
+  002a7d9c  addu       $v1, $v1, $a0
+  002a7da0  dsll32     $v0, $v0, 0
+  002a7da4  dsrl32     $v0, $v0, 14
+  002a7da8  slt        $at, $s6, $v0
+  002a7dac  beq        $at, $zero, .L007
+  002a7db0  lhu        $s1, 0x2($v1)                           # delay slot
+.L007:
+  002a7db4  nop
+  002a7db8  sll        $v0, $s6, 1
+  002a7dbc  addu       $v0, $v0, $s6
+  002a7dc0  lw         $v1, 0x84($s2)
+  002a7dc4  sll        $a0, $v0, 2
+  002a7dc8  lw         $v0, 0x80($s2)
+  002a7dcc  dsll32     $v0, $v0, 0
+  002a7dd0  dsrl32     $v0, $v0, 14
+  002a7dd4  slt        $at, $s1, $v0
+  002a7dd8  beq        $at, $zero, .L008
+  002a7ddc  addu       $s3, $v1, $a0                           # delay slot
+.L008:
+  002a7de0  lw         $a0, 0x84($s2)
+  002a7de4  sll        $v0, $s1, 1
+  002a7de8  addiu      $a2, $sp, 0x1c0
+  002a7dec  addu       $v0, $v0, $s1
+  002a7df0  sll        $a1, $v0, 2
+  002a7df4  sll        $v0, $s0, 3
+  002a7df8  addu       $v0, $v0, $s0
+  002a7dfc  addu       $a0, $a0, $a1
+  002a7e00  sll        $v1, $v0, 1
+  002a7e04  sw         $zero, 0x4($a0)
+  002a7e08  addu       $v1, $v1, $s0
+  002a7e0c  sw         $zero, 0x4($s3)
+  002a7e10  addiu      $v0, $s5, 0x58
+  002a7e14  lwc1       $f5, 0x8($s3)
+  002a7e18  sll        $v1, $v1, 2
+  002a7e1c  lwc1       $f4, 0x188($sp)
+  002a7e20  addu       $v0, $v0, $v1
+  002a7e24  lwc1       $f3, 0x4($s3)
+  002a7e28  addu       $v1, $s5, $v1
+  002a7e2c  lwc1       $f2, 0x184($sp)
+  002a7e30  lwc1       $f1, 0x180($sp)
+  002a7e34  lwc1       $f0, 0x0($s3)
+  002a7e38  mtc1       $zero, $f7
+  002a7e3c  sub.s      $f4, $f4, $f5
+  002a7e40  sub.s      $f2, $f2, $f3
+  002a7e44  sub.s      $f0, $f1, $f0
+  002a7e48  swc1       $f4, 0x1c8($sp)
+  002a7e4c  swc1       $f2, 0x1c4($sp)
+  002a7e50  swc1       $f0, 0x1c0($sp)
+  002a7e54  lwc1       $f6, 0x4($a2)
+  002a7e58  lwc1       $f5, 0x60($v1)
+  002a7e5c  lwc1       $f4, 0x0($a2)
+  002a7e60  lwc1       $f3, 0x5c($v1)
+  002a7e64  lwc1       $f2, 0x8($a2)
+  002a7e68  lwc1       $f1, 0x64($v1)
+  002a7e6c  lwc1       $f0, 0x0($s3)
+  002a7e70  mul.s      $f5, $f6, $f5
+  002a7e74  swc1       $f0, 0x190($sp)
+  002a7e78  lwc1       $f0, 0x4($s3)
+  002a7e7c  mul.s      $f3, $f4, $f3
+  002a7e80  swc1       $f0, 0x194($sp)
+  002a7e84  lwc1       $f0, 0x8($s3)
+  002a7e88  adda.s     $f3, $f5
+  002a7e8c  madd.s     $f21, $f2, $f1
+  002a7e90  swc1       $f0, 0x198($sp)
+  002a7e94  lwc1       $f0, 0x0($v0)
+  002a7e98  c.le.s     $f21, $f0
+  002a7e9c  nop
+  002a7ea0  bc1t       .L009
+  002a7ea4  addiu      $a1, $v1, 0x5c                          # delay slot
+  002a7ea8  lwc1       $f0, 0x0($a0)
+  002a7eac  lui        $v0, 0x3f80
+  002a7eb0  mtc1       $v0, $f21
+  002a7eb4  swc1       $f0, 0x190($sp)
+  002a7eb8  lwc1       $f0, 0x4($a0)
+  002a7ebc  swc1       $f0, 0x194($sp)
+  002a7ec0  lwc1       $f0, 0x8($a0)
+  002a7ec4  b          .L011
+  002a7ec8  swc1       $f0, 0x198($sp)                         # delay slot
+.L009:
+  002a7ecc  nop
+  002a7ed0  c.le.s     $f21, $f7
+  002a7ed4  nop
+  002a7ed8  bc1t       .L010
+  002a7edc  nop                                                # delay slot
+  002a7ee0  lwc1       $f2, 0x0($a1)
+  002a7ee4  addiu      $a0, $sp, 0x1e0
+  002a7ee8  lwc1       $f1, 0x4($a1)
+  002a7eec  lwc1       $f0, 0x8($a1)
+  002a7ef0  mul.s      $f12, $f2, $f21
+  002a7ef4  mul.s      $f13, $f1, $f21
+  002a7ef8  jal        func_002067D0
+  002a7efc  mul.s      $f14, $f0, $f21                         # delay slot
+  002a7f00  addiu      $v1, $sp, 0x1e0
+  002a7f04  sll        $v0, $s0, 3
+  002a7f08  lwc1       $f4, 0x8($s3)
+  002a7f0c  addu       $v0, $v0, $s0
+  002a7f10  lwc1       $f5, 0x8($v1)
+  002a7f14  sll        $v0, $v0, 1
+  002a7f18  lwc1       $f3, 0x4($v1)
+  002a7f1c  addu       $v0, $v0, $s0
+  002a7f20  lwc1       $f0, 0x4($s3)
+  002a7f24  lwc1       $f2, 0x0($v1)
+  002a7f28  lwc1       $f1, 0x0($s3)
+  002a7f2c  add.s      $f4, $f5, $f4
+  002a7f30  sll        $v1, $v0, 2
+  002a7f34  add.s      $f3, $f3, $f0
+  002a7f38  addiu      $v0, $s5, 0x58
+  002a7f3c  addu       $v0, $v0, $v1
+  002a7f40  add.s      $f2, $f2, $f1
+  002a7f44  mov.s      $f0, $f4
+  002a7f48  swc1       $f0, 0x198($sp)
+  002a7f4c  mov.s      $f1, $f3
+  002a7f50  mov.s      $f0, $f2
+  002a7f54  swc1       $f4, 0x1d8($sp)
+  002a7f58  swc1       $f3, 0x1d4($sp)
+  002a7f5c  swc1       $f2, 0x1d0($sp)
+  002a7f60  swc1       $f1, 0x194($sp)
+  002a7f64  swc1       $f0, 0x190($sp)
+  002a7f68  lwc1       $f0, 0x0($v0)
+  002a7f6c  div.s      $f21, $f21, $f0
+  002a7f70  nop
+  002a7f74  nop
+  002a7f78  b          .L011
+  002a7f7c  nop                                                # delay slot
+.L010:
+  002a7f80  mov.s      $f21, $f7
+.L011:
+  002a7f84  nop
+  002a7f88  lwc1       $f2, 0x190($sp)
+  002a7f8c  lwc1       $f1, 0x180($sp)
+  002a7f90  lwc1       $f3, 0x194($sp)
+  002a7f94  lwc1       $f0, 0x184($sp)
+  002a7f98  lwc1       $f5, 0x198($sp)
+  002a7f9c  lwc1       $f4, 0x188($sp)
+  002a7fa0  sub.s      $f2, $f2, $f1
+  002a7fa4  sub.s      $f3, $f3, $f0
+  002a7fa8  sub.s      $f4, $f5, $f4
+  002a7fac  swc1       $f2, 0x1f0($sp)
+  002a7fb0  mov.s      $f1, $f3
+  002a7fb4  mov.s      $f2, $f2
+  002a7fb8  mov.s      $f0, $f4
+  002a7fbc  swc1       $f1, 0x1a4($sp)
+  002a7fc0  swc1       $f2, 0x1a0($sp)
+  002a7fc4  swc1       $f0, 0x1a8($sp)
+  002a7fc8  mov.s      $f1, $f1
+  002a7fcc  mov.s      $f2, $f2
+  002a7fd0  lwc1       $f0, 0x1a8($sp)
+  002a7fd4  mul.s      $f1, $f1, $f1
+  002a7fd8  mul.s      $f2, $f2, $f2
+  002a7fdc  adda.s     $f2, $f1
+  002a7fe0  madd.s     $f0, $f0, $f0
+  002a7fe4  swc1       $f4, 0x1f8($sp)
+  002a7fe8  swc1       $f3, 0x1f4($sp)
+  002a7fec  sqrt.s     $f0, $f0
+  002a7ff0  lui        $v0, 0x3586
+  002a7ff4  ori        $v0, $v0, 0x37bd
+  002a7ff8  mtc1       $v0, $f1
+  002a7ffc  nop
+  002a8000  max.s      $f22, $f1, $f0
+  002a8004  sll        $v0, $s0, 3
+  002a8008  addu       $v1, $v0, $s0
+  002a800c  daddu      $a0, $fp, $zero
+  002a8010  sll        $v0, $s0, 2
+  002a8014  sll        $v1, $v1, 1
+  002a8018  addu       $v0, $v0, $s0
+  002a801c  addu       $v1, $v1, $s0
+  002a8020  sll        $v0, $v0, 3
+  002a8024  sll        $v1, $v1, 2
+  002a8028  addu       $a3, $s4, $v0
+  002a802c  daddu      $a1, $s2, $zero
+  002a8030  addu       $v0, $s5, $v1
+  002a8034  daddu      $t0, $s7, $zero
+  002a8038  jal        func_002A7030
+  002a803c  addiu      $a2, $v0, 0x1c                          # delay slot
+  002a8040  beq        $v0, $zero, .L013
+  002a8044  nop                                                # delay slot
+  002a8048  sll        $a2, $s0, 2
+  002a804c  addiu      $a0, $s4, 0x20
+  002a8050  addu       $v1, $a2, $s0
+  002a8054  addiu      $a3, $zero, 0x1
+  002a8058  sll        $a1, $v1, 3
+  002a805c  addiu      $v1, $sp, 0xb0
+  002a8060  addu       $a0, $a0, $a1
+  002a8064  addu       $v1, $v1, $a2
+  002a8068  sb         $a3, 0x0($a0)
+  002a806c  swc1       $f22, 0x0($v1)
+  002a8070  lui        $v1, 0x3f00
+  002a8074  mtc1       $v1, $f1
+  002a8078  nop
+  002a807c  c.lt.s     $f21, $f1
+  002a8080  nop
+  002a8084  bc1f       .L012
+  002a8088  add.s      $f20, $f20, $f22                        # delay slot
+  002a808c  sub.s      $f0, $f1, $f21
+  002a8090  daddu      $a2, $s6, $zero
+  002a8094  daddu      $a0, $fp, $zero
+  002a8098  daddu      $a1, $s5, $zero
+  002a809c  addiu      $a3, $sp, 0xc0
+  002a80a0  daddu      $t0, $s7, $zero
+  002a80a4  sb         $zero, 0xe0($sp)
+  002a80a8  div.s      $f21, $f0, $f1
+  002a80ac  sb         $zero, 0x110($sp)
+  002a80b0  nop
+  002a80b4  nop
+  002a80b8  jal        func_002A7A40
+  002a80bc  nop                                                # delay slot
+  002a80c0  lui        $v0, 0x3f80
+  002a80c4  sll        $v1, $s0, 2
+  002a80c8  mtc1       $v0, $f0
+  002a80cc  addu       $v1, $v1, $s0
+  002a80d0  sll        $v1, $v1, 3
+  002a80d4  addiu      $a0, $sp, 0xf0
+  002a80d8  sub.s      $f12, $f0, $f21
+  002a80dc  addiu      $a2, $sp, 0xc0
+  002a80e0  jal        func_002A6FC0
+  002a80e4  addu       $a1, $s4, $v1                           # delay slot
+  002a80e8  sll        $v0, $s0, 2
+  002a80ec  addiu      $a1, $sp, 0xf0
+  002a80f0  addu       $v0, $v0, $s0
+  002a80f4  sll        $v0, $v0, 3
+  002a80f8  jal        func_002A6D70
+  002a80fc  addu       $a0, $s4, $v0                           # delay slot
+  002a8100  b          .L013
+  002a8104  nop                                                # delay slot
+.L012:
+  002a8108  c.le.s     $f21, $f1
+  002a810c  nop
+  002a8110  bc1t       .L013
+  002a8114  nop                                                # delay slot
+  002a8118  sub.s      $f0, $f21, $f1
+  002a811c  daddu      $a2, $s1, $zero
+  002a8120  daddu      $a0, $fp, $zero
+  002a8124  daddu      $a1, $s5, $zero
+  002a8128  addiu      $a3, $sp, 0x120
+  002a812c  daddu      $t0, $s7, $zero
+  002a8130  sb         $zero, 0x140($sp)
+  002a8134  div.s      $f21, $f0, $f1
+  002a8138  sb         $zero, 0x170($sp)
+  002a813c  nop
+  002a8140  nop
+  002a8144  jal        func_002A7A40
+  002a8148  nop                                                # delay slot
+  002a814c  lui        $v1, 0x3f80
+  002a8150  sll        $v0, $s0, 2
+  002a8154  mtc1       $v1, $f0
+  002a8158  addu       $v0, $v0, $s0
+  002a815c  sll        $v0, $v0, 3
+  002a8160  addiu      $a0, $sp, 0x150
+  002a8164  sub.s      $f12, $f0, $f21
+  002a8168  addu       $a1, $s4, $v0
+  002a816c  jal        func_002A6FC0
+  002a8170  addiu      $a2, $sp, 0x120                         # delay slot
+  002a8174  sll        $v0, $s0, 2
+  002a8178  addiu      $a1, $sp, 0x150
+  002a817c  addu       $v0, $v0, $s0
+  002a8180  sll        $v0, $v0, 3
+  002a8184  jal        func_002A6D70
+  002a8188  addu       $a0, $s4, $v0                           # delay slot
+.L013:
+  002a818c  nop
+  002a8190  addiu      $s0, $s0, 0x1
+.L014:
+  002a8194  nop
+  002a8198  lw         $v1, 0x8($s5)
+  002a819c  slt        $v1, $s0, $v1
+  002a81a0  bne        $v1, $zero, .L004
+  002a81a4  nop                                                # delay slot
+  002a81a8  lui        $v1, 0x3f80
+  002a81ac  daddu      $s0, $zero, $zero
+  002a81b0  mtc1       $zero, $f2
+  002a81b4  addiu      $a1, $sp, 0xb0
+  002a81b8  mtc1       $v1, $f1
+  002a81bc  b          .L017
+  002a81c0  addiu      $a2, $s4, 0x20                          # delay slot
+  002a81c4  sll        $a0, $s0, 2
+.L015:
+  002a81c8  addu       $v1, $a0, $s0
+  002a81cc  sll        $a3, $v1, 3
+  002a81d0  addu       $v1, $a2, $a3
+  002a81d4  lb         $v1, 0x0($v1)
+  002a81d8  beq        $v1, $zero, .L016
+  002a81dc  nop                                                # delay slot
+  002a81e0  addu       $a0, $a1, $a0
+  002a81e4  addu       $v1, $s4, $a3
+  002a81e8  lwc1       $f0, 0x0($a0)
+  002a81ec  div.s      $f0, $f1, $f0
+  002a81f0  swc1       $f0, 0x0($v1)
+  002a81f4  mov.s      $f0, $f0
+  002a81f8  add.s      $f2, $f2, $f0
+.L016:
+  002a81fc  nop
+  002a8200  addiu      $s0, $s0, 0x1
+.L017:
+  002a8204  nop
+  002a8208  lw         $v1, 0x8($s5)
+  002a820c  slt        $v1, $s0, $v1
+  002a8210  bne        $v1, $zero, .L015
+  002a8214  sll        $a0, $s0, 2                             # delay slot
+  002a8218  b          .L019
+  002a821c  daddu      $s0, $zero, $zero                       # delay slot
+  002a8220  sll        $v1, $s0, 2
+.L018:
+  002a8224  addu       $v1, $v1, $s0
+  002a8228  sll        $v1, $v1, 3
+  002a822c  addiu      $s0, $s0, 0x1
+  002a8230  addu       $v1, $s4, $v1
+  002a8234  lwc1       $f0, 0x0($v1)
+  002a8238  div.s      $f0, $f0, $f2
+  002a823c  swc1       $f0, 0x0($v1)
+.L019:
+  002a8240  lw         $v1, 0x8($s5)
+  002a8244  slt        $v1, $s0, $v1
+  002a8248  bne        $v1, $zero, .L018
+  002a824c  sll        $v1, $s0, 2                             # delay slot
+.L020:
+  002a8250  ld         $ra, 0xa0($sp)
+.L021:
+  002a8254  lwc1       $f22, 0x8($sp)
+  002a8258  lq         $fp, 0x90($sp)
+  002a825c  lwc1       $f21, 0x4($sp)
+  002a8260  lq         $s7, 0x80($sp)
+  002a8264  lwc1       $f20, 0x0($sp)
+  002a8268  lq         $s6, 0x70($sp)
+  002a826c  lq         $s5, 0x60($sp)
+  002a8270  lq         $s4, 0x50($sp)
+  002a8274  lq         $s3, 0x40($sp)
+  002a8278  lq         $s2, 0x30($sp)
+  002a827c  lq         $s1, 0x20($sp)
+  002a8280  lq         $s0, 0x10($sp)
+  002a8284  jr         $ra
+  002a8288  addiu      $sp, $sp, 0x200                         # delay slot
+  002a828c  nop
+  002a8290  addiu      $sp, $sp, -0x2d0
+  002a8294  addiu      $v1, $zero, -0x1
+  002a8298  sd         $ra, 0x90($sp)
+  002a829c  sq         $fp, 0x80($sp)
+  002a82a0  sq         $s7, 0x70($sp)
+  002a82a4  daddu      $fp, $t2, $zero
+  002a82a8  sq         $s6, 0x60($sp)
+  002a82ac  daddu      $s7, $a3, $zero
+  002a82b0  sq         $s5, 0x50($sp)
+  002a82b4  sq         $s4, 0x40($sp)
+  002a82b8  sq         $s3, 0x30($sp)
+  002a82bc  sq         $s2, 0x20($sp)
+  002a82c0  sq         $s1, 0x10($sp)
+  002a82c4  daddu      $s2, $a0, $zero
+  002a82c8  sq         $s0, 0x0($sp)
+  002a82cc  daddu      $s1, $a1, $zero
+  002a82d0  sw         $t1, 0xac($sp)
+  002a82d4  sb         $zero, 0x2ac($a0)
+  002a82d8  sw         $v1, 0x28c($a0)
+  002a82dc  lb         $v0, -0x7558($gp)
+  002a82e0  beq        $v0, $zero, 0x002a82f8
+  002a82e4  daddu      $s0, $a2, $zero                         # delay slot
+  002a82e8  sw         $zero, 0x2a4($s2)
+  002a82ec  daddu      $v0, $zero, $zero
+/* end of range_002A7BF0 */
+

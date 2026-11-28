@@ -1,0 +1,226 @@
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index 38e06d7..04dda20 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -505,11 +505,59 @@ Outcome SifGetOtherData(Vm& vm, Context& c) {
+     return Ret(c, 0);
+ }
+ 
+-// sceSifBindRpc(client, server id, mode) and sceSifCallRpc(client, ...) as an IOP
+-// client: not modelled yet. The answer is "not bound" / "not called" (0), and the
+-// trace shows the arguments, which name the server the module is looking for.
+-Outcome SifBindRpcClient(Vm&, Context& c) { return Ret(c, 0); }
+-Outcome SifCallRpcClient(Vm&, Context& c) { return Ret(c, 0); }
++// The IOP's SIF RPC client, as ps2sdk's IOP library has it (sifrpc.c). The
++// SifRpcClientData_t: hdr (pkt_addr, rpc_id, sema_id, mode: 16 bytes), command,
++// buf, cbuf, end_function, end_param, server (at 36).
++constexpr u32 kClientCommand = 16, kClientBuf = 20, kClientCbuf = 24, kClientServer = 36;
++constexpr u32 kSifRpcNoWait = 1;
++
++// sceSifBindRpc(client, sid, mode): the client takes the server a module
++// registered for `sid`; with none, server stays NULL and the caller waits
++// for one (the bind returns 0 either way, as the library's does).
++Outcome SifBindRpcClient(Vm& vm, Context& c) {
++    const u32 client = A(vm, c, 0), sid = A(vm, c, 1);
++    u32 server = 0, buffer = 0, cbuffer = 0;
++    for (const auto& [address, entry] : vm.rpc_servers)
++        if (entry.sid == sid) {
++            server = address;
++            buffer = entry.buffer;
++            cbuffer = entry.cbuffer;
++            break;
++        }
++    vm.Write(client + kClientCommand, 0, 4);
++    vm.Write(client + kClientBuf, buffer, 4);
++    vm.Write(client + kClientCbuf, cbuffer, 4);
++    vm.Write(client + kClientServer, server, 4);
++    return Ret(c, 0);
++}
++
++// sceSifCallRpc(client, procedure, mode, send, ssize, recv, rsize, end, end_param).
++// A blocking call waits for the answer (its thread is woken from the server's);
++// the end function runs when the answer is in, as the library runs it.
++Outcome SifCallRpcClient(Vm& vm, Context& c) {
++    const u32 client = A(vm, c, 0), procedure = A(vm, c, 1), mode = A(vm, c, 2);
++    const u32 send = A(vm, c, 3), ssize = A(vm, c, 4), recv = A(vm, c, 5), rsize = A(vm, c, 6);
++    const u32 end_function = A(vm, c, 7), end_param = A(vm, c, 8);
++    const u32 server = vm.Read(client + kClientServer, 4);
++    const auto entry = vm.rpc_servers.find(server);
++    if (!server || entry == vm.rpc_servers.end()) return Ret(c, u32(-1));    // not bound
++    for (u32 i = 0; i < ssize; ++i) vm.Write(entry->second.buffer + i, vm.Read(send + i, 1), 1);
++    RpcRequest request;
++    request.procedure = procedure;
++    request.size = ssize;
++    request.receive = recv;
++    request.receive_size = rsize;
++    request.iop_client = true;
++    request.blocking = !(mode & kSifRpcNoWait);
++    request.client = vm.current;
++    request.client_gp = c.r[28];
++    request.end_function = end_function;
++    request.end_param = end_param;
++    IopRpcCall(vm, server, request);
++    if (!request.blocking) return Ret(c, 0);
++    if (!vm.Block(c, Wait::RpcReply, client)) return Ret(c, u32(KE_CAN_NOT_WAIT));
++    return Outcome::Block;
++}
+ 
+ // The IOP file manager (ioman) is not modelled: an open fails (-1, no such file),
+ // and the calls on an open file fail too. The trace shows what was asked.
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index 2befa19..9835875 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -399,6 +399,52 @@ namespace {
+ bool g_iop_held = false;
+ }  // namespace
+ 
++// An end function of an IOP sceSifCallRpc runs in a thread of its own (the
++// library runs it from the SIF's handler). A blocking caller waits for it.
++u32 StartHelper(Vm& vm, u32 entry, u32 arg, u32 gp) {
++    Thread t;
++    t.id = vm.next_id++;
++    t.helper = true;
++    t.entry = entry;
++    t.stack_size = 0x1000;
++    t.stack = vm.Allocate(t.stack_size);
++    if (!t.stack) return 0;
++    t.priority = 1;
++    t.c = Context{};
++    t.c.r[4] = arg;
++    t.c.r[28] = gp;
++    t.c.r[29] = t.stack + t.stack_size - 16;
++    t.c.r[31] = kThreadExit;
++    t.c.pc = entry;
++    t.c.npc = entry + 4;
++    t.wait = Wait::Dormant;
++    vm.threads[t.id] = t;
++    vm.MakeReady(vm.threads[t.id]);
++    return t.id;
++}
++
++// A blocked sceSifCallRpc returns 0 when its answer is in.
++void WakeRpcCaller(Vm& vm, u32 id) {
++    auto caller = vm.threads.find(id);
++    if (caller == vm.threads.end() || caller->second.wait != Wait::RpcReply) return;
++    caller->second.c.r[2] = 0;
++    vm.MakeReady(caller->second);
++}
++
++// The server's function returned for an IOP caller: its answer goes into the
++// caller's buffer; the end function runs, then the blocked caller returns.
++void IopRpcAnswer(Vm& vm, const RpcRequest& done, u32 answer) {
++    for (u32 i = 0; i < done.receive_size && done.receive && answer; ++i)
++        vm.Write(done.receive + i, vm.Read(answer + i, 1), 1);
++    if (done.end_function) {
++        const u32 helper = StartHelper(vm, done.end_function, done.end_param, done.client_gp);
++        if (helper && done.blocking) vm.threads[helper].wake_on_exit = done.client;
++        else if (!helper && done.blocking) WakeRpcCaller(vm, done.client);
++        return;
++    }
++    if (done.blocking) WakeRpcCaller(vm, done.client);
++}
++
+ void Run(u64 slice) {
+     Vm& vm = TheVm();
+     if (vm.threads.empty() && vm.alarms.empty() && vm.completions.empty() &&
+@@ -456,19 +502,31 @@ void Run(u64 slice) {
+         bool stopped = false;
+         const Outcome outcome = Execute(vm, best->c, kReturnFromCall, kQuantum, &stopped);
+         if (best->c.pc == kRpcReturn) {                      // a server function returned
+-            const RpcRequest& done = best->serving;
+-            Memory& ee = GuestMemory();
++            const RpcRequest done = best->serving;          // a copy: ServeNext replaces it
+             const u32 answer = best->c.r[2];
+-            for (u32 i = 0; i < done.receive_size && done.receive && answer; ++i)
+-                ee.Write(done.receive + i, vm.Read(answer + i, 1), 1);
+-            const RpcServerEntry& entry = vm.rpc_servers[done.server];
+-            QueueRpcEnd(done.packet, entry.server, entry.buffer, entry.cbuffer);
++            if (done.iop_client) {
++                IopRpcAnswer(vm, done, answer);
++            } else {
++                Memory& ee = GuestMemory();
++                for (u32 i = 0; i < done.receive_size && done.receive && answer; ++i)
++                    ee.Write(done.receive + i, vm.Read(answer + i, 1), 1);
++                const RpcServerEntry& entry = vm.rpc_servers[done.server];
++                QueueRpcEnd(done.packet, entry.server, entry.buffer, entry.cbuffer);
++            }
+             best->ready = false;
+             best->wait = Wait::Rpc;
+             ServeNext(vm, *best);
+         } else if (best->c.pc == kThreadExit) {              // returned from its entry
+             best->ready = false;
+             best->wait = Wait::Dormant;
++            if (best->helper && best->stack) {               // an end function's thread
++                vm.Free(best->stack);
++                best->stack = 0;
++            }
++            if (best->wake_on_exit) {
++                WakeRpcCaller(vm, best->wake_on_exit);
++                best->wake_on_exit = 0;
++            }
+         } else if (outcome == Outcome::Yield && best->ready) {
+             best->queued = ++vm.counter;                     // back of its priority's queue
+         }
+@@ -657,6 +715,20 @@ void ServeNext(Vm& vm, Thread& t) {
+     vm.MakeReady(t);
+ }
+ 
++void IopRpcCall(Vm& vm, u32 server, const RpcRequest& request) {
++    const RpcServerEntry& entry = vm.rpc_servers[server];
++    RpcRequest queued = request;
++    queued.server = server;
++    char text[160];
++    std::snprintf(text, sizeof text, "IOP: RPC 0x%08X procedure %u (%u bytes in, %u out) from an IOP thread",
++                  unsigned(entry.sid), unsigned(request.procedure), unsigned(request.size),
++                  unsigned(request.receive_size));
++    Note("iop rpc call " + std::to_string(entry.sid) + " " + std::to_string(request.procedure), text);
++    vm.rpc_pending[entry.queue].push_back(queued);
++    auto thread = vm.rpc_queues.find(entry.queue);
++    if (thread != vm.rpc_queues.end()) ServeNext(vm, vm.threads[thread->second]);
++}
++
+ bool RpcServer(u32 sid, u32* server, u32* buffer, u32* cbuffer) {
+     for (const auto& [address, entry] : TheVm().rpc_servers)
+         if (entry.sid == sid) {
+diff --git a/host/src/iop_vm_internal.h b/host/src/iop_vm_internal.h
+index d9b0a1a..1ed0004 100644
+--- a/host/src/iop_vm_internal.h
++++ b/host/src/iop_vm_internal.h
+@@ -33,11 +33,15 @@ struct Context {
+     u32 pc = 0, npc = 4;
+ };
+ 
+-enum class Wait { None, Sema, Event, Sleep, Delay, Dormant, Rpc, Mbx };
++enum class Wait { None, Sema, Event, Sleep, Delay, Dormant, Rpc, Mbx, RpcReply };
+ 
+ struct RpcRequest {
+     u32 server = 0, procedure = 0, size = 0, receive = 0, receive_size = 0;
+     std::vector<u8> packet;
++    // An IOP thread's sceSifCallRpc (ps2sdk's IOP library): the answer goes
++    // into IOP memory, the end function runs, and a blocking call's thread wakes.
++    bool iop_client = false, blocking = false;
++    u32 client = 0, client_gp = 0, end_function = 0, end_param = 0;
+ };
+ 
+ struct RpcServerEntry {
+@@ -60,6 +64,8 @@ struct Thread {
+     u32 entry = 0, stack = 0, stack_size = 0;
+     RpcRequest serving;             // the RPC request its server function is running
+     u32 rpc_queue = 0;              // the queue it serves (sceSifRpcLoop)
++    bool helper = false;            // an end function's thread: its stack goes at exit
++    u32 wake_on_exit = 0;           // the blocked IOP caller its end function answers
+ };
+ 
+ struct Semaphore {
+@@ -249,6 +255,10 @@ bool SoundInterrupts(Vm& vm, bool idle = false);
+ /* printf-style formatting from IOP memory: `next` yields each argument word. */
+ std::string Format(Vm& vm, u32 format, const std::function<u32()>& next);
+ 
++// sceSifCallRpc from an IOP thread: the request goes to the server's queue
++// (its arguments are copied to the server's buffer by the caller).
++void IopRpcCall(Vm& vm, u32 server, const RpcRequest& request);
++
+ }  // namespace iop
+ }  // namespace ps2host
+ 

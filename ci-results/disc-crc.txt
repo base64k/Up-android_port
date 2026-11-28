@@ -1,0 +1,2 @@
+the port's disc reads against the image (up.iso)
+distinct reads 43: same 43, different 0, past the image's end 0

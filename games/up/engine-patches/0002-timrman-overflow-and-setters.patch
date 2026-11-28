@@ -1,0 +1,77 @@
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index f075d93..fcb5c74 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -424,6 +424,48 @@ Outcome SetTimerHandler(Vm& vm, Context& c) {
+     return Ret(c, KE_OK);
+ }
+ 
++// SetTimerMode(id, mode): the mode as the module set it (kept; the timer's clock is
++// its source and prescale, set by SetupHardTimer).
++Outcome SetTimerMode(Vm& vm, Context& c) {
++    HardTimer* t = TimerOf(vm, c);
++    if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    t->mode = A(vm, c, 1);
++    return Ret(c, KE_OK);
++}
++
++// SetTimerCounter(id, count) / GetTimerCounter(id)
++Outcome SetTimerCounter(Vm& vm, Context& c) {
++    HardTimer* t = TimerOf(vm, c);
++    if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    t->counter = A(vm, c, 1);
++    return Ret(c, KE_OK);
++}
++
++Outcome GetTimerCounter(Vm& vm, Context& c) {
++    HardTimer* t = TimerOf(vm, c);
++    if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    return Ret(c, t->counter);
++}
++
++// SetTimerCompare(id, compare)
++Outcome SetTimerCompare(Vm& vm, Context& c) {
++    HardTimer* t = TimerOf(vm, c);
++    if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    t->compare = A(vm, c, 1);
++    return Ret(c, KE_OK);
++}
++
++// SetOverflowHandler(id, handler, common): the handler for the counter's overflow.
++// Stored; the overflow interrupt is not modelled (a module's compare handler is
++// what drives its timing).
++Outcome SetOverflowHandler(Vm& vm, Context& c) {
++    HardTimer* t = TimerOf(vm, c);
++    if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    t->overflow = A(vm, c, 1);
++    t->overflow_common = A(vm, c, 2);
++    return Ret(c, KE_OK);
++}
++
+ // SetupHardTimer(id, source, mode, prescale)
+ Outcome SetupHardTimer(Vm& vm, Context& c) {
+     HardTimer* t = TimerOf(vm, c);
+@@ -1328,7 +1370,9 @@ const Map& Table() {
+         {{"thmsgbx", 6}, SendMbx}, {{"thmsgbx", 7}, SendMbx},
+         {{"thmsgbx", 8}, ReceiveMbx}, {{"thmsgbx", 9}, PollMbx},
+         {{"timrman", 4}, AllocHardTimer}, {{"timrman", 6}, FreeHardTimer},
+-        {{"timrman", 20}, SetTimerHandler}, {{"timrman", 22}, SetupHardTimer},
++        {{"timrman", 7}, SetTimerMode}, {{"timrman", 9}, SetTimerCounter}, {{"timrman", 10}, GetTimerCounter},
++        {{"timrman", 11}, SetTimerCompare}, {{"timrman", 20}, SetTimerHandler}, {{"timrman", 21}, SetOverflowHandler},
++        {{"timrman", 22}, SetupHardTimer},
+         {{"timrman", 23}, StartHardTimer}, {{"timrman", 24}, StopHardTimer},
+         {{"sifcmd", 23}, SifGetOtherData},
+         {{"sysclib", 8}, LookCtypeTable},
+diff --git a/host/src/iop_vm_internal.h b/host/src/iop_vm_internal.h
+index d366c37..5265a10 100644
+--- a/host/src/iop_vm_internal.h
++++ b/host/src/iop_vm_internal.h
+@@ -90,6 +90,8 @@ struct MessageBox {
+ // the timer stops).
+ struct HardTimer {
+     u32 source = 1, prescale = 1, compare = 0, handler = 0, common = 0;
++    u32 mode = 0, counter = 0;
++    u32 overflow = 0, overflow_common = 0;     // SetOverflowHandler's (stored; not run)
+     bool running = false;
+     u64 due_us = 0;
+ };

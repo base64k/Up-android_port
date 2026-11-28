@@ -1,0 +1,53 @@
+void F_002E05B0(lifted::Context& c) {
+    const u32 entry_ra = (u32)c.r[31], entry_sp = (u32)c.r[29];
+    (void)entry_ra; (void)entry_sp;
+    { bool t; t = c.r[6] == 0ull; c.r[29] = lifted::Sx32((u32)c.r[29] + 0xFFFFFFB0u); if (t) goto L_002E0654; }
+    { u32 q = ((u32)c.r[29] + 0x0u) & ~0xFu; generated::Write64(q, c.r[16]); generated::Write64(q + 8, c.rh[16]); }
+    { u32 q = ((u32)c.r[29] + 0x10u) & ~0xFu; generated::Write64(q, c.r[17]); generated::Write64(q + 8, c.rh[17]); }
+    { u32 q = ((u32)c.r[29] + 0x20u) & ~0xFu; generated::Write64(q, c.r[18]); generated::Write64(q + 8, c.rh[18]); }
+    { u32 q = ((u32)c.r[29] + 0x30u) & ~0xFu; generated::Write64(q, c.r[8]); generated::Write64(q + 8, c.rh[8]); }
+    { u32 q = ((u32)c.r[29] + 0x40u) & ~0xFu; generated::Write64(q, c.r[9]); generated::Write64(q + 8, c.rh[9]); }
+    lifted::Lanes(lifted::kPaddub, c.r[17], c.rh[17], c.r[4], c.rh[4], 0ull, c.rh[0]);
+    lifted::Lanes(lifted::kPaddub, c.r[18], c.rh[18], c.r[5], c.rh[5], 0ull, c.rh[0]);
+    c.r[9] = lifted::Sx32((u32)0ull + 0xFu);
+    c.r[16] = c.r[9] & c.r[4];
+    { bool t; t = c.r[16] != 0ull; lifted::Lanes(lifted::kPaddub, c.r[16], c.rh[16], 0ull, c.rh[0], 0ull, c.rh[0]); if (t) goto L_002E0628; }
+    c.r[16] = c.r[9] & c.r[5];
+    { bool t; t = c.r[16] != 0ull; lifted::Lanes(lifted::kPaddub, c.r[16], c.rh[16], 0ull, c.rh[0], 0ull, c.rh[0]); if (t) goto L_002E0628; }
+    c.r[1] = 0ull | 0xFFFFull;
+    c.r[9] = lifted::Sx32((u32)0ull + (u32)c.r[1]);
+    c.r[9] = lifted::Sx32((u32)c.r[9] << 16);
+    c.r[1] = 0ull | 0xFFF0ull;
+    c.r[9] = lifted::Sx32((u32)c.r[9] + (u32)c.r[1]);
+    c.r[9] = c.r[6] & c.r[9];
+    { bool t; t = (s64)c.r[9] <= 0; { u32 q = ((u32)c.r[18] + 0x0u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[8] = lo; c.rh[8] = hi; } if (t) goto L_002E0628; }
+    goto L_002E0610;
+L_002E060C:
+    lifted::Tick(c, 0x002E060Cu);
+    { u32 q = ((u32)c.r[18] + 0x0u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[8] = lo; c.rh[8] = hi; }
+L_002E0610:
+    { u32 q = ((u32)c.r[17] + 0x0u) & ~0xFu; generated::Write64(q, c.r[8]); generated::Write64(q + 8, c.rh[8]); }
+    c.r[16] = lifted::Sx32((u32)c.r[16] + 0x10u);
+    c.r[17] = lifted::Sx32((u32)c.r[17] + 0x10u);
+    { bool t; t = c.r[9] != c.r[16]; c.r[18] = lifted::Sx32((u32)c.r[18] + 0x10u); if (t) goto L_002E060C; }
+    { bool t; t = c.r[9] == c.r[6]; c.r[8] = generated::ReadS8((u32)c.r[18] + 0x0u); if (t) goto L_002E0640; }
+    goto L_002E062C;
+L_002E0628:
+    lifted::Tick(c, 0x002E0628u);
+    c.r[8] = generated::ReadS8((u32)c.r[18] + 0x0u);
+L_002E062C:
+    generated::Write8((u32)c.r[17] + 0x0u, (u32)c.r[8]);
+    c.r[16] = lifted::Sx32((u32)c.r[16] + 0x1u);
+    c.r[17] = lifted::Sx32((u32)c.r[17] + 0x1u);
+    { bool t; t = c.r[6] != c.r[16]; c.r[18] = lifted::Sx32((u32)c.r[18] + 0x1u); if (t) goto L_002E0628; }
+L_002E0640:
+    { u32 q = ((u32)c.r[29] + 0x40u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[9] = lo; c.rh[9] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x30u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[8] = lo; c.rh[8] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x20u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[18] = lo; c.rh[18] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x10u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[17] = lo; c.rh[17] = hi; }
+    { u32 q = ((u32)c.r[29] + 0x0u) & ~0xFu; u64 lo = lifted::Read64(q); u64 hi = lifted::Read64(q + 8); c.r[16] = lo; c.rh[16] = hi; }
+L_002E0654:
+    c.r[2] = lifted::Sx32((u32)c.r[5] + (u32)c.r[6]);
+    c.r[29] = lifted::Sx32((u32)c.r[29] + 0x50u); return;
+    lifted::TailCall(c, 0x002E0660u, entry_ra, entry_sp);  /* runs off the end */
+}

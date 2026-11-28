@@ -1,0 +1,16 @@
+== 19502 functions in /tmp/ee-asm
+
+== 1. Deci2Call (syscall 0x7C) wrappers, and the jal sites that set $a0 = 0x10 before them
+  wrappers: func_003A6300, func_003A7690, func_003DC9D0, func_0063F2B0
+  func_003DD900 @ 003dd910 calls func_003DC9D0 with $a0 = 0x10 (kputs)
+
+== 2. loads and stores of 0x00797270..0x00797290 (base tracked through lui/addiu/ori)
+  load  func_002E01D0 @ 002e01e8 -> 0x00797270: 002e01e8  lw         $v0, 0x7270($at)
+  store func_002E0200 @ 002e0250 -> 0x00797270: 002e0250  sw         $zero, 0x7270($at)
+  load  func_002E0410 @ 002e0420 -> 0x00797270: 002e0420  lw         $v0, 0x7270($at)
+  load  func_002E0480 @ 002e04a4 -> 0x00797270: 002e04a4  lw         $v1, 0x7270($at)
+  load  func_002E04F0 @ 002e0514 -> 0x00797270: 002e0514  lw         $v1, 0x7270($at)
+  load  func_002E0560 @ 002e0570 -> 0x00797270: 002e0570  lw         $v1, 0x7270($at)
+  store func_002E0560 @ 002e057c -> 0x00797270: 002e057c  sw         $v1, 0x7270($at)
+  store func_00752750 @ 0075276c -> 0x0079727C: 0075276c  sw         $zero, 0x727c($at)
+  store func_00752750 @ 0075279c -> 0x00797278: 0075279c  sw         $v0, 0x7278($at)

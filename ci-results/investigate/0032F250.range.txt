@@ -1,0 +1,482 @@
+== original assembly, 0x0032F250 to 0x0032F950
+/**************************************************************************
+ * range_0032F250
+ *
+ * address      : 0x0032f250 .. 0x0032f950  (1792 bytes, 448 instructions)
+ * discovered by: --range
+ * called from  : no direct calls (indirect or unreferenced)
+ */
+glabel range_0032F250
+  0032f250  addiu      $sp, $sp, -0x40
+  0032f254  sd         $ra, 0x10($sp)
+  0032f258  jal        func_0030CC90
+  0032f25c  sq         $s0, 0x0($sp)                           # delay slot
+  0032f260  lui        $a0, 0x73
+  0032f264  jal        func_002DD080
+  0032f268  addiu      $a0, $a0, -0x4358                       # delay slot; 0x0072bca8 "Target Init"
+  0032f26c  jal        func_00443850
+  0032f270  nop                                                # delay slot
+  0032f274  jal        func_00444020
+  0032f278  nop                                                # delay slot
+  0032f27c  lui        $a0, 0x79
+  0032f280  jal        func_004B7A60
+  0032f284  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f288  lui        $at, 0x79
+  0032f28c  sw         $v0, 0x57b8($at)
+  0032f290  lui        $at, 0x79
+  0032f294  lw         $v0, 0x5f70($at)
+  0032f298  bne        $v0, $zero, .L002
+  0032f29c  lui        $a1, 0x73                               # delay slot
+  0032f2a0  lui        $a2, 0x73
+  0032f2a4  addiu      $a0, $zero, 0x7d4
+  0032f2a8  addiu      $a1, $a1, -0x4348
+  0032f2ac  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f2b0  jal        func_002DCB00
+  0032f2b4  addiu      $a3, $zero, 0x1be                       # delay slot
+  0032f2b8  beq        $v0, $zero, .L000
+  0032f2bc  nop                                                # delay slot
+  0032f2c0  jal        func_003083F0
+  0032f2c4  daddu      $a0, $v0, $zero                         # delay slot
+.L000:
+  0032f2c8  lui        $at, 0x79
+  0032f2cc  sw         $v0, 0x5f70($at)
+  0032f2d0  lui        $at, 0x79
+  0032f2d4  lw         $a0, 0x5f70($at)
+  0032f2d8  lw         $t9, 0x88($a0)
+  0032f2dc  lw         $t9, 0xc($t9)
+  0032f2e0  jalr       $t9
+  0032f2e4  nop                                                # delay slot
+  0032f2e8  bne        $v0, $zero, .L001
+  0032f2ec  lui        $a0, 0x79                               # delay slot
+  0032f2f0  jal        func_00427D60
+  0032f2f4  daddu      $a0, $zero, $zero                       # delay slot
+  0032f2f8  daddu      $a0, $v0, $zero
+  0032f2fc  jal        func_00485540
+  0032f300  addiu      $a1, $zero, 0x8                         # delay slot
+  0032f304  lui        $a1, 0x73
+  0032f308  lui        $a3, 0x73
+  0032f30c  daddu      $a2, $v0, $zero
+  0032f310  daddu      $a0, $zero, $zero
+  0032f314  addiu      $a1, $a1, -0x4328                       # 0x0072bcd8 "Fatal error"
+  0032f318  jal        func_003CEC60
+  0032f31c  addiu      $a3, $a3, -0x4348                       # delay slot; 0x0072bcb8 "ClassManager_Z"
+  0032f320  jal        func_003EFA08
+  0032f324  daddu      $a0, $zero, $zero                       # delay slot
+  0032f328  b          .L002
+  0032f32c  nop                                                # delay slot
+.L001:
+  0032f330  jal        func_004B7A60
+  0032f334  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f338  lui        $at, 0x79
+  0032f33c  sw         $v0, 0x57b8($at)
+.L002:
+  0032f340  jal        func_00332510
+  0032f344  nop                                                # delay slot
+  0032f348  jal        func_004854A0
+  0032f34c  nop                                                # delay slot
+  0032f350  lui        $a0, 0x79
+  0032f354  jal        func_004B7A60
+  0032f358  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f35c  lui        $at, 0x79
+  0032f360  sw         $v0, 0x57b8($at)
+  0032f364  lui        $at, 0x79
+  0032f368  lw         $v0, 0x5ffc($at)
+  0032f36c  bne        $v0, $zero, .L004
+  0032f370  lui        $a1, 0x73                               # delay slot
+  0032f374  lui        $a2, 0x73
+  0032f378  addiu      $a0, $zero, 0x1404
+  0032f37c  addiu      $a1, $a1, -0x4318
+  0032f380  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f384  jal        func_002DCB00
+  0032f388  addiu      $a3, $zero, 0x1c8                       # delay slot
+  0032f38c  beq        $v0, $zero, .L003
+  0032f390  nop                                                # delay slot
+  0032f394  jal        func_004BA1A0
+  0032f398  daddu      $a0, $v0, $zero                         # delay slot
+.L003:
+  0032f39c  lui        $at, 0x79
+  0032f3a0  lui        $a0, 0x79
+  0032f3a4  sw         $v0, 0x5ffc($at)
+  0032f3a8  jal        func_004B7A60
+  0032f3ac  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f3b0  lui        $at, 0x79
+  0032f3b4  sw         $v0, 0x57b8($at)
+.L004:
+  0032f3b8  jal        func_00241A10
+  0032f3bc  nop                                                # delay slot
+  0032f3c0  lui        $a0, 0x79
+  0032f3c4  jal        func_004B7A60
+  0032f3c8  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f3cc  lui        $at, 0x79
+  0032f3d0  sw         $v0, 0x57b8($at)
+  0032f3d4  lui        $at, 0x79
+  0032f3d8  lw         $v0, 0x5fcc($at)
+  0032f3dc  bne        $v0, $zero, .L007
+  0032f3e0  nop                                                # delay slot
+  0032f3e4  lui        $a1, 0x73
+  0032f3e8  lui        $a2, 0x73
+  0032f3ec  addiu      $a0, $zero, 0x2ad0
+  0032f3f0  addiu      $a1, $a1, -0x4300                       # 0x0072bd00 "StreamManager_Z"
+  0032f3f4  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f3f8  jal        func_002DCB00
+  0032f3fc  addiu      $a3, $zero, 0x1cd                       # delay slot
+  0032f400  beq        $v0, $zero, .L005
+  0032f404  nop                                                # delay slot
+  0032f408  jal        func_00456020
+  0032f40c  daddu      $a0, $v0, $zero                         # delay slot
+.L005:
+  0032f410  lui        $at, 0x79
+  0032f414  sw         $v0, 0x5fcc($at)
+  0032f418  lui        $at, 0x79
+  0032f41c  jal        func_004567F0
+  0032f420  lw         $a0, 0x5fcc($at)                        # delay slot
+  0032f424  bne        $v0, $zero, .L006
+  0032f428  lui        $a0, 0x79                               # delay slot
+  0032f42c  jal        func_00427D60
+  0032f430  daddu      $a0, $zero, $zero                       # delay slot
+  0032f434  daddu      $a0, $v0, $zero
+  0032f438  jal        func_00485540
+  0032f43c  addiu      $a1, $zero, 0x8                         # delay slot
+  0032f440  lui        $a1, 0x73
+  0032f444  lui        $a3, 0x73
+  0032f448  daddu      $a2, $v0, $zero
+  0032f44c  daddu      $a0, $zero, $zero
+  0032f450  addiu      $a1, $a1, -0x4328                       # 0x0072bcd8 "Fatal error"
+  0032f454  jal        func_003CEC60
+  0032f458  addiu      $a3, $a3, -0x4300                       # delay slot; 0x0072bd00 "StreamManager_Z"
+  0032f45c  jal        func_003EFA08
+  0032f460  daddu      $a0, $zero, $zero                       # delay slot
+  0032f464  b          .L007
+  0032f468  nop                                                # delay slot
+.L006:
+  0032f46c  jal        func_004B7A60
+  0032f470  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f474  lui        $at, 0x79
+  0032f478  sw         $v0, 0x57b8($at)
+.L007:
+  0032f47c  lui        $a0, 0x79
+  0032f480  jal        func_004B7A60
+  0032f484  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f488  lui        $at, 0x79
+  0032f48c  sw         $v0, 0x57b8($at)
+  0032f490  lui        $at, 0x79
+  0032f494  lw         $v0, 0x5f8c($at)
+  0032f498  bne        $v0, $zero, .L009
+  0032f49c  nop                                                # delay slot
+  0032f4a0  lui        $a1, 0x73
+  0032f4a4  lui        $a2, 0x73
+  0032f4a8  addiu      $a0, $zero, 0x44
+  0032f4ac  addiu      $a1, $a1, -0x42f0                       # 0x0072bd10 "Mat4x4Buffer_Z"
+  0032f4b0  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f4b4  jal        func_002DCB00
+  0032f4b8  addiu      $a3, $zero, 0x1ce                       # delay slot
+  0032f4bc  beq        $v0, $zero, .L008
+  0032f4c0  nop                                                # delay slot
+  0032f4c4  jal        func_00360B00
+  0032f4c8  daddu      $a0, $v0, $zero                         # delay slot
+.L008:
+  0032f4cc  lui        $at, 0x79
+  0032f4d0  lui        $a0, 0x79
+  0032f4d4  sw         $v0, 0x5f8c($at)
+  0032f4d8  jal        func_004B7A60
+  0032f4dc  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f4e0  lui        $at, 0x79
+  0032f4e4  sw         $v0, 0x57b8($at)
+.L009:
+  0032f4e8  lui        $a0, 0x79
+  0032f4ec  jal        func_004B7A60
+  0032f4f0  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f4f4  lui        $at, 0x79
+  0032f4f8  sw         $v0, 0x57b8($at)
+  0032f4fc  lui        $at, 0x79
+  0032f500  lw         $v0, 0x5f90($at)
+  0032f504  bne        $v0, $zero, .L011
+  0032f508  nop                                                # delay slot
+  0032f50c  lui        $a1, 0x73
+  0032f510  lui        $a2, 0x73
+  0032f514  addiu      $a0, $zero, 0x44
+  0032f518  addiu      $a1, $a1, -0x42f0                       # 0x0072bd10 "Mat4x4Buffer_Z"
+  0032f51c  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f520  jal        func_002DCB00
+  0032f524  addiu      $a3, $zero, 0x1cf                       # delay slot
+  0032f528  beq        $v0, $zero, .L010
+  0032f52c  nop                                                # delay slot
+  0032f530  jal        func_00360B00
+  0032f534  daddu      $a0, $v0, $zero                         # delay slot
+.L010:
+  0032f538  lui        $at, 0x79
+  0032f53c  lui        $a0, 0x79
+  0032f540  sw         $v0, 0x5f90($at)
+  0032f544  jal        func_004B7A60
+  0032f548  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f54c  lui        $at, 0x79
+  0032f550  sw         $v0, 0x57b8($at)
+.L011:
+  0032f554  lui        $at, 0x79
+  0032f558  lui        $a1, 0x73
+  0032f55c  lw         $a0, 0x5f68($at)
+  0032f560  lui        $a2, 0x36
+  0032f564  lui        $a3, 0x73
+  0032f568  addiu      $a1, $a1, -0x42e0                       # 0x0072bd20 "GetMatrixUsage"
+  0032f56c  addiu      $a2, $a2, 0x2470                        # 0x00362470 -> func_00362470
+  0032f570  jal        func_003CF1B0
+  0032f574  addiu      $a3, $a3, -0x42d0                       # delay slot; 0x0072bd30 "No Comment"
+  0032f578  lui        $at, 0x79
+  0032f57c  lb         $v0, 0x680f($at)
+  0032f580  bne        $v0, $zero, .L012
+  0032f584  nop                                                # delay slot
+  0032f588  jal        func_002DEC40
+  0032f58c  nop                                                # delay slot
+.L012:
+  0032f590  lui        $at, 0x79
+  0032f594  lw         $v0, 0x5f6c($at)
+  0032f598  bne        $v0, $zero, .L015
+  0032f59c  nop                                                # delay slot
+  0032f5a0  lui        $a0, 0x79
+  0032f5a4  jal        func_004B7A60
+  0032f5a8  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f5ac  lui        $at, 0x79
+  0032f5b0  sw         $v0, 0x57b8($at)
+  0032f5b4  lui        $at, 0x79
+  0032f5b8  lw         $v0, 0x5f6c($at)
+  0032f5bc  bne        $v0, $zero, .L015
+  0032f5c0  nop                                                # delay slot
+  0032f5c4  lui        $a1, 0x73
+  0032f5c8  lui        $a2, 0x73
+  0032f5cc  addiu      $a0, $zero, 0x3220
+  0032f5d0  addiu      $a1, $a1, -0x42c0                       # 0x0072bd40 "Renderer_Z"
+  0032f5d4  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f5d8  jal        func_002DCB00
+  0032f5dc  addiu      $a3, $zero, 0x1da                       # delay slot
+  0032f5e0  beq        $v0, $zero, .L013
+  0032f5e4  nop                                                # delay slot
+  0032f5e8  jal        func_003951E0
+  0032f5ec  daddu      $a0, $v0, $zero                         # delay slot
+.L013:
+  0032f5f0  lui        $at, 0x79
+  0032f5f4  addiu      $a1, $zero, 0x100
+  0032f5f8  sw         $v0, 0x5f6c($at)
+  0032f5fc  lui        $at, 0x79
+  0032f600  lw         $a0, 0x5f6c($at)
+  0032f604  lw         $t9, 0x2200($a0)
+  0032f608  lw         $t9, 0xc($t9)
+  0032f60c  jalr       $t9
+  0032f610  daddu      $a2, $a1, $zero                         # delay slot
+  0032f614  bne        $v0, $zero, .L014
+  0032f618  lui        $a0, 0x79                               # delay slot
+  0032f61c  jal        func_00427D60
+  0032f620  daddu      $a0, $zero, $zero                       # delay slot
+  0032f624  daddu      $a0, $v0, $zero
+  0032f628  jal        func_00485540
+  0032f62c  addiu      $a1, $zero, 0x8                         # delay slot
+  0032f630  lui        $a1, 0x73
+  0032f634  lui        $a3, 0x73
+  0032f638  daddu      $a2, $v0, $zero
+  0032f63c  daddu      $a0, $zero, $zero
+  0032f640  addiu      $a1, $a1, -0x4328                       # 0x0072bcd8 "Fatal error"
+  0032f644  jal        func_003CEC60
+  0032f648  addiu      $a3, $a3, -0x42c0                       # delay slot; 0x0072bd40 "Renderer_Z"
+  0032f64c  jal        func_003EFA08
+  0032f650  daddu      $a0, $zero, $zero                       # delay slot
+  0032f654  b          .L015
+  0032f658  nop                                                # delay slot
+.L014:
+  0032f65c  jal        func_004B7A60
+  0032f660  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f664  lui        $at, 0x79
+  0032f668  sw         $v0, 0x57b8($at)
+.L015:
+  0032f66c  lui        $at, 0x79
+  0032f670  lw         $v0, 0x5fdc($at)
+  0032f674  bne        $v0, $zero, .L019
+  0032f678  nop                                                # delay slot
+  0032f67c  lui        $a0, 0x79
+  0032f680  jal        func_004B7A60
+  0032f684  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f688  lui        $at, 0x79
+  0032f68c  sw         $v0, 0x57b8($at)
+  0032f690  lui        $at, 0x79
+  0032f694  lw         $v0, 0x5fdc($at)
+  0032f698  bne        $v0, $zero, .L019
+  0032f69c  nop                                                # delay slot
+  0032f6a0  lui        $a1, 0x73
+  0032f6a4  lui        $a2, 0x73
+  0032f6a8  addiu      $a0, $zero, 0x10
+  0032f6ac  addiu      $a1, $a1, -0x42b0                       # 0x0072bd50 "PlayerInfoList_Z"
+  0032f6b0  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f6b4  jal        func_002DCB00
+  0032f6b8  addiu      $a3, $zero, 0x1dc                       # delay slot
+  0032f6bc  beq        $v0, $zero, .L018
+  0032f6c0  nop                                                # delay slot
+  0032f6c4  sw         $v0, 0x24($sp)
+  0032f6c8  jal        func_00456700
+  0032f6cc  daddu      $a0, $v0, $zero                         # delay slot
+  0032f6d0  lw         $v0, 0x24($sp)
+  0032f6d4  lui        $a1, 0x73
+  0032f6d8  lui        $a2, 0x73
+  0032f6dc  addiu      $a0, $zero, 0x8
+  0032f6e0  addiu      $a1, $a1, -0x4298                       # 0x0072bd68 "Anonymous New"
+  0032f6e4  addiu      $a2, $a2, -0x4288                       # 0x0072bd78 "PlayerInfo_Z.h"
+  0032f6e8  addiu      $a3, $zero, 0x44
+  0032f6ec  jal        func_002DCB00
+  0032f6f0  sw         $zero, 0x4($v0)                         # delay slot
+  0032f6f4  beq        $v0, $zero, .L016
+  0032f6f8  dsll32     $v1, $zero, 14                          # delay slot
+  0032f6fc  lw         $a3, 0x0($v0)
+  0032f700  dsrl32     $v1, $v1, 14
+  0032f704  sll        $a2, $v1, 14
+  0032f708  addiu      $v1, $zero, -0x1
+  0032f70c  dsll32     $a0, $v1, 0
+  0032f710  addiu      $v1, $zero, 0x3fff
+  0032f714  or         $a1, $v1, $a0
+  0032f718  and        $a1, $a3, $a1
+  0032f71c  addiu      $v1, $zero, -0x4000
+  0032f720  or         $a1, $a1, $a2
+  0032f724  andi       $a0, $zero, 0x3fff
+  0032f728  sw         $a1, 0x0($v0)
+  0032f72c  lhu        $a1, 0x0($v0)
+  0032f730  and        $v1, $a1, $v1
+  0032f734  or         $v1, $v1, $a0
+  0032f738  sh         $v1, 0x0($v0)
+  0032f73c  sw         $zero, 0x4($v0)
+.L016:
+  0032f740  lw         $v1, 0x24($sp)
+  0032f744  lui        $a1, 0x73
+  0032f748  lui        $a2, 0x73
+  0032f74c  addiu      $a0, $zero, 0x8
+  0032f750  addiu      $a1, $a1, -0x4298                       # 0x0072bd68 "Anonymous New"
+  0032f754  addiu      $a2, $a2, -0x4288                       # 0x0072bd78 "PlayerInfo_Z.h"
+  0032f758  addiu      $a3, $zero, 0x45
+  0032f75c  jal        func_002DCB00
+  0032f760  sw         $v0, 0x8($v1)                           # delay slot
+  0032f764  beq        $v0, $zero, .L017
+  0032f768  dsll32     $v1, $zero, 14                          # delay slot
+  0032f76c  lw         $a3, 0x0($v0)
+  0032f770  dsrl32     $v1, $v1, 14
+  0032f774  sll        $a2, $v1, 14
+  0032f778  addiu      $v1, $zero, -0x1
+  0032f77c  dsll32     $a0, $v1, 0
+  0032f780  addiu      $v1, $zero, 0x3fff
+  0032f784  or         $a1, $v1, $a0
+  0032f788  and        $a1, $a3, $a1
+  0032f78c  addiu      $v1, $zero, -0x4000
+  0032f790  or         $a1, $a1, $a2
+  0032f794  andi       $a0, $zero, 0x3fff
+  0032f798  sw         $a1, 0x0($v0)
+  0032f79c  lhu        $a1, 0x0($v0)
+  0032f7a0  and        $v1, $a1, $v1
+  0032f7a4  or         $v1, $v1, $a0
+  0032f7a8  sh         $v1, 0x0($v0)
+  0032f7ac  sw         $zero, 0x4($v0)
+.L017:
+  0032f7b0  lw         $v1, 0x24($sp)
+  0032f7b4  sw         $v0, 0xc($v1)
+  0032f7b8  lw         $v0, 0x24($sp)
+  0032f7bc  nop
+.L018:
+  0032f7c0  lui        $at, 0x79
+  0032f7c4  lui        $a0, 0x79
+  0032f7c8  sw         $v0, 0x5fdc($at)
+  0032f7cc  jal        func_004B7A60
+  0032f7d0  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f7d4  lui        $at, 0x79
+  0032f7d8  sw         $v0, 0x57b8($at)
+.L019:
+  0032f7dc  lui        $at, 0x79
+  0032f7e0  lw         $v0, 0x5fac($at)
+  0032f7e4  bne        $v0, $zero, .L022
+  0032f7e8  nop                                                # delay slot
+  0032f7ec  lui        $a0, 0x79
+  0032f7f0  jal        func_004B7A60
+  0032f7f4  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f7f8  lui        $at, 0x79
+  0032f7fc  sw         $v0, 0x57b8($at)
+  0032f800  lui        $at, 0x79
+  0032f804  lw         $v0, 0x5fac($at)
+  0032f808  bne        $v0, $zero, .L022
+  0032f80c  nop                                                # delay slot
+  0032f810  lui        $a1, 0x73
+  0032f814  lui        $a2, 0x73
+  0032f818  addiu      $a0, $zero, 0xfb0
+  0032f81c  addiu      $a1, $a1, -0x4278                       # 0x0072bd88 "SoundManager_Z"
+  0032f820  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f824  jal        func_002DCB00
+  0032f828  addiu      $a3, $zero, 0x1dd                       # delay slot
+  0032f82c  beq        $v0, $zero, .L020
+  0032f830  nop                                                # delay slot
+  0032f834  jal        func_0035DD00
+  0032f838  daddu      $a0, $v0, $zero                         # delay slot
+.L020:
+  0032f83c  lui        $at, 0x79
+  0032f840  sw         $v0, 0x5fac($at)
+  0032f844  lui        $at, 0x79
+  0032f848  lw         $a0, 0x5fac($at)
+  0032f84c  lw         $t9, 0x30($a0)
+  0032f850  lw         $t9, 0x18($t9)
+  0032f854  jalr       $t9
+  0032f858  nop                                                # delay slot
+  0032f85c  bne        $v0, $zero, .L021
+  0032f860  lui        $a0, 0x79                               # delay slot
+  0032f864  jal        func_00427D60
+  0032f868  daddu      $a0, $zero, $zero                       # delay slot
+  0032f86c  daddu      $a0, $v0, $zero
+  0032f870  jal        func_00485540
+  0032f874  addiu      $a1, $zero, 0x8                         # delay slot
+  0032f878  lui        $a1, 0x73
+  0032f87c  lui        $a3, 0x73
+  0032f880  daddu      $a2, $v0, $zero
+  0032f884  daddu      $a0, $zero, $zero
+  0032f888  addiu      $a1, $a1, -0x4328                       # 0x0072bcd8 "Fatal error"
+  0032f88c  jal        func_003CEC60
+  0032f890  addiu      $a3, $a3, -0x4278                       # delay slot; 0x0072bd88 "SoundManager_Z"
+  0032f894  jal        func_003EFA08
+  0032f898  daddu      $a0, $zero, $zero                       # delay slot
+  0032f89c  b          .L022
+  0032f8a0  nop                                                # delay slot
+.L021:
+  0032f8a4  jal        func_004B7A60
+  0032f8a8  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f8ac  lui        $at, 0x79
+  0032f8b0  sw         $v0, 0x57b8($at)
+.L022:
+  0032f8b4  lui        $at, 0x79
+  0032f8b8  lw         $v0, 0x5fa8($at)
+  0032f8bc  bne        $v0, $zero, 0x0032fbe0
+  0032f8c0  nop                                                # delay slot
+  0032f8c4  lui        $a0, 0x79
+  0032f8c8  jal        func_004B7A60
+  0032f8cc  addiu      $a0, $a0, 0x57d4                        # delay slot
+  0032f8d0  lui        $at, 0x79
+  0032f8d4  sw         $v0, 0x57b8($at)
+  0032f8d8  lui        $at, 0x79
+  0032f8dc  lw         $v0, 0x5fa8($at)
+  0032f8e0  bne        $v0, $zero, 0x0032fbe0
+  0032f8e4  nop                                                # delay slot
+  0032f8e8  lui        $a1, 0x73
+  0032f8ec  lui        $a2, 0x73
+  0032f8f0  addiu      $a0, $zero, 0x2c4
+  0032f8f4  addiu      $a1, $a1, -0x4260                       # 0x0072bda0 "InputPlatForm_Z"
+  0032f8f8  addiu      $a2, $a2, -0x4338                       # 0x0072bcc8 "Main_Z.cpp"
+  0032f8fc  jal        func_002DCB00
+  0032f900  addiu      $a3, $zero, 0x1de                       # delay slot
+  0032f904  beq        $v0, $zero, 0x0032fb68
+  0032f908  nop                                                # delay slot
+  0032f90c  lui        $v1, 0x77
+  0032f910  sw         $v0, 0x28($sp)
+  0032f914  addiu      $v1, $v1, -0x6b40                       # 0x007694c0
+  0032f918  sw         $v1, 0x1a8($v0)
+  0032f91c  lw         $a3, 0x28($sp)
+  0032f920  dsll32     $v0, $zero, 14
+  0032f924  dsrl32     $v0, $v0, 14
+  0032f928  addiu      $v1, $zero, -0x1
+  0032f92c  sll        $a1, $v0, 14
+  0032f930  dsll32     $a0, $v1, 0
+  0032f934  addiu      $v0, $zero, 0x3fff
+  0032f938  andi       $v1, $zero, 0x3fff
+  0032f93c  or         $a0, $v0, $a0
+  0032f940  addiu      $v0, $zero, -0x4000
+  0032f944  lw         $a2, 0x0($a3)
+  0032f948  and        $a0, $a2, $a0
+  0032f94c  or         $a0, $a0, $a1
+/* end of range_0032F250 */
+

@@ -1,0 +1,106 @@
+diff --git a/ps2decomp/cppcheck.py b/ps2decomp/cppcheck.py
+index 06d3c5d..a54fc23 100644
+--- a/ps2decomp/cppcheck.py
++++ b/ps2decomp/cppcheck.py
+@@ -142,7 +142,9 @@ def harness_source(functions, typed: bool, externs=()) -> str:
+     # The dispatch switch has a case per function - over two thousand - and
+     # optimising it ran the compiler out of heap. Only the generated code has to be
+     # checked at /O2; the harness that calls it does not.
+-    lines = ['#pragma optimize("", off)', '#include "ps2rt/generated.h"']
++    lines = ['#if defined(_MSC_VER)', '#define B3_EXPORT __declspec(dllexport)', '#else',
++             '#define B3_EXPORT __attribute__((visibility("default")))', '#endif',
++             '#pragma optimize("", off)', '#include "ps2rt/generated.h"']
+     if typed:
+         lines.append('#include "types.h"')
+     lines += ["", "namespace generated {"]
+@@ -192,14 +194,14 @@ def harness_source(functions, typed: bool, externs=()) -> str:
+     lines += [
+         "}",
+         "",
+-        'extern "C" __declspec(dllexport) void b3_set_memory(ReadFn r, WriteFn w, CallFn c) {',
++        'extern "C" B3_EXPORT void b3_set_memory(ReadFn r, WriteFn w, CallFn c) {',
+         "    g_read = r;",
+         "    g_write = w;",
+         "    g_call = c;",
+         "}",
+         "",
+         "/* Returns 1 with *result set, 2 for a void function, 0 if unknown. */",
+-        'extern "C" __declspec(dllexport) int b3_call(u32 address, const u64* args, s32* result) {',
++        'extern "C" B3_EXPORT int b3_call(u32 address, const u64* args, s32* result) {',
+         # Every case starts at the stack top: a path that traps returns without
+         # its StackLeave.
+         "    g_sp = 0x%08X;" % layout.CURRENT.stack_top,
+@@ -216,8 +218,19 @@ def harness_source(functions, typed: bool, externs=()) -> str:
+ 
+ 
+ def build(generated_path: str, runtime_sources, include_dir: str, work_dir: str) -> tuple:
+-    """Compile the generated file into a DLL; returns (dll path, functions)."""
+-    vcvars = find_vcvars()
++    """Compile the generated file into a shared library; returns (library path, functions).
++
++    On Windows it is an MSVC DLL (the check's original compiler). Elsewhere g++
++    builds the same source, with the same -O2, as a shared object: the check is
++    the same check, only the compiler differs.
++    """
++    on_windows = os.name == "nt"
++    if on_windows:
++        vcvars = find_vcvars()
++    else:
++        import shutil
++        if not shutil.which("g++"):
++            raise CompilerUnavailable("no g++ on this machine")
+     # Absolute: the build script changes into work_dir before compiling, so a
+     # relative path (a relative --game) would name a file that is not there.
+     work_dir = os.path.abspath(work_dir)
+@@ -236,28 +249,37 @@ def build(generated_path: str, runtime_sources, include_dir: str, work_dir: str)
+     # the same process under the same name would fail.
+     global _BUILDS
+     _BUILDS += 1
+-    dll = os.path.join(work_dir, "generated_check_%d_%d.dll" % (os.getpid(), _BUILDS))
++    suffix = "dll" if on_windows else "so"
++    dll = os.path.join(work_dir, "generated_check_%d_%d.%s" % (os.getpid(), _BUILDS, suffix))
+     sources = [os.path.abspath(generated_path), harness] + [
+         os.path.abspath(path) for path in runtime_sources
+     ]
++    log_path = os.path.join(work_dir, "build.log")
+     # /O2 on purpose: an optimiser is what turns undefined behaviour into wrong
+     # answers, so checking an unoptimised build would hide exactly the problems
+     # this exists to find.
+-    script = os.path.join(work_dir, "build.bat")
+-    with open(script, "w", encoding="utf-8") as handle:
+-        handle.write("@echo off\n")
+-        handle.write('call "%s" >nul\n' % vcvars)
+-        handle.write('cd /d "%s"\n' % work_dir)
+-        handle.write('cl /nologo /std:c++17 /O2 /W3 /bigobj /LD /I"%s" /I"%s" %s /Fe"%s" >build.log 2>&1\n'
+-                     % (os.path.abspath(include_dir), generated_dir,
+-                        " ".join('"%s"' % path for path in sources), dll))
+-        handle.write("exit /b %errorlevel%\n")
+-    result = subprocess.run(["cmd", "/c", script], capture_output=True, text=True)
++    if on_windows:
++        script = os.path.join(work_dir, "build.bat")
++        with open(script, "w", encoding="utf-8") as handle:
++            handle.write("@echo off\n")
++            handle.write('call "%s" >nul\n' % vcvars)
++            handle.write('cd /d "%s"\n' % work_dir)
++            handle.write('cl /nologo /std:c++17 /O2 /W3 /bigobj /LD /I"%s" /I"%s" %s /Fe"%s" >build.log 2>&1\n'
++                         % (os.path.abspath(include_dir), generated_dir,
++                            " ".join('"%s"' % path for path in sources), dll))
++            handle.write("exit /b %errorlevel%\n")
++        result = subprocess.run(["cmd", "/c", script], capture_output=True, text=True)
++    else:
++        command = ["g++", "-std=c++17", "-O2", "-shared", "-fPIC", "-w",
++                   "-I" + os.path.abspath(include_dir), "-I" + generated_dir] + sources + ["-o", dll]
++        result = subprocess.run(command, capture_output=True, text=True, cwd=work_dir)
++        with open(log_path, "w", encoding="utf-8") as handle:
++            handle.write(result.stdout + result.stderr)
+     if result.returncode != 0:
+-        with open(os.path.join(work_dir, "build.log"), encoding="utf-8",
+-                  errors="replace") as handle:
++        with open(log_path, encoding="utf-8", errors="replace") as handle:
+             log = handle.read()
+-        errors = [line for line in log.splitlines() if " error " in line]
++        # MSVC: "file(line): error C...", g++: "file:line:col: error: ..."
++        errors = [line for line in log.splitlines() if " error " in line or ": error:" in line]
+         # Every error, not a sample: the caller drops each function named here.
+         raise CompileError("\n".join(errors) or log[-2000:])
+     return dll, functions

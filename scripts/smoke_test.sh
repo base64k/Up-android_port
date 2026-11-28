@@ -23,7 +23,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 GAME="games/up"
-SECONDS_TO_RUN="${UP_SMOKE_SECONDS:-120}"
+SECONDS_TO_RUN="${UP_SMOKE_SECONDS:-300}"
 ROUNDS="${UP_SMOKE_ROUNDS:-3}"
 JOBS="${UP_JOBS:-$(nproc 2>/dev/null || echo 2)}"
 BUILD="$GAME/build/linux/up"
@@ -95,10 +95,25 @@ run_game() {
     mkdir -p "$GAME/build/smoke/frames" "$(dirname "$REPORT")" "$(dirname "$DISCOVERED")"
     local -a headless=()
     command -v xvfb-run >/dev/null 2>&1 && headless=(xvfb-run -a)
+    # The IOP's trace: every library call the game's own IOP modules make (the
+    # sound driver's, what it asks of the host). On by default; UP_SMOKE_IOP_TRACE=0 turns it off.
+    local -a iop_trace=()
+    [ "${UP_SMOKE_IOP_TRACE:-1}" = "1" ] && iop_trace=(--iop-trace)
+    # UP_SMOKE_VIRTUAL=1: the run's time is its own (--virtual-time): the same
+    # pictures and the same stops every run, the time going on only as the
+    # emulated machine runs. The real-time run is the default.
+    local -a virtual=()
+    [ "${UP_SMOKE_VIRTUAL:-0}" = "1" ] && virtual=(--virtual-time)
+    # Every store to one guest address, with the calls that make it (its writer):
+    # UP_SMOKE_WATCH=0x007A982C, for a wait on a flag (or 0x007A982C,0x00795F94). Logged as "[write]" lines.
+    # Several addresses separated by commas (or spaces): one --watch-write each.
+    local -a watch=() w
+    for w in ${UP_SMOKE_WATCH//,/ }; do watch+=(--watch-write "$w"); done
     set +e
-    SDL_VIDEODRIVER=dummy PS2HOST_RENDERER=sdl \
+    SDL_VIDEODRIVER=dummy PS2HOST_RENDERER=sdl PS2HOST_RAM_DUMP="$GAME/build/smoke/port-ram.bin" \
         "${headless[@]+"${headless[@]}"}" "$BUILD/up" "$ELF" \
             --disc "${UP_ISO:-disc/up.iso}" --no-memcard \
+            --audio ${iop_trace[@]+"${iop_trace[@]}"} ${watch[@]+"${watch[@]}"} ${virtual[@]+"${virtual[@]}"} \
             --timeout "$SECONDS_TO_RUN" --frames "$GAME/build/smoke/frames" \
             --frames-every 1 --frames-limit 20 --discover "$DISCOVERED" \
             > "$REPORT" 2>&1

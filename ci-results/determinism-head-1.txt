@@ -1,0 +1,400 @@
+[port] Up, version 0.1.0-alpha
+[host] SDK routine sceGsSyncPath runs on the host
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+[audio] no audio device: ALSA: Couldn't open audio device: No such file or directory
+no sound device: running silent
+[host] SDK routine the SDK's kernel-mode store at 0x003E5E40 runs on the host
+[host] SDK routine the SDK's TTY write (DECI2) at 0x003DDB68 runs on the host
+[host] entry 0x00200008
+[call] 0x00200008
+[write] 0x00795F70 <- 0x0 (8 bytes) in 0x00200008
+[write] 0x00795F90 <- 0x0 (8 bytes) in 0x00200008
+[write] 0x007A9828 <- 0x0 (8 bytes) in 0x00200008
+[host] kernel SetupThread (0x3C) a0=0x0079BB70 a1=0x01FA8800 a2=0x00057800 a3=0x007AAF40
+[host] SetupThread: program args at 007AAF40 (argc 1, argv[0] "\SLUS_218.64;1")
+[host] kernel SetupHeap (0x3D) a0=0x007AB390 a1=0xFFFFFFFF a2=0x00057800 a3=0x007AAF40
+[call] 0x003E5888
+[call] 0x003E5650
+[call] 0x003DC5A0 CreateSema
+[host] kernel CreateSema (0x40) a0=0x01FFFD00 a1=0xFFFFFFFF a2=0x00057800 a3=0x007AAF40
+[call] 0x003E5778
+[call] 0x003E5878 SetSyscall
+[host] kernel SetSyscall (0x74) a0=0x00000083 a1=0x003E56F0 a2=0x00057800 a3=0x007AAF40
+[call] 0x003E5730 RFU083
+[host] kernel ? (0x83) a0=0x80000000 a1=0x80080000 a2=0x003E56F0 a3=0x007AAF40
+[call] 0x003E56F0
+[call] 0x003E5D68
+[call] 0x003E5D00 SetSyscall
+[call] 0x003E5D10 MachineType_or_rfu
+[host] kernel kCopy (0x5A) a0=0x80076000 a1=0x00714678 a2=0x00000740 a3=0x007AAF40
+[call] 0x003E5D20
+[call] 0x003DC820 FlushCache
+[host] kernel FlushCache (0x64) a0=0x00000000 a1=0x00714DE0 a2=0x0000000A a3=0x0000000A
+[call] 0x003E5D58 GetMemorySize_or_rfu
+[host] kernel ? (0x5B) a0=0x000000FC a1=0x80076000 a2=0x0000000A a3=0x0000000A
+[call] 0x80076000 copy of 0x00714678
+[host] kernel: the program's patch of syscall 0xFC is not installed: the host's alarms stand
+[host] kernel: the program's patch of syscall 0xFE is not installed: the host's alarms stand
+[host] kernel: the program's patch of syscall 0xFD is not installed: the host's alarms stand
+[host] kernel: the program's patch of syscall 0xFF is not installed: the host's alarms stand
+[call] 0x003E5EE0
+[call] 0x003F18EC
+[call] 0x003E71A8
+[call] 0x003DC290 AddIntcHandler
+[host] kernel AddIntcHandler (0x10) a0=0x0000000B a1=0x003E6480 a2=0x00000000 a3=0x00000000
+[call] 0x003E55E0
+[call] 0x003E5EB0
+[call] 0x003E5E40 the SDK's kernel-mode store
+[call] 0x003E5ED0
+[call] 0x003E5EC0
+[call] 0x003DD0E8
+[call] 0x003DC2E0 _EnableIntc
+[host] kernel _EnableIntc (0x14) a0=0x0000000B a1=0x00000F82 a2=0x00000000 a3=0x00000000
+[call] 0x003E6120
+[call] 0x003DD378
+[call] 0x003DC3A0 CreateThread
+[host] kernel CreateThread (0x20) a0=0x01FFFCD0 a1=0x0079BB70 a2=0x00000400 a3=0x00000000
+[call] 0x003DC3C0 StartThread
+[host] kernel StartThread (0x22) a0=0x00000002 a1=0x0079AC68 a2=0x00000400 a3=0x00000000
+[call] 0x003DC490 GetThreadId
+[host] kernel GetThreadId (0x2F) a0=0x00000002 a1=0x0079AC68 a2=0x00000400 a3=0x00000000
+[call] 0x003DC430 ChangeThreadPriority
+[host] kernel ChangeThreadPriority (0x29) a0=0x00000001 a1=0x00000001 a2=0x00000400 a3=0x00000000
+[call] 0x003DD2A0
+[call] 0x003DC5E0 WaitSema
+[host] kernel WaitSema (0x44) a0=0x00000003 a1=0x00000000 a2=0x00000000 a3=0x00000000
+[call] 0x003E59B0
+[call] 0x003E5948
+[call] 0x003DC650 GetOsdConfigParam
+[host] kernel GetOsdConfigParam (0x4B) a0=0x01FFFCE0 a1=0x00000001 a2=0x00000400 a3=0x00000000
+[call] 0x003DC640 SetOsdConfigParam
+[host] kernel SetOsdConfigParam (0x4A) a0=0x01FFFCE4 a1=0x00000001 a2=0x00000400 a3=0x00000000
+[call] 0x003E4E88
+[call] 0x003E4E78 SetSyscall
+[call] 0x003E4E20 MachineType_or_rfu
+[call] 0x003E4E30
+[call] 0x003E4E68 GetMemorySize_or_rfu
+[call] 0x80075000 copy of 0x00713840
+[call] 0x003E7598
+[call] 0x002DD240
+[call] 0x003F3E70
+[call] 0x003F6830
+[call] 0x003EFDE0
+[call] 0x003EFBD0
+[call] 0x003F68A8
+[call] 0x003F0998
+[call] 0x003F0960
+[call] 0x003F1590
+[call] 0x003F470C StringLength
+[call] 0x003F6730
+[call] 0x003F0458
+[call] 0x003F17E8
+[call] 0x003D9B70
+[call] 0x003D9A50
+[call] 0x00751D80
+[call] 0x003D9A20
+[call] 0x00751DE0
+[call] 0x00751E40
+[call] 0x00751EA0
+[call] 0x00216000
+[call] 0x00215FD0
+[call] 0x00751EB0
+[call] 0x0030CCA0
+[call] 0x00752270
+[call] 0x007522D0
+[call] 0x00752330
+[call] 0x007523C0
+[call] 0x007523E0
+[call] 0x00752440
+[call] 0x007524A0
+[call] 0x00752580
+[call] 0x007525E0
+[call] 0x007526C0
+[call] 0x002CBED0
+[call] 0x007526D0
+[call] 0x00752700
+[call] 0x002DC650
+[call] 0x004B5570
+[call] 0x00752750
+[call] 0x0032E910
+[write] 0x00795F70 <- 0x0 (1 bytes) in 0x003F18EC < 0032E910 < 00752750 < 003D9A50 < 003D9B70 < 002DD240 < 00200008
+[write] 0x00795F94 <- 0x0 (1 bytes) in 0x003F18EC < 0032E910 < 00752750 < 003D9A50 < 003D9B70 < 002DD240 < 00200008
+[call] 0x003F45F8 StringCopy
+[call] 0x007527D0
+[call] 0x007527E0
+[call] 0x003D9750
+[call] 0x002FDA00
+[call] 0x00752800
+[call] 0x00752810
+[call] 0x00752890
+[call] 0x007528A0
+[call] 0x007528C0
+[call] 0x007528D0
+[call] 0x00752940
+[call] 0x00350150
+[call] 0x00752960
+[call] 0x003588E0
+[call] 0x00358920
+[call] 0x003588B0
+[call] 0x00358830
+[call] 0x00358870
+[call] 0x003588D0
+[call] 0x00358800
+[call] 0x002CC230
+[call] 0x002CC260
+[call] 0x00752D60
+[call] 0x00752D90
+[call] 0x00484F50
+[call] 0x00484FA0
+[call] 0x00752E30
+[call] 0x00752E40
+[call] 0x00330F40
+[call] 0x00752EA0
+[call] 0x00752F10
+[call] 0x00205B60
+[call] 0x0039A9B0
+[call] 0x0039A9E0
+[call] 0x00752F90
+[call] 0x00753050
+[call] 0x00753080
+[call] 0x00753090
+[call] 0x007530D0
+[call] 0x00271990
+[call] 0x007531E0
+[call] 0x007531F0
+[call] 0x00753230
+[call] 0x007534F0
+[call] 0x00753500
+[call] 0x00753560
+[call] 0x00444070
+[call] 0x0031E0A0
+[call] 0x0031E370
+[call] 0x0031E350
+[call] 0x0024E6E0
+[call] 0x00753C60
+[call] 0x00753D80
+[call] 0x0044E320
+[call] 0x0044DCF0
+[call] 0x0044E3C0
+[call] 0x0044E380
+[call] 0x0044E3B0
+[call] 0x00753DC0
+[call] 0x00753E20
+[call] 0x00754080
+[call] 0x00754090
+[call] 0x007540B0
+[call] 0x007540C0
+[call] 0x007540D0
+[call] 0x007540E0
+[call] 0x00754140
+[call] 0x00754170
+[call] 0x007542F0
+[call] 0x00754350
+[call] 0x007543B0
+[call] 0x00754410
+[call] 0x00754470
+[call] 0x005B9270
+[call] 0x005B9370
+[call] 0x005B9AF0
+[call] 0x00754550
+[call] 0x007545B0
+[call] 0x00755490
+[call] 0x007554F0
+[call] 0x00755550
+[call] 0x007555B0
+[call] 0x00755610
+[call] 0x00755670
+[call] 0x007556D0
+[call] 0x00755820
+[call] 0x00755A90
+[call] 0x007560B0
+[call] 0x00756800
+[call] 0x003E6480
+[call] 0x003E6230
+[call] 0x0075CAF0
+[call] 0x0075CB50
+[call] 0x0075CC00
+[call] 0x0075CC50
+[call] 0x0075CCA0
+[call] 0x0075CEE0
+[call] 0x0075D170
+[call] 0x0075D1D0
+[call] 0x0075D230
+[call] 0x0075D290
+[call] 0x0075D2F0
+[call] 0x0075D350
+[call] 0x00277B10
+[call] 0x0075D370
+[call] 0x0075D3D0
+[call] 0x0075D430
+[call] 0x00241CD0
+[call] 0x00440890
+[call] 0x002E0660
+[call] 0x00485B48
+[call] 0x00485B08
+[call] 0x00485A98
+[call] 0x003E09F0
+[call] 0x003E05F0
+[call] 0x003E05A0
+[call] 0x003E0720
+[call] 0x003DF000
+[call] 0x003E5638 EnableIntr
+[call] 0x003DE8A0
+[call] 0x003DC980 SifSetDChain
+[host] kernel SifSetDChain (0x78) a0=0x00000000 a1=0x003E0000 a2=0x2079B500 a3=0x00000020
+[call] 0x003DC2B0 AddDmacHandler
+[host] kernel AddDmacHandler (0x12) a0=0x00000005 a1=0x003DEE08 a2=0x00000000 a3=0x00000020
+[call] 0x003DD1B8
+[call] 0x003DC300 _EnableDmac
+[host] kernel _EnableDmac (0x16) a0=0x00000005 a1=0x003DEE08 a2=0x00000000 a3=0x00000020
+[call] 0x003DC9B0 SifGetReg
+[host] kernel SifGetReg (0x7A) a0=0x80000000 a1=0x003DEE08 a2=0x00000000 a3=0x00000020
+[call] 0x003DED88
+[call] 0x003DEC50
+[call] 0x003DEF50
+[call] 0x003DC960 SifSetDma
+[host] kernel SifSetDma (0x77) a0=0x01FFF8C0 a1=0x00000001 a2=0x0079B5C0 a3=0x00000014
+[host] SIF: the EE receives at 0x0079B500
+[call] 0x003DEB88
+[call] 0x003DF798 sceSifBindRpc
+[call] 0x003DF1C8
+[host] SIF: bound to IOP server 0x80000001
+[host] SIF reply queued for the EE: procedure-answer 80000009, due 0 ns, 1 queued
+[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 3186516623 ns
+[call] 0x003DEE08
+[call] 0x003DC990 iSifSetDChain
+[host] kernel SifSetDChain (0x78) a0=0x00000000 a1=0x00000004 a2=0x2079B540 a3=0x2079B500
+[call] 0x003DF300
+[call] 0x003DC5D0
+[host] kernel iSignalSema (0x43) a0=0x00000005 a1=0x0079D000 a2=0x003DF300 a3=0x2079B500
+[call] 0x003DF270
+[host] DMAC: channel 5 interrupt delivered
+[call] 0x003DC5B0 DeleteSema
+[host] kernel DeleteSema (0x41) a0=0x00000005 a1=0x00000001 a2=0x2079B800 a3=0x00000040
+[call] 0x003E0090
+[call] 0x003DC5C0 SignalSema
+[host] kernel SignalSema (0x42) a0=0x00000006 a1=0x00000001 a2=0x2079B800 a3=0x00000040
+[call] 0x003DF968 sceSifCallRpc
+[host] SIF: EE call, server 0x80000001 (at 0x00180400), procedure 255, 8 bytes sent; from 0x003E0720 0x003DF968 0x003DED88 0x003DEC50 0x003DC960
+[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
+[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 3186516623 ns
+[call] 0x003E0928
+[call] 0x003F16A4
+[call] 0x003E00F0
+[host] SIF: EE call, server 0x80000001 (at 0x00180400), procedure 0, 1048 bytes sent; from 0x003E09F0 0x003DF968 0x003DED88 0x003DEC50 0x003DC960
+[host] file I/O: open rom0:ROMVER (not found)
+[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
+[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 3186516623 ns
+[call] 0x003E0620
+[call] 0x003F2AF8
+[call] 0x003F9058
+[call] 0x003F0A18
+[call] 0x003F03F8
+[call] 0x003DCD58
+[call] 0x003F0E68
+[call] 0x003F19B0
+[call] 0x003F0C10
+[call] 0x003F3D90
+[call] 0x003DCCA0
+[call] 0x003DC580 EndOfHeap
+[host] kernel EndOfHeap (0x3E) a0=0x00000420 a1=0x00000420 a2=0x00000000 a3=0x01FFFBB8
+[call] 0x003F1A30
+[call] 0x003DCD50
+[call] 0x003F15C4
+[call] 0x003EFAB8
+[call] 0x003F4018
+[call] 0x003F8FF8
+[call] 0x003DCB68
+[call] 0x003DDDB0
+[call] 0x003DD6F0
+[call] 0x003DC9D0 Deci2Call
+[host] kernel Deci2Call (0x7C) a0=0x00000001 a1=0x01FFF7A0 a2=0x003DD9D0 a3=0x0000000C
+[call] 0x002DCD90
+[call] 0x002DC580
+[call] 0x004B5600
+[call] 0x004B5760
+[call] 0x004B7BD0
+[call] 0x004B80E0
+[call] 0x004B9050
+[call] 0x004B7900
+[call] 0x004B7DD0
+[call] 0x004B7A60
+[call] 0x003F4C88
+[call] 0x002DD080
+[call] 0x002013E8
+[call] 0x00200E68
+[call] 0x00201F20
+[call] 0x00201E90
+[call] 0x00202AA8
+[call] 0x00201F60
+[call] 0x00202020
+[call] 0x003ED828
+[call] 0x003ED870
+[call] 0x003F7F18
+[call] 0x003EE790
+[call] 0x00202900
+[call] 0x00202038
+[call] 0x002027E0
+[call] 0x003F27D0
+[call] 0x003F1A80
+[call] 0x003EE450
+[call] 0x003F1E10
+[call] 0x002023B0
+[call] 0x002020F8
+[call] 0x00202418
+[call] 0x002000C8
+[call] 0x00202358
+[call] 0x00202950
+[call] 0x00202A08
+[call] 0x003F1B28
+[call] 0x002DD6B0
+[call] 0x002DCB00
+[call] 0x002DCE30
+[call] 0x002DC710
+[call] 0x004B68C0
+[call] 0x004B8800
+[call] 0x004B7F00
+[call] 0x004B8E60
+[call] 0x004B9080
+[call] 0x004B8140
+[call] 0x004B7C30
+[call] 0x004B8AE0
+[call] 0x004B7310
+[call] 0x004B53F0
+[call] 0x004B77E0
+[call] 0x0030CD80
+[call] 0x003CFFE0
+[call] 0x003F4120
+[call] 0x002E1040
+[call] 0x003D14C0
+[call] 0x003D1780
+[call] 0x002DCB70
+[call] 0x003D19D0
+[call] 0x003D1850
+[call] 0x002E1560
+[call] 0x002E1540
+[call] 0x0027DF20
+[call] 0x0030D0A0
+[call] 0x002DCAD0
+[call] 0x004250E0
+[call] 0x003DBDA8
+[call] 0x003D9D38
+[call] 0x003DB3E0
+[call] 0x003DB380
+[call] 0x003DB4C0
+[call] 0x003DAA20
+[call] 0x003D9D28
+[call] 0x003DCA30
+[call] 0x003D9B98
+[call] 0x003DC8E0 GsPutIMR
+[host] kernel GsPutIMR (0x71) a0=0x0000FF00 a1=0x00010000 a2=0x00020000 a3=0x00000000
+[call] 0x003DC1A0
+[host] kernel ? (0x02) a0=0x00000001 a1=0x00000002 a2=0x00000000 a3=0x00000000
+[call] 0x003DB3B8

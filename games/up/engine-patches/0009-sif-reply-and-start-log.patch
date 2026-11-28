@@ -1,0 +1,36 @@
+diff --git a/host/src/iop.cpp b/host/src/iop.cpp
+index e1ab604..6b37164 100644
+--- a/host/src/iop.cpp
++++ b/host/src/iop.cpp
+@@ -103,6 +103,8 @@ void QueueEnd(const std::vector<u8>& request, u32 answered, u32 server,
+     const u64 due = iop.next_delay_ns ? ClockNs() + iop.next_delay_ns : 0;
+     iop.next_delay_ns = 0;
+     iop.replies.push_back({std::move(packet), due});
++    std::fprintf(stderr, "[host] SIF reply queued for the EE: procedure-answer %08X, due %llu ns, %zu queued\n",
++                 unsigned(answered), (unsigned long long)due, iop.replies.size());
+     RequestDelivery();
+ }
+ 
+@@ -294,6 +296,8 @@ bool DeliverIopReply() {
+     if (!IopReplyPending()) return false;
+     std::vector<u8> packet = std::move(iop.replies.front().packet);
+     iop.replies.pop_front();
++    std::fprintf(stderr, "[host] SIF reply delivered to the EE: %zu bytes, %zu left, at %llu ns\n",
++                 packet.size(), iop.replies.size(), (unsigned long long)ClockNs());
+     Memory& m = GuestMemory();
+     m.WriteBytes(iop.receive_buffer, packet.data(), packet.size());
+     RaiseDmac(kSif0Channel);
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index 9835875..e3ff3d1 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -696,7 +696,9 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     *result = s32(done.c.r[2]);
+     vm.Free(done.stack);
+     vm.threads.erase(loader.id);
++    std::fprintf(stderr, "[host] IOP: %s's start returned %d; running the IOP until it waits\n", path.c_str(), int(*result));
+     Run();
++    std::fprintf(stderr, "[host] IOP: %s loaded\n", path.c_str());
+     return true;
+ }
+ 

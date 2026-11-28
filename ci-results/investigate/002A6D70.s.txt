@@ -1,0 +1,28 @@
+== original assembly of 0x002A6D70
+/**************************************************************************
+ * func_002A6D70
+ *
+ * address      : 0x002a6d70 .. 0x002a6db4  (68 bytes, 17 instructions)
+ * discovered by: called
+ * called from  : 0x002a80f8, 0x002a8184
+ */
+glabel func_002A6D70
+  002a6d70  lwc1       $f0, 0x4($a1)
+  002a6d74  swc1       $f0, 0x4($a0)
+  002a6d78  lwc1       $f0, 0x8($a1)
+  002a6d7c  swc1       $f0, 0x8($a0)
+  002a6d80  lwc1       $f0, 0xc($a1)
+  002a6d84  swc1       $f0, 0xc($a0)
+  002a6d88  lwc1       $f0, 0x10($a1)
+  002a6d8c  swc1       $f0, 0x10($a0)
+  002a6d90  lwc1       $f0, 0x14($a1)
+  002a6d94  swc1       $f0, 0x14($a0)
+  002a6d98  lwc1       $f0, 0x18($a1)
+  002a6d9c  swc1       $f0, 0x18($a0)
+  002a6da0  lwc1       $f0, 0x1c($a1)
+  002a6da4  swc1       $f0, 0x1c($a0)
+  002a6da8  lwc1       $f0, 0x24($a1)
+  002a6dac  jr         $ra
+  002a6db0  swc1       $f0, 0x24($a0)                          # delay slot
+/* end of func_002A6D70 */
+

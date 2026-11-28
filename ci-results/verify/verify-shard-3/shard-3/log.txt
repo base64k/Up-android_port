@@ -1,0 +1,25 @@
+  seeded 1948 null global pointers for testing, and 113 more found by running (25s)
+lifted 3248 of 3250 functions; refused 2
+      1  cfc2 of an unmodelled VU0 flag register
+      1  unsupported instruction psubh
+    a worker has verified 500 of 812
+    a worker has verified 500 of 812
+    a worker has verified 500 of 812
+    a worker has verified 500 of 812
+  0 verdicts remembered, 3248 verified afresh
+  building and verifying took 3686s (4 processes)
+lifted and verified: 3067 functions, 662,496 bytes (13.69% of code)
+     71  untestable: original, every memory profile: ExecutionLimit: exceeded N instructions; likely an infinite loop
+     41  untestable: only N cases ran
+     27  untestable: original, every memory profile: MemoryFault: load of N byte(s) at unmapped N
+     12  untestable: original, every memory profile: MemoryFault: store of N byte(s) at unmapped N
+     11  untestable: original, every memory profile: UnsupportedInstruction: unsupported instruction at N: 4a002778 (vcallms)
+      5  untestable: original, every memory profile: EmulationError: trap (tge) at N
+      4  untestable: original, every memory profile: EmulationError: execution left the program at N
+      2  untestable: original, every memory profile: EmulationError: trap (break) at N
+      2  lifted run failed: callee failed (N: execution left the program at N)
+      2  untestable: original, every memory profile: EmulationError: trap (teq) at N
+      1  untestable: original, every memory profile: UnsupportedInstruction: unsupported instruction at N: 756f6d79 (.word)
+      1  untestable: original, every memory profile: UnsupportedInstruction: unsupported instruction at N: N (eret)
+  elapsed 3739s
+lift.py exit 0

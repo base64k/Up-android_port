@@ -1,0 +1,57 @@
+diff --git a/host/src/iop_vm_internal.h b/host/src/iop_vm_internal.h
+--- a/host/src/iop_vm_internal.h
++++ b/host/src/iop_vm_internal.h
+@@ -157,6 +157,7 @@
+     bool trace = false;
+     std::map<u32, std::pair<u64, u32>> calls;    // with trace: target -> (count, a caller)
+     u32 executing = 0;                           // the instruction being run, for messages
++    u32 previous_executing = 0;                  // the one before it: where a jump came from
+ 
+     // Memory, by IOP address (any segment; the RAM mirrors every 2 MB).
+     // Inline, each size its own copy: the interpreter reads every instruction
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -187,6 +187,16 @@
+ 
+ namespace {
+ 
++// What a stop on a bad instruction shows: the instruction that jumped there (the
++// one run before it) and the registers of the thread that ran it. A word that is
++// data (here 0x00000001 in an IOP buffer) means a jump to a stale or wrong address.
++std::string JumpInfo(Vm& vm, const Context& c) {
++    std::string s = " (after the instruction at " + Hex(vm.previous_executing) + " = " +
++                    Hex(vm.Read(vm.previous_executing, 4)) + "; registers";
++    for (int i = 0; i < 32; ++i) s += (i % 8 == 0 ? "\n  r" : " r") + std::to_string(i) + "=" + Hex(c.r[i]);
++    return s + " hi=" + Hex(c.hi) + " lo=" + Hex(c.lo) + ")";
++}
++
+ // Runs `c` until it reaches `stop`, a library call blocks or yields, or
+ // `limit` instructions have run. Returns what ended it.
+ Outcome Execute(Vm& vm, Context& c, u32 stop, u64 limit, bool* stopped) {
+@@ -208,6 +218,7 @@
+             return Outcome::Block;
+         }
+         const u32 pc = c.pc;
++        vm.previous_executing = vm.executing;
+         vm.executing = pc;
+         const u32 w = vm.Read(pc, 4);
+         c.pc = c.npc;
+@@ -295,7 +306,7 @@
+                     case 0x27: set(rd, ~(r[rs] | r[rt])); break;
+                     case 0x2A: set(rd, s32(r[rs]) < s32(r[rt]) ? 1 : 0); break;
+                     case 0x2B: set(rd, r[rs] < r[rt] ? 1 : 0); break;
+-                    default: Stop("instruction " + Hex(w) + " at " + Hex(pc));
++                    default: Stop("instruction " + Hex(w) + " at " + Hex(pc) + JumpInfo(vm, c));
+                 }
+                 break;
+             case 0x01: {                                                             // regimm
+@@ -350,7 +361,7 @@
+                 break;
+             }
+             case 0x2B: vm.Write(r[rs] + u32(simm), r[rt], 4); break;                 // sw
+-            default: Stop("instruction " + Hex(w) + " at " + Hex(pc));
++            default: Stop("instruction " + Hex(w) + " at " + Hex(pc) + JumpInfo(vm, c));
+         }
+     }
+     return Outcome::Return;          // the quantum ran out: still ready, not rotated

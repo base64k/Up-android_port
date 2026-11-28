@@ -1,0 +1,7 @@
+== 19502 functions in /tmp/ee-asm
+
+== 1. Deci2Call (syscall 0x7C) wrappers, and the jal sites that set $a0 = 0x10 before them
+  wrappers: func_003A6300, func_003A7690, func_003DC9D0, func_0063F2B0
+  func_003DD900 @ 003dd910 calls func_003DC9D0 with $a0 = 0x10 (kputs)
+
+== 2. loads and stores of 0x00795BB0..0x00795C00 (base tracked through lui/addiu/ori)

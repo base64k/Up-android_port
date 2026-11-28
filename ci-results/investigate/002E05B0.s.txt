@@ -1,0 +1,59 @@
+== original assembly of 0x002E05B0
+/**************************************************************************
+ * func_002E05B0
+ *
+ * address      : 0x002e05b0 .. 0x002e0660  (176 bytes, 44 instructions)
+ * discovered by: called
+ * called from  : 0x002e17d4, 0x002e1940, 0x002e1954, 0x002e19ec, 0x002e8184, 0x002e93e0 (+430 more)
+ */
+glabel func_002E05B0
+  002e05b0  beq        $a2, $zero, .L003
+  002e05b4  addiu      $sp, $sp, -0x50                         # delay slot
+  002e05b8  sq         $s0, 0x0($sp)
+  002e05bc  sq         $s1, 0x10($sp)
+  002e05c0  sq         $s2, 0x20($sp)
+  002e05c4  sq         $t0, 0x30($sp)
+  002e05c8  sq         $t1, 0x40($sp)
+  002e05cc  paddub     $s1, $a0, $zero
+  002e05d0  paddub     $s2, $a1, $zero
+  002e05d4  addiu      $t1, $zero, 0xf
+  002e05d8  and        $s0, $t1, $a0
+  002e05dc  bne        $s0, $zero, .L001
+  002e05e0  paddub     $s0, $zero, $zero                       # delay slot
+  002e05e4  and        $s0, $t1, $a1
+  002e05e8  bne        $s0, $zero, .L001
+  002e05ec  paddub     $s0, $zero, $zero                       # delay slot
+  002e05f0  ori        $at, $zero, 0xffff
+  002e05f4  addu       $t1, $zero, $at
+  002e05f8  sll        $t1, $t1, 16
+  002e05fc  ori        $at, $zero, 0xfff0
+  002e0600  addu       $t1, $t1, $at
+  002e0604  and        $t1, $a2, $t1
+  002e0608  blez       $t1, .L001
+.L000:
+  002e060c  lq         $t0, 0x0($s2)                           # delay slot
+  002e0610  sq         $t0, 0x0($s1)
+  002e0614  addi       $s0, $s0, 0x10
+  002e0618  addi       $s1, $s1, 0x10
+  002e061c  bne        $t1, $s0, .L000
+  002e0620  addi       $s2, $s2, 0x10                          # delay slot
+  002e0624  beq        $t1, $a2, .L002
+.L001:
+  002e0628  lb         $t0, 0x0($s2)                           # delay slot
+  002e062c  sb         $t0, 0x0($s1)
+  002e0630  addi       $s0, $s0, 0x1
+  002e0634  addi       $s1, $s1, 0x1
+  002e0638  bne        $a2, $s0, .L001
+  002e063c  addi       $s2, $s2, 0x1                           # delay slot
+.L002:
+  002e0640  lq         $t1, 0x40($sp)
+  002e0644  lq         $t0, 0x30($sp)
+  002e0648  lq         $s2, 0x20($sp)
+  002e064c  lq         $s1, 0x10($sp)
+  002e0650  lq         $s0, 0x0($sp)
+.L003:
+  002e0654  add        $v0, $a1, $a2
+  002e0658  jr         $ra
+  002e065c  addiu      $sp, $sp, 0x50                          # delay slot
+/* end of func_002E05B0 */
+

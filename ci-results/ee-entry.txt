@@ -1,0 +1,54 @@
+/**************************************************************************
+ * func_00200008
+ *
+ * address      : 0x00200008 .. 0x002000b4  (172 bytes, 43 instructions)
+ * discovered by: entry
+ * called from  : no direct calls (indirect or unreferenced)
+ */
+glabel func_00200008
+  00200008  lui        $v0, 0x79
+  0020000c  lui        $v1, 0x7b
+  00200010  addiu      $v0, $v0, 0x4500
+  00200014  addiu      $v1, $v1, -0x4c70
+.L000:
+  00200018  sq         $zero, 0x0($v0)
+  0020001c  nop
+  00200020  sltu       $at, $v0, $v1
+  00200024  nop
+  00200028  nop
+  0020002c  bne        $at, $zero, .L000
+  00200030  addiu      $v0, $v0, 0x10                          # delay slot
+  00200034  lui        $a0, 0x7a
+  00200038  lui        $a1, 0x1fb
+  0020003c  lui        $a2, 0x5
+  00200040  lui        $a3, 0x7b
+  00200044  lui        $t0, 0x20
+  00200048  addiu      $a0, $a0, -0x4490
+  0020004c  addiu      $a1, $a1, -0x7800
+  00200050  addiu      $a2, $a2, 0x7800
+  00200054  addiu      $a3, $a3, -0x50c0
+  00200058  addiu      $t0, $t0, 0xc0                          # 0x002000c0
+  0020005c  or         $gp, $a0, $zero
+  00200060  addiu      $v1, $zero, 0x3c
+  00200064  syscall
+  00200068  or         $sp, $v0, $zero
+  0020006c  lui        $a0, 0x7b
+  00200070  lui        $a1, 0x0
+  00200074  addiu      $a0, $a0, -0x4c70
+  00200078  addiu      $a1, $a1, -0x1
+  0020007c  addiu      $v1, $zero, 0x3d
+  00200080  syscall
+  00200084  jal        func_003E5888
+  00200088  nop                                                # delay slot
+  0020008c  jal        func_003DC820
+  00200090  or         $a0, $zero, $zero                       # delay slot
+  00200094  ei
+  00200098  lui        $v0, 0x7b
+  0020009c  addiu      $v0, $v0, -0x50c0
+  002000a0  lw         $a0, 0x0($v0)
+  002000a4  jal        func_002DD240
+  002000a8  addiu      $a1, $v0, 0x4                           # delay slot
+  002000ac  j          func_003E5C88
+  002000b0  or         $a0, $v0, $zero                         # delay slot
+/* end of func_00200008 */
+

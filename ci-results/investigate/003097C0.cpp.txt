@@ -1,0 +1,50 @@
+void F_003097C0(lifted::Context& c) {
+    const u32 entry_ra = (u32)c.r[31], entry_sp = (u32)c.r[29];
+    (void)entry_ra; (void)entry_sp;
+    c.r[2] = generated::ReadS32((u32)c.r[4] + 0x8u);
+    { bool t; t = c.r[2] != 0ull; c.r[2] = 0ull + 0ull; if (t) goto L_003097D4; }
+    goto L_00309878;
+L_003097D4:
+    c.r[5] = generated::ReadS32((u32)c.r[5] + 0x0u);
+    c.r[6] = generated::ReadS32((u32)c.r[4] + 0x0u);
+    c.r[2] = (u64)(0ull < c.r[5]);
+    c.r[3] = c.r[2] ^ 0x1ull;
+    c.r[2] = generated::ReadS32((u32)c.r[6] + 0x8u);
+    c.r[10] = lifted::Sx32((u32)c.r[2] + 0xFFFFFFFFu);
+    { bool t; t = c.r[3] != 0ull; c.r[11] = c.r[10] & c.r[5]; if (t) goto L_003097F8; }
+    c.r[3] = lifted::Sx32((u32)c.r[3] + 0x1u);
+L_003097F8:
+    lifted::Tick(c, 0x003097F8u);
+    c.r[8] = generated::ReadS32((u32)c.r[6] + 0x4u);
+    c.r[2] = lifted::Sx32((u64)((s32)(u32)c.r[11] >> 5));
+    c.r[9] = lifted::Sx32((u32)c.r[2] << 2);
+    c.r[7] = c.r[11] & 0x1Full;
+    c.r[2] = lifted::Sx32((u32)0ull + 0x1u);
+    c.r[7] = lifted::Sx32((u32)c.r[2] << (c.r[7] & 31));
+    c.r[2] = lifted::Sx32((u32)c.r[8] + (u32)c.r[9]);
+    c.r[2] = generated::ReadS32((u32)c.r[2] + 0x0u);
+    c.r[2] = c.r[7] & c.r[2];
+    { bool t; t = c.r[2] != 0ull; if (t) goto L_00309844; }
+    c.r[2] = generated::ReadS32((u32)c.r[4] + 0x4u);
+    c.r[7] = lifted::Sx32((u32)c.r[11] << 3);
+    c.r[2] = lifted::Sx32((u32)c.r[2] + (u32)c.r[7]);
+    c.r[2] = generated::ReadS32((u32)c.r[2] + 0x4u);
+    { bool t; t = c.r[2] != 0ull; c.r[2] = lifted::Sx32((u32)c.r[11] + (u32)c.r[3]); if (t) goto L_00309870; }
+    c.r[2] = 0ull + 0ull; goto L_00309878;
+L_00309844:
+    c.r[2] = generated::ReadS32((u32)c.r[4] + 0x4u);
+    c.r[7] = lifted::Sx32((u32)c.r[11] << 3);
+    c.r[2] = lifted::Sx32((u32)c.r[2] + (u32)c.r[7]);
+    c.r[7] = generated::ReadS32((u32)c.r[2] + 0x0u);
+    c.r[7] = c.r[5] ^ c.r[7];
+    c.r[7] = (u64)(c.r[7] < 0x1ull);
+    { bool t; t = c.r[7] == 0ull; if (t) goto L_0030986C; }
+    goto L_00309878;
+L_0030986C:
+    c.r[2] = lifted::Sx32((u32)c.r[11] + (u32)c.r[3]);
+L_00309870:
+    c.r[11] = c.r[10] & c.r[2]; goto L_003097F8;
+L_00309878:
+    return;
+    lifted::TailCall(c, 0x00309880u, entry_ra, entry_sp);  /* runs off the end */
+}

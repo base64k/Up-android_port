@@ -1,0 +1,47 @@
+--- a/host/src/threads.cpp
++++ b/host/src/threads.cpp
+@@ -199,6 +199,9 @@
+     try {
+         Dispatch(t.context, t.entry);
+         t.state = State::Dormant;               // returning from its entry ends a thread
++    } catch (const MemoryFault&) {
++        ReportRunningRegisters();               // the registers of the fault, while the thread is still current
++        S().stop = std::current_exception();
+     } catch (...) {
+         S().stop = std::current_exception();
+     }
+@@ -1501,6 +1504,23 @@
+ 
+ u64 LastVblankNs() { return g_last_vblank_ns.load(std::memory_order_relaxed); }
+ 
++/* A diagnostic for a fault (a read or write outside guest memory): the thread
++   that was running, its entry and its general registers, as the translated code
++   left them in its context. */
++void ReportRunningRegisters() {
++    Scheduler& s = S();
++    if (!s.current) {
++        std::fprintf(stderr, "[regs] no thread was running\n");
++        return;
++    }
++    const lifted::Context& c = s.current->context;
++    std::fprintf(stderr, "[regs] thread %u, entry %08X\n", unsigned(s.current->id), unsigned(s.current->entry));
++    for (int i = 0; i < 32; i += 2)
++        std::fprintf(stderr, "[regs] r%02d %016llX   r%02d %016llX\n", i, (unsigned long long)c.r[i],
++                     i + 1, (unsigned long long)c.r[i + 1]);
++    std::fflush(stderr);
++}
++
+ void SetRefreshLead(u64 ns) { g_refresh_lead.store(ns, std::memory_order_relaxed); }
+ 
+ void SetHostPriority(HostPriority priority) {
+--- a/host/include/ps2host/run.h
++++ b/host/include/ps2host/run.h
+@@ -327,6 +327,8 @@
+ /* Real time: when the last vertical blank was due (ClockNs), on the timer's
+    own grid - not when the EE took it, which it does at its next loop head. */
+ u64 LastVblankNs();
++/* A diagnostic: the running thread's general registers, to stderr (after a fault). */
++void ReportRunningRegisters();
+ /* The calling thread runs the game in real time (the EE's, the GS thread,
+    VIF1's worker): Windows is asked not to slow it for power (on a hybrid
+    processor, not to park it on an efficiency core) and to run it above

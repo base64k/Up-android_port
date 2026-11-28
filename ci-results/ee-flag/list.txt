@@ -1,0 +1,12 @@
+/tmp/ee-asm/func_0047B7D0.s
+/tmp/ee-asm/func_0047B8E8.s
+/tmp/ee-asm/func_0047BF98.s
+/tmp/ee-asm/func_0047C300.s
+/tmp/ee-asm/func_0047C6C8.s
+/tmp/ee-asm/func_0047CEA8.s
+/tmp/ee-asm/func_0047CFD0.s
+/tmp/ee-asm/func_0047D140.s
+/tmp/ee-asm/func_0047D2D8.s
+/tmp/ee-asm/func_0047D498.s
+/tmp/ee-asm/func_0047D660.s
+/tmp/ee-asm/func_0047DAE0.s

@@ -18,6 +18,26 @@ name: Up (PS2) - Android APK
 on:
   workflow_dispatch:
     inputs:
+      investigate:
+        description: "Dump the original's assembly, the lifted C++ and the callers of the given functions (ci-results/investigate/)"
+        type: boolean
+        default: false
+      addresses:
+        description: "Functions to investigate (space-separated hex, e.g. 0x002A7BF0)"
+        type: string
+        default: "0x002A7BF0"
+      bios:
+        description: "Fetch the PS2 BIOS dump from the secret UP_BIOS_DRIVE_FILE_ID and report its size and hashes (ci-results/bios-check.txt; the dump is never committed)"
+        type: boolean
+        default: false
+      reference:
+        description: "The reference run: the original on PCSX2 with the owner's BIOS and disc - screenshots and the emulator's console (artifact up-reference; the text goes to ci-results/reference/)"
+        type: boolean
+        default: false
+      verify:
+        description: "Verify every lifted function against the original instead of building (six shards, then the merged report in ci-results/verify/)"
+        type: boolean
+        default: false
       stages:
         description: "Stages to run: disc extract analyze [derive] lift host apk - 'derive' is the slow, readable tier and is not needed for the APK"
         default: "disc extract analyze lift host apk"
@@ -54,6 +74,7 @@ env:
 jobs:
   apk:
     name: Build the APK
+    if: ${{ !inputs.verify && !inputs.investigate && !inputs.bios && !inputs.reference }}
     runs-on: ubuntu-latest
     timeout-minutes: 300
     # The release step writes to the repository; the rest only reads.
@@ -63,6 +84,8 @@ jobs:
       group: up-android-apk
       cancel-in-progress: true
     env:
+      # The owner's BIOS, for the reference run the RAM comparison uses (the smoke run).
+      UP_BIOS_DRIVE_FILE_ID: ${{ secrets.UP_BIOS_DRIVE_FILE_ID }}
       UP_ABI: ${{ inputs.abi || 'arm64-v8a' }}
       # 'true' unless the run says otherwise: a push has no inputs at all.
       UP_CACHE: ${{ github.event_name == 'push' && 'true' || (inputs.cache && 'true' || 'false') }}
@@ -181,6 +204,19 @@ jobs:
           fi
           (clang++-19 --version 2>/dev/null || clang++ --version) | head -1
 
+      # The engine's patches for this game (games/up/engine-patches): what the
+      # engine lacks for the game yet, until it is in the engine's own
+      # repository. They go onto the checkout only; the submodule's commit is
+      # never changed.
+      - name: The engine's patches for this game
+        run: |
+          set -e
+          for patch in "$GITHUB_WORKSPACE"/games/up/engine-patches/*.patch; do
+            [ -f "$patch" ] || continue
+            echo "applying $(basename "$patch")"
+            git -C engine apply --verbose "$patch"
+          done
+
       - name: The engine's commit (the caches' key)
         id: engine
         run: echo "sha=$(git -C engine rev-parse HEAD)" >> "$GITHUB_OUTPUT"
@@ -252,13 +288,128 @@ jobs:
           [ -n "$STAGES" ] || STAGES="disc extract analyze lift host"
           bash scripts/build_apk.sh --stage "$STAGES" --abi "$UP_ABI"
 
+      # The engine's own check (the method in engine/docs/METHODOLOGY.md) of the
+      # functions on the crash chain: each lifted function is run against the
+      # original on test cases, and the verdict says whether it agrees. Only these
+      # functions, without writing any code (no --emit). ci-results/chain-verdicts.txt.
+      - name: The lifted functions of the crash chain, verified against the original
+        if: ${{ always() }}
+        continue-on-error: true
+        run: |
+          mkdir -p ci-results
+          ONLY=""
+          for a in 0x003078A0 0x003078F0 0x003079C0 0x00307ACC 0x003097C0 0x0030A240 0x0032DE80 0x0032DFA0 0x004C49A0 0x004C4BD0 0x004C4F40 0x0032F1B0 0x0032EAA0 0x00426350 0x00426E00 0x00356A60 0x0041B550; do ONLY="$ONLY --only $a"; done
+          python3 engine/tools/lift.py --game games/up $ONLY --jobs 4 --no-cache > ci-results/chain-verdicts.txt 2>&1 || echo "lift.py exit $?" >> ci-results/chain-verdicts.txt
+          cp games/up/build/lift_outcomes.json ci-results/chain-outcomes.json 2>/dev/null || true
+      # Every lifted function, verified the same way (no --emit: the code is not changed).
+      # Its outcomes are saved per function: which ones disagree with the original is the
+      # list to look at first. ci-results/verify-all.txt, ci-results/all-outcomes.json.
+      # Off: the full verification in one process ran for two hours on every
+      # smoke run and did not finish. The sharded mode (verify=true) does it.
+      - name: Every lifted function verified against the original (the engine's method)
+        if: ${{ false }}
+        continue-on-error: true
+        timeout-minutes: 120
+        run: |
+          mkdir -p ci-results
+          python3 engine/tools/lift.py --game games/up --jobs "$(nproc)" > ci-results/verify-all.txt 2>&1 || echo "lift.py exit $?" >> ci-results/verify-all.txt
+          cp games/up/build/lift_outcomes.json ci-results/all-outcomes.json 2>/dev/null || true
+
+      # Which of the disc's own files serve the SIF RPC servers the trace names
+      # (the sound module waits for 0x01000002): the report is saved to
+      # ci-results/disc-modules.txt. It never fails the run.
+      - name: The disc's modules (who serves the RPC servers the trace names)
+        if: ${{ always() }}
+        continue-on-error: true
+        run: python3 scripts/disc_modules.py "${UP_ISO:-disc/up.iso}" games/up/extracted engine games/up/build/disc-modules.txt
+
       # The PC reference build and its headless run: it says how far the game
       # gets, which is the porting work's measure. It fails on its own without
       # stopping the run: the report is worth more than the build.
       - name: The PC reference build and a headless run (how far the game gets)
         if: ${{ env.UP_SMOKE == 'true' }}
         continue-on-error: true
+        env:
+          UP_SMOKE_WATCH: "0x007A982C,0x00795F94,0x00795F70,0x007BD3E0,0x007BD3E4,0x007BD3E8,0x007BD3EC,0x007BD3F0,0x007BD3F4,0x007BD3F8,0x007BD3FC,0x007BD400,0x007BD404,0x007BD408,0x007BD40C,0x007BD410"   # the streaming ring of the context 0x7BD3D0 (run 46186597454: its dst 0x33680008 at ctx+0x30). the flag the main thread waits on at 0x47DB38; the ManipulatorMgr's globals (0x795F94 its object, 0x795F70 the one the update walks)
+          UP_SMOKE_VIRTUAL: "1"                                  # the run's own time (--virtual-time): the same run every time
+          PS2HOST_IOP_WATCH: "0x000C2D00-0x000C2FD0"            # the IOP stack of cdvdman (thread 7, sp 0xC2FA8 at the stop): every change, with its thread and instruction
         run: bash scripts/smoke_test.sh
+
+      # The comparison: the port's RAM at its stop against the reference's RAM
+      # (the original on PCSX2 with the owner's BIOS and disc, the same first
+      # minute). Numbers only in ci-results/ram-compare.txt; continue-on-error:
+      # the comparison is worth having, the APK is not held up by it.
+      - name: The reference's packages (PCSX2's display and sound)
+        if: ${{ env.UP_SMOKE == 'true' }}
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xdotool imagemagick tesseract-ocr pulseaudio pulseaudio-utils \
+            libgl1 libglx-mesa0 libgl1-mesa-dri libopengl0 libglx0 libegl1 libfontconfig1 libdbus-1-3 \
+            libxkbcommon0 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
+            libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 libxcb-randr0 libxcb-xfixes0 libxcb-glx0
+          python3 -m pip install --disable-pip-version-check gdown zstandard
+
+      - name: The reference run (the BIOS and the disc; a short run, its savestate at the end)
+        if: ${{ env.UP_SMOKE == 'true' }}
+        continue-on-error: true
+        env:
+          UP_REFERENCE_SECONDS: "6"
+        run: |
+          set -o pipefail
+          bash scripts/fetch_bios.sh
+          bash scripts/reference_run.sh
+
+      - name: The RAM of the port against the reference's (numbers only)
+        if: ${{ env.UP_SMOKE == 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p ci-results
+          if [ -f reference/savestate.p2s ] && [ -f games/up/build/smoke/port-ram.bin ]; then
+            python3 scripts/ram_compare.py reference/savestate.p2s games/up/build/smoke/port-ram.bin \
+              --value 0x10010000 0x00795F94 0x00795F70 0x00795F80 0x00795F8C 0x00795FA0 0x0032F250 0x0043E880 > ci-results/ram-compare.txt 2>&1 || true
+          else
+            echo "no comparison: the reference savestate or the port's RAM is missing" > ci-results/ram-compare.txt
+            ls reference 2>/dev/null >> ci-results/ram-compare.txt || true
+            ls games/up/build/smoke 2>/dev/null | head -20 >> ci-results/ram-compare.txt || true
+          fi
+
+      - name: Save the comparison's text to the repository
+        if: ${{ always() && env.UP_SMOKE == 'true' }}
+        run: |
+          mkdir -p ci-results/reference
+          cp reference/logs/ee-snapshot.txt ci-results/reference/ee-snapshot.txt 2>/dev/null || true
+          git config user.email "agent@arena.ai"
+          git config user.name "Arena Agent"
+          git add ci-results/ram-compare.txt ci-results/reference 2>/dev/null || true
+          git commit -m "ci(up): the port's RAM against the reference's, run ${{ github.run_id }}" || exit 0
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push -q origin "HEAD:refs/heads/$BRANCH" \
+            || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+            || echo "::warning title=compare::could not push to $BRANCH"
+
+      # The disc reads the port made (the engine's [disc] lines, patch 0021) against
+      # the image's own sectors: seconds, no emulation. ci-results/disc-crc.txt.
+      - name: The disc reads against the image (CRC-32 per read)
+        if: ${{ env.UP_SMOKE == 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p ci-results
+          python3 scripts/disc_crc_check.py "${UP_ISO:-disc/up.iso}" games/up/build/port/report.txt ci-results/disc-crc.txt
+
+      # The determinism check: the same build run twice with the same arguments.
+      # The first line where the two reports differ is where the run stops being
+      # repeatable (scripts/determinism_check.sh). continue-on-error: the report
+      # is worth more than the check.
+      # Off for now (the runs of 45872070165 to 45947696479 all stopped at the host's
+      # watchdog or gave the same first difference; ~6 minutes each). Turn back on: `env.UP_SMOKE == 'true'`.
+      - name: Determinism check (the same run twice)
+        if: ${{ false }}
+        continue-on-error: true
+        env:
+          UP_SMOKE_WATCH: "0x007A982C,0x00795F94,0x00795F70"
+          UP_DET_SECONDS: "150"
+        run: bash scripts/determinism_check.sh
 
       # The APK's stage, when it was asked for. (The check is in the shell:
       # GitHub's expressions have no way to ask whether a word is in a list.)
@@ -330,6 +481,182 @@ jobs:
             nproc
           } >> "$GITHUB_STEP_SUMMARY" 2>&1
 
+      # Save smoke test results to the repo so they can be read without
+      # downloading artifacts (blocked in some networks).
+      - name: Save smoke test results to repo
+        if: always()
+        run: |
+          mkdir -p ci-results
+          cp games/up/build/smoke/summary.txt ci-results/smoke-summary.txt 2>/dev/null || true
+          cp games/up/build/disc-modules.txt ci-results/disc-modules.txt 2>/dev/null || true
+          # The determinism check (scripts/determinism_check.sh): its summary, and the tail of each run.
+            for i in 1 2; do grep -a '^\[diag\]' games/up/build/determinism/run-$i.txt > ci-results/determinism-diag-$i.txt 2>/dev/null || true; done
+          if [ -f games/up/build/determinism/summary.txt ]; then
+            cp games/up/build/determinism/summary.txt ci-results/determinism-summary.txt
+            for i in 1 2; do tail -n 1500 games/up/build/determinism/run-$i.nowall.txt > ci-results/determinism-run-$i.txt 2>/dev/null || true; done
+            for i in 1 2; do cp games/up/build/determinism/head-$i.txt ci-results/determinism-head-$i.txt 2>/dev/null || true; cp games/up/build/determinism/command-$i.txt ci-results/determinism-command-$i.txt 2>/dev/null || true; done
+          fi
+          # The report, cut to its head and tail (a trace of a whole run is
+          # big); the full one is in the smoke test's artifact.
+          # The diagnostic lines of the whole report (the head and tail above keep only the ends).
+          grep -a '^\[diag\]' games/up/build/port/report.txt > ci-results/diag.txt 2>/dev/null || true
+          if [ -f games/up/build/port/report.txt ]; then
+            LINES=$(wc -l < games/up/build/port/report.txt)
+            if [ "$LINES" -gt 9000 ]; then
+              { head -n 4500 games/up/build/port/report.txt
+                echo "... $((LINES - 9000)) lines left out (the full report is in the up-smoke artifact) ..."
+                tail -n 4500 games/up/build/port/report.txt; } > ci-results/port-report.txt
+            else
+              cp games/up/build/port/report.txt ci-results/port-report.txt
+            fi
+            grep "^\[iop\]" games/up/build/port/report.txt | head -n 20000 > ci-results/iop-trace.txt || true
+            # The host's own lines (module starts and returns, SIF replies,
+            # the EE's idle loop, the loader dump): the port-report above
+            # cuts its middle out, and these are what tell a run's story.
+            grep "^\[host\]" games/up/build/port/report.txt | head -n 20000 > ci-results/host-trace.txt || true
+            # The writes to the watched address (UP_SMOKE_WATCH), with their callers.
+            grep "^\[write\]" games/up/build/port/report.txt | head -n 2000 > ci-results/write-trace.txt || true
+            grep "^\[iopwatch\]" games/up/build/port/report.txt | head -n 400 > ci-results/iop-watch.txt || true
+            # Every SIF command the IOP sends to the EE (sceSifSendCmd), and the IOP's
+            # command-handler registrations: the EE flag 0x007A982C waits for command 0xB.
+            grep -E 'to the EE: command|sifcmd#(10|12|13) ' games/up/build/port/report.txt | head -n 2000 > ci-results/iop-sendcmd.txt || true
+          fi
+          # What was built: the engine's patches as applied, and the end of the
+          # smoke test's build log (a build that went wrong is seen here).
+          {
+            echo "run ${{ github.run_id }} (the engine at $(git -C engine rev-parse --short HEAD))"
+            echo "the engine's patches on the checkout:"
+            git -C engine status --short
+            git -C engine diff --stat
+          } > ci-results/engine-build.txt 2>&1 || true
+          tail -n 150 games/up/build/smoke/build.log > ci-results/smoke-build-tail.txt 2>/dev/null || true
+          # The EE's code where the run stops (from the analysis database): the
+          # registration of 0x01000002, the bind of 0x01000001, the caller of the
+          # RPC 513, and the entry of EE thread 2. Read with host-trace.txt.
+          {
+            for a in 0x0044CEE0 0x003DD2A0; do
+              echo "=== EE function at $a ==="
+              timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 400 || true
+            done
+          } > ci-results/ee-code.txt 2>&1 || true
+          # The code around 0x24CEE4 (the bind) and 0x24D5BC (the registration), in
+          # a range: those addresses are inside functions, not at their starts.
+          timeout 300 python3 engine/tools/disasm.py --game games/up --range 0x0024C000 0x0024D800 2>&1 | head -n 2000 > ci-results/ee-code-24.txt || true
+          # The loop the main thread spins in at the end of a smoke run (its loop head
+          # 0x47DB38, in 0x47DAE0): what it waits for. ci-results/ee-code-47.txt.
+          # The smoke test now runs past the old wait, and stops at a write outside guest
+          # memory (the call stack innermost last: 0x426350 does the write). Its code and its
+          # callers: ci-results/ee-code-crash.txt.
+          # Run 46181473420 (virtual time, --virtual-time): the stop is deeper - 0x2DCC40 and
+          # 0x4B66F0 (the read at 0x33680004), called from 0x32DF60 / 0x4C49A0 / 0x3078A0.
+          # The frame that fills the object the free takes (0x32DE80 in 0x3079C0 at sp+0x70, the
+          # unpacker's wrapper), the allocator it calls (0x2DCA90) and the calls in 0x3079C0.
+          for a in 0x004C4F40 0x004C4EB0 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x0032DE80 0x0032DFA0 0x002DCA90 0x0030B9A0 0x002E05B0 0x0030CA70 0x00426350 0x00426E00 0x0032EAA0; do
+            echo "=== EE function at $a ==="
+            timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 300 || true
+          done > ci-results/ee-code-crash.txt 2>&1 || true
+          # The caller of the crashing function: where its object comes from (0x32ED94).
+          timeout 120 python3 engine/tools/disasm.py --game games/up --range 0x0032ED40 0x0032EDF0 2>&1 | head -n 200 >> ci-results/ee-code-crash.txt || true
+          # The game's own debug log (the strings "_CoreMainLoop(): Before ..." are passed to
+          # 0x3F45F8; the TTY write is 0x3DDB68). Retail code skips them: the golden-trace method
+          # (DQ8-Recompiled) needs their entry. ci-results/ee-code-log.txt.
+          { for a in 0x003F45F8 0x003DDB68 0x0030C3D0; do
+              echo "=== EE function at $a ==="
+              timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 120 || true
+            done; } > ci-results/ee-code-log.txt 2>&1 || true
+          # Who writes the manager pointers the main loop uses (globals at 0x795F94, 0x795F98,
+          # 0x795F70 - the $at 0x790000 offsets 0x5F94, 0x5F98, 0x5F70): the stores into them
+          # (sw/sd with that offset), and the functions holding them. ci-results/ee-writers.txt.
+          { for off in 5f94 5f98 5f70; do
+              echo "== stores to 0x79$off"
+              grep -lE '(sw|sd|swc1|sq) +[$][a-z0-9]+, -?0x'"$off"'[(][$][a-z0-9]+[)]' /tmp/ee-asm/*.s 2>/dev/null | head -20 || true
+              grep -hE '(sw|sd|swc1|sq) +[$][a-z0-9]+, -?0x'"$off"'[(][$][a-z0-9]+[)]' /tmp/ee-asm/*.s 2>/dev/null | head -20 || true
+            done; } > ci-results/ee-writers.txt 2>&1 || true
+          mkdir -p ci-results/ee-writers
+          grep -lE '(sw|sd|swc1|sq) +[$][a-z0-9]+, -?0x(5f94|5f98|5f70)[(][$][a-z0-9]+[)]' /tmp/ee-asm/*.s 2>/dev/null | head -12 | xargs -r -n1 -I{} cp {} ci-results/ee-writers/ || true
+          timeout 300 python3 engine/tools/disasm.py --game games/up --range 0x0047DA80 0x0047DB80 2>&1 | head -n 400 > ci-results/ee-code-47.txt || true
+          # The functions around the wait (its caller 0x301B80, the one that clears the
+          # flag 0x47C300) and every function that touches the flag's word or its
+          # struct (0x7A9700 + offsets, lui 0x7b/0x7a): who sets it, if anyone does.
+          for a in 0x00301B80 0x0047C300 0x0047DAE0 0x003DEB88 0x0047B8E8 0x003DED88 0x003DEB58; do
+            echo "=== EE function at $a ==="
+            timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 300 || true
+          done > ci-results/ee-code-flag.txt || true
+          # Every EE function that loads the RPC ids 0x01000002 or 0x01000001 (the
+          # constant tracked through lui/addiu/ori), and the calls after it: the
+          # registration or bind the id goes to. scripts/ee_rpc_ids.py.
+          rm -rf /tmp/ee-asm
+          # --all writes its files at the end: a run past the limit leaves no directory.
+          timeout 1500 python3 engine/tools/disasm.py --game games/up --all -o /tmp/ee-asm > /tmp/ee-asm.log 2>&1 || true
+          { echo "disasm exit: see below; files: $(ls /tmp/ee-asm 2>/dev/null | wc -l)"; tail -n 40 /tmp/ee-asm.log; } > ci-results/ee-asm-log.txt 2>&1 || true
+          python3 scripts/ee_rpc_ids.py /tmp/ee-asm 0x01000002 0x01000001 0x0044D4A0 0x003DD2A0 0x0044CDC0 0x0044CEE0 2>&1 | head -n 400 > ci-results/ee-rpc-ids.txt || true
+          # The Deci2Call(0x10) kputs callers ([guest] lines) and every load or store of
+          # the ManipulatorMgr pointer (0x795F94), the base tracked through lui/addiu.
+          python3 scripts/ee_find.py /tmp/ee-asm > ci-results/ee-find.txt 2>&1 || true
+          # Who writes the allocator's pool (0x7957B0 and the words round it).
+          python3 scripts/ee_find.py /tmp/ee-asm 0x795790 0x7957C0 > ci-results/ee-find-pool.txt 2>&1 || true
+          # Who writes the boot path buffer (0x797280) that the game prints as "Path : %s".
+          python3 scripts/ee_find.py /tmp/ee-asm 0x797270 0x797290 > ci-results/ee-find-path-buf.txt 2>&1 || true
+          # The entry the loader starts (0x200008, the start-up code that calls main).
+          timeout 120 python3 engine/tools/disasm.py --game games/up --addr 0x00200008 > ci-results/ee-entry.txt 2>&1 || true
+          # The string the game prints as "Path : %s": the disassembly writes each string
+          # it loads as a comment, so the function that loads it is the one that prints it.
+          grep -rn -- '"Path' /tmp/ee-asm > ci-results/ee-string-path.txt 2>&1 || true
+          mkdir -p ci-results/ee-path && rm -f ci-results/ee-path/*.s
+          for f in $(grep -rl -- '"Path' /tmp/ee-asm 2>/dev/null | head -n 20); do cp "$f" ci-results/ee-path/; done
+          mkdir -p ci-results/ee-flag
+          rm -f ci-results/ee-flag/*.s
+          grep -rlE -- "(-0x67d4|0x982c|-0x67d8|0x9828|-0x6900)\(" /tmp/ee-asm 2>/dev/null | head -n 40 > ci-results/ee-flag/list.txt || true
+          while read -r f; do cp "$f" ci-results/ee-flag/ 2>/dev/null || true; done < ci-results/ee-flag/list.txt
+          # The functions around the bind (0x44CDC0), the RPC 513 caller (0x44CEE0)
+          # and the registration of 0x01000002 (0x44D4A0), and who calls them.
+          mkdir -p ci-results/ee-funcs
+          for f in func_0044CDC0 func_0044D4A0 func_0044CEE0 func_002DEC40 func_0032F250 func_0044D190 func_003DF000 func_003DC820 func_002DCB00 func_002DD240 func_0032F1B0 func_0032EAA0 func_004B7A60 func_002DD6B0 func_002DCE30 func_00331230 func_002DD6A0 func_00338480 func_00338490 func_002DC710 func_003DD900 func_003DC9D0 func_003DDEB0 func_004B68C0; do
+            cp "/tmp/ee-asm/$f.s" ci-results/ee-funcs/ 2>/dev/null || true
+          done
+          # The arena of the game's allocator (the pool's counters and bitmaps at 0x795BC0-0x795C00):
+          # who writes its bounds, and the function that makes the arena (ee-find-arena.txt).
+          python3 scripts/ee_find.py /tmp/ee-asm 0x795BB0 0x795C00 > ci-results/ee-find-arena.txt 2>&1 || true
+          # The call chain of the stop (the smoke test's last stop: a read at 0xFFFFF000,
+          # innermost 0x4B66F0; the chain 0x32EAA0 (_CoreMainLoop) > 0x426350 (the
+          # ManipulatorMgr's update, its list of objects) > 0x426E00 > 0x356A60 > ...
+          # > 0x32DE20 > 0x32DF60 > 0x2DCC40 > 0x4B66F0; the innermost of the stop is
+          # 0x32DFA0, after 0x32DE80 (both dumped here)) and the allocator it uses
+          # (0x4B8800/0x4B9050/0x4B9080/0x4B8140/0x4B7310/0x4B77E0). ci-results/ee-chain/.
+          mkdir -p ci-results/ee-chain && rm -f ci-results/ee-chain/*.s
+          for f in func_004B66F0 func_002DCC40 func_0032DE20 func_0032DE80 func_0032DF60 func_0032DFA0 func_003079C0 func_003078A0 func_004C49A0 func_0041B550 func_00356A60 func_00426350 func_00426E00 func_0030C3D0 func_004B8800 func_004B9050 func_004B9080 func_004B8140 func_004B7310 func_004B77E0 func_004B6E40 func_004B7840 func_003F45F8 func_003083F0 func_00332510 func_0032F1B0 func_0032EAA0 func_002DD240 func_003E5D58 func_003E4E68 func_003E5888 func_0032F250 func_00331230; do
+            cp "/tmp/ee-asm/$f.s" ci-results/ee-chain/ 2>/dev/null || echo "missing $f" >> ci-results/ee-chain/missing.txt
+          done
+          for f in func_0044D4A0 func_0044CDC0 func_0044CEE0 func_002DEC40 func_0032F250 func_0044D190 func_002DCE30 func_00331230 func_002DD6A0 func_003DD900 func_002DC710 func_003DDEB0 func_004B68C0 func_003F2AF8; do
+            echo "== called from ($f):"
+            grep -rlE "jal +$f( |\$)" /tmp/ee-asm 2>/dev/null | xargs -r -n1 basename || true
+          done > ci-results/ee-callers.txt || true
+          if [ -f ci-results/smoke-summary.txt ] || [ -f ci-results/port-report.txt ]; then
+            git config user.email "agent@arena.ai"
+            git config user.name "Arena Agent"
+            git add ci-results/
+            git commit -m "ci(up): save smoke test results from run ${{ github.run_id }}" || true
+            # The branch may have moved while the run went on (a push of the
+            # next change): rebase onto it and push again, a few times.
+            BRANCH="${GITHUB_REF#refs/heads/}"
+            # The results of this run win a conflict with an earlier run's results
+            # (-X theirs). A merge, not a rebase: a rebase refuses to start while the
+            # engine submodule has the patches on it (its content is modified).
+            git push -q origin "HEAD:refs/heads/$BRANCH" \
+              || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+              || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+              || echo "::warning title=results::the results could not be pushed to $BRANCH"
+          fi
+          # The key lines of the run, as annotations too (they are kept by the
+          # checks API even when the logs and artifacts are not reachable).
+          grep -m1 "^stopped:" games/up/build/smoke/summary.txt 2>/dev/null | tr -d '\r' | sed 's/^/::notice title=smoke stop::/' || true
+          grep -m1 "^time:" games/up/build/smoke/summary.txt 2>/dev/null | cut -c1-160 | sed 's/^/::notice title=smoke time::/' || true
+          grep -m1 "^functions executed" games/up/build/smoke/summary.txt 2>/dev/null | sed 's/^/::notice title=smoke::/' || true
+          git -C engine status --short 2>/dev/null | sed 's/^/::notice title=engine patch::/' || true
+          NOT_IMPL=0; NOT_IMPL=$(grep -c 'is not implemented' games/up/build/port/report.txt 2>/dev/null) || true
+          echo "::notice title=smoke::lines 'is not implemented' in the report: ${NOT_IMPL:-0}"
+          grep -m3 "error" games/up/build/smoke/build.log 2>/dev/null | cut -c1-200 | sed 's/^/::notice title=smoke build::/' || true
+
       - name: Publish the release
         if: ${{ inputs.publish == true }}
         env:
@@ -342,3 +669,415 @@ jobs:
             --title "Up (PS2) - Android $VERSION" \
             --notes "An unofficial native port of Up (PS2, SLUS-21864) to Android. Bring your own disc image: the app asks for it on the first run. Alpha - expect bugs." \
             --prerelease
+
+  # ---- The verification of the lifted functions (workflow_dispatch with verify=true) ----
+  shard:
+    name: Verify shard ${{ matrix.shard }} of 6
+    if: ${{ inputs.verify }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    env:
+      SHARDS: 6
+    steps:
+      - name: Check out the repository (with the engine)
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      # The same patches the build applies, in the same order (games/up/engine-patches).
+      - name: The engine's patches for this game
+        run: |
+          set -e
+          for patch in "$GITHUB_WORKSPACE"/games/up/engine-patches/*.patch; do
+            [ -f "$patch" ] || continue
+            echo "applying $(basename "$patch")"
+            git -C engine apply --verbose "$patch"
+          done
+
+      - name: The engine's commit (the caches' key)
+        id: engine
+        run: echo "sha=$(git -C engine rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: The disc image - the cache
+        id: disc_cache
+        uses: actions/cache/restore@v6
+        with:
+          path: disc
+          key: disc-v1-${{ env.UP_DRIVE_FILE_ID }}
+
+      - name: The disc image (fetched only when the cache has none)
+        if: ${{ steps.disc_cache.outputs.cache-hit != 'true' }}
+        run: |
+          python -m pip install --disable-pip-version-check gdown
+          bash scripts/fetch_disc.sh
+
+      - name: The disc image's sha (the derived cache's key, as the build computes it)
+        id: fetch
+        run: |
+          IMAGE="disc/up.iso"
+          if [ -f "$IMAGE" ]; then
+            echo "sha=$(sha256sum "$IMAGE" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=raw" >> "$GITHUB_OUTPUT"
+          fi
+
+      # The lifted code, the analysis and the verdicts the build saved. A miss
+      # fails here with a clear message: run the build workflow first.
+      - name: The decompiled code - the cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            games/up/src
+            games/up/config
+            games/up/build/functions.json
+            games/up/build/verdicts.json
+            games/up/build/lift_outcomes.json
+            games/up/build/lift
+          key: derived-${{ steps.engine.outputs.sha }}-${{ steps.fetch.outputs.sha }}
+          fail-on-cache-miss: true
+
+      # lift.py reads the program's image: take it out of the disc, as the build does.
+      - name: The program out of the disc
+        run: |
+          set -e
+          EXE="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["executable"])' games/up/game.json)"
+          mkdir -p games/up/extracted
+          if [ ! -f "games/up/extracted/$EXE" ]; then
+            python3 engine/tools/isotool.py extract disc/up.iso "$EXE" -o games/up/extracted/
+          fi
+          test -f "games/up/extracted/$EXE"
+
+      - name: Verify this shard's functions against the original
+        run: |
+          set -u
+          OUT="verify-out/shard-${{ matrix.shard }}"
+          mkdir -p "$OUT"
+          ONLY="$(python3 scripts/verify_shard.py games/up/build/functions.json "${{ matrix.shard }}" "$SHARDS")"
+          echo "$ONLY" | head -c 300; echo
+          # lift.py without --emit: the code is not changed, only checked.
+          set +e
+          python3 engine/tools/lift.py --game games/up $ONLY --jobs "$(nproc)" > "$OUT/log.txt" 2>&1
+          echo "lift.py exit $?" >> "$OUT/log.txt"
+          set -e
+          cp games/up/build/lift_outcomes.json "$OUT/lift_outcomes.json" 2>/dev/null || echo "no outcomes written" >> "$OUT/log.txt"
+          tail -n 40 "$OUT/log.txt"
+
+      - name: The shard's outcomes
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-shard-${{ matrix.shard }}
+          path: verify-out/
+          if-no-files-found: warn
+          retention-days: 14
+
+  merge:
+    name: Merge the shards' outcomes
+    needs: shard
+    if: ${{ always() && inputs.verify }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: The shards' outcomes
+        uses: actions/download-artifact@v4
+        with:
+          pattern: verify-shard-*
+          path: verify-in
+
+      - name: The merged report
+        run: |
+          set -e
+          python3 scripts/verify_merge.py verify-in ci-results/verify | tee -a "$GITHUB_STEP_SUMMARY"
+          cp -r verify-in/. ci-results/verify/ 2>/dev/null || true
+
+      - name: Save the report to the repository
+        run: |
+          git config user.email "agent@arena.ai"
+          git config user.name "Arena Agent"
+          git add ci-results/verify/
+          git commit -m "ci(up): verification of the lifted functions, run ${{ github.run_id }}" || exit 0
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push -q origin "HEAD:refs/heads/$BRANCH" \
+            || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+            || echo "::warning title=verify::the report could not be pushed to $BRANCH"
+
+  investigate:
+    name: Investigate the functions
+    if: ${{ inputs.investigate }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      UP_ADDRESSES: ${{ inputs.addresses }}
+    steps:
+      - name: Check out the repository (with the engine)
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      # The same patches the build applies, in the same order (games/up/engine-patches).
+      - name: The engine's patches for this game
+        run: |
+          set -e
+          for patch in "$GITHUB_WORKSPACE"/games/up/engine-patches/*.patch; do
+            [ -f "$patch" ] || continue
+            echo "applying $(basename "$patch")"
+            git -C engine apply --verbose "$patch"
+          done
+
+      - name: The engine's commit (the caches' key)
+        id: engine
+        run: echo "sha=$(git -C engine rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: The disc image - the cache
+        id: disc_cache
+        uses: actions/cache/restore@v6
+        with:
+          path: disc
+          key: disc-v1-${{ env.UP_DRIVE_FILE_ID }}
+
+      - name: The disc image (fetched only when the cache has none)
+        if: ${{ steps.disc_cache.outputs.cache-hit != 'true' }}
+        run: |
+          python -m pip install --disable-pip-version-check gdown
+          bash scripts/fetch_disc.sh
+
+      - name: The disc image's sha (the derived cache's key, as the build computes it)
+        id: fetch
+        run: |
+          IMAGE="disc/up.iso"
+          if [ -f "$IMAGE" ]; then
+            echo "sha=$(sha256sum "$IMAGE" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=raw" >> "$GITHUB_OUTPUT"
+          fi
+
+      # The lifted code, the analysis and the verdicts the build saved. A miss
+      # fails here with a clear message: run the build workflow first.
+      - name: The decompiled code - the cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            games/up/src
+            games/up/config
+            games/up/build/functions.json
+            games/up/build/verdicts.json
+            games/up/build/lift_outcomes.json
+            games/up/build/lift
+          key: derived-${{ steps.engine.outputs.sha }}-${{ steps.fetch.outputs.sha }}
+          fail-on-cache-miss: true
+
+      # lift.py reads the program's image: take it out of the disc, as the build does.
+      - name: The program out of the disc
+        run: |
+          set -e
+          EXE="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["executable"])' games/up/game.json)"
+          mkdir -p games/up/extracted
+          if [ ! -f "games/up/extracted/$EXE" ]; then
+            python3 engine/tools/isotool.py extract disc/up.iso "$EXE" -o games/up/extracted/
+          fi
+          test -f "games/up/extracted/$EXE"
+
+      - name: The original's assembly, the lifted C++ and the callers
+        run: |
+          set -u
+          OUT="ci-results/investigate"
+          mkdir -p "$OUT"
+          # The lifted C++ of these functions, made now (the cache may not hold the lifted sources).
+          ONLY=""
+          for a in $UP_ADDRESSES; do ONLY="$ONLY --only 0x$(printf '%08X' "0x${a#0x}")"; done
+          python3 engine/tools/lift.py --game games/up $ONLY --emit --jobs "$(nproc)" > "$OUT/lift.log" 2>&1 || echo "lift.py exit $?" >> "$OUT/lift.log"
+          tail -n 15 "$OUT/lift.log"
+          for a in $UP_ADDRESSES; do
+            hex="${a#0x}"; hex="$(printf '%08X' "0x$hex")"
+            { echo "== original assembly of 0x$hex"; python3 engine/tools/disasm.py --game games/up --addr "0x$hex" 2>&1 || echo "disasm failed"; } > "$OUT/$hex.s.txt"
+            # The original over the whole extent the lifter follows (the analysis range can be shorter).
+            END=$(printf '0x%08X' $(( 0x$hex + 0x700 )))
+            { echo "== original assembly, 0x$hex to $END"; python3 engine/tools/disasm.py --game games/up --range "0x$hex" "$END" 2>&1 || echo "disasm failed"; } > "$OUT/$hex.range.txt"
+            # The lifted C++ of the function (from the derived cache): its body, up to the closing brace at column 0.
+            FILE="$(grep -rl "^void F_$hex(lifted::Context& c) {" games/up/src 2>/dev/null | head -n 1)"
+            if [ -n "$FILE" ]; then
+              START="$(grep -n "^void F_${hex}(lifted::Context& c) {" "$FILE" | head -n 1 | cut -d: -f1)"
+              awk -v s="$START" 'NR >= s { print } NR > s && /^}/ { exit }' "$FILE" > "$OUT/$hex.cpp.txt"
+            else
+              echo "no lifted source for 0x$hex" > "$OUT/$hex.cpp.txt"
+            fi
+            # The lifted functions that call it (by name), and the file each is in.
+            { echo "== lifted callers of F_$hex"; grep -rln "F_$hex(c)" games/up/src 2>/dev/null || echo "none found"; } > "$OUT/$hex.callers.txt"
+          done
+          ls -la "$OUT"
+
+      - name: Save the investigation to the repository
+        if: ${{ always() }}
+        run: |
+          git config user.email "agent@arena.ai"
+          git config user.name "Arena Agent"
+          git add ci-results/investigate/
+          git commit -m "ci(up): investigation of ${UP_ADDRESSES}, run ${{ github.run_id }}" || exit 0
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push -q origin "HEAD:refs/heads/$BRANCH" \
+            || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+            || echo "::warning title=investigate::could not push to $BRANCH"
+
+  reference:
+    name: The reference run (PCSX2, the owner's BIOS and disc)
+    if: ${{ inputs.reference }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    env:
+      UP_BIOS_DRIVE_FILE_ID: ${{ secrets.UP_BIOS_DRIVE_FILE_ID }}
+      UP_REFERENCE_SECONDS: "900"
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: The display and the libraries PCSX2 needs
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xdotool imagemagick tesseract-ocr pulseaudio pulseaudio-utils libgl1 libglx-mesa0 libgl1-mesa-dri libopengl0 libglx0 libegl1 libfontconfig1 libxcb-glx0 libxkbcommon0 libdbus-1-3 \
+            libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
+            libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 libxcb-randr0 libxcb-xfixes0
+
+      - name: The disc image - the cache
+        id: disc_cache
+        uses: actions/cache/restore@v6
+        with:
+          path: disc
+          key: disc-v1-${{ env.UP_DRIVE_FILE_ID }}
+
+      - name: The disc image (fetched only when the cache has none)
+        if: ${{ steps.disc_cache.outputs.cache-hit != 'true' }}
+        run: |
+          python -m pip install --disable-pip-version-check gdown
+          bash scripts/fetch_disc.sh
+
+      - name: The BIOS dump (from the secret; the dump is never printed or committed)
+        run: |
+          set -e
+          test -n "$UP_BIOS_DRIVE_FILE_ID" || { echo "::error title=reference::the secret UP_BIOS_DRIVE_FILE_ID is not set"; exit 1; }
+          python -m pip install --disable-pip-version-check gdown zstandard
+          bash scripts/fetch_bios.sh
+
+      - name: The reference run (PCSX2 headless, screenshots every minute)
+        run: |
+          set -e
+          set -o pipefail
+          mkdir -p ci-results/reference
+          bash scripts/reference_run.sh 2>&1 | tee ci-results/reference/script.txt
+
+      - name: The reference's pictures (artifact only - the game's pictures are not committed)
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: up-reference
+          path: |
+            reference/shots
+            reference/logs
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: The reference's text (the emulator's log, the BIOS report) to the repository
+        if: ${{ always() }}
+        run: |
+          mkdir -p ci-results/reference
+          cp bios/report.txt ci-results/reference/bios-report.txt 2>/dev/null || true
+          cp reference/logs/ee-snapshot.txt ci-results/reference/ee-snapshot.txt 2>/dev/null || true
+          cp reference/logs/files.txt ci-results/reference/files.txt 2>/dev/null || true
+          cp reference/logs/emulog-tail.txt ci-results/reference/emulog-tail.txt 2>/dev/null || true
+          if [ -f reference/logs/pcsx2.log ]; then
+            tail -n 3000 reference/logs/pcsx2.log > ci-results/reference/pcsx2-tail.txt
+          fi
+          ls reference/shots 2>/dev/null > ci-results/reference/shots.txt || true
+          # The text of each screen (OCR): the menu's words, to compare with the port's.
+          rm -f ci-results/reference/ocr.txt
+          for shot in reference/shots/*.png; do
+            [ -f "$shot" ] || continue
+            { echo "== $(basename "$shot")"; tesseract "$shot" - 2>/dev/null | grep -v '^\s*$' || true; } >> ci-results/reference/ocr.txt
+          done
+          cp reference/logs/error-text.txt ci-results/reference/error-text.txt 2>/dev/null || true
+          git config user.email "agent@arena.ai"
+          git config user.name "Arena Agent"
+          git add ci-results/reference
+          git commit -m "ci(up): the reference run's text (the emulator's log tail), run ${{ github.run_id }}" || exit 0
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push -q origin "HEAD:refs/heads/$BRANCH" \
+            || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+            || echo "::warning title=reference::could not push to $BRANCH"
+
+  bios:
+    name: The PS2 BIOS dump (size and hashes only)
+    if: ${{ inputs.bios }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      UP_BIOS_DRIVE_FILE_ID: ${{ secrets.UP_BIOS_DRIVE_FILE_ID }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Fetch the BIOS dump and report it (the dump is not printed or committed)
+        run: |
+          set -e
+          test -n "$UP_BIOS_DRIVE_FILE_ID" || { echo "::error title=bios::the secret UP_BIOS_DRIVE_FILE_ID is not set"; exit 1; }
+          bash scripts/fetch_bios.sh
+          mkdir -p ci-results
+          cp bios/report.txt ci-results/bios-check.txt
+
+      - name: Save the BIOS report to the repository (the dump itself stays out)
+        if: ${{ always() }}
+        run: |
+          git config user.email "agent@arena.ai"
+          git config user.name "Arena Agent"
+          git add ci-results/bios-check.txt
+          git commit -m "ci(up): the BIOS dump's report (size and hashes), run ${{ github.run_id }}" || exit 0
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push -q origin "HEAD:refs/heads/$BRANCH" \
+            || { git fetch -q origin "$BRANCH" && git merge -q --no-edit -X theirs FETCH_HEAD && git push -q origin "HEAD:refs/heads/$BRANCH"; } \
+            || echo "::warning title=bios::could not push to $BRANCH"

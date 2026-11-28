@@ -1,0 +1,35 @@
+diff --git a/host/src/memory.cpp b/host/src/memory.cpp
+index a8c2c43..1817feb 100644
+--- a/host/src/memory.cpp
++++ b/host/src/memory.cpp
+@@ -92,6 +92,14 @@ bool Vif1Sees(u32 a, bool write) {
+ }
+ }  // namespace
+ 
++/* Physical 0x02000000-0x0FFFFFFF is no memory on the PS2 (only 32 MB of RDRAM is
++   fitted). PCSX2 maps that range to a null handler (memMapPhy in Memory.cpp: a read
++   finds nothing, a write goes nowhere), and so does this: the access is not a fault.
++   The device registers at 0x10000000 and above still fault when unmapped. */
++static bool OpenGap(u32 physical) {
++    return physical >= kRdramSize && physical < kEeRegisterBase;
++}
++
+ u64 Memory::Read(u32 address, u32 size) {
+     address = Physical(address);
+     // GIF_STAT, while VIF1's worker has work: what it will read once the
+@@ -103,6 +111,7 @@ u64 Memory::Read(u32 address, u32 size) {
+         JoinVif1("read", address);
+     }
+     u8* bytes = Translate(address, size);
++    if (!bytes && OpenGap(address)) return 0;   // (see OpenGap)
+     if (!bytes) throw MemoryFault{address, false};
+     u64 value = 0;
+     std::memcpy(&value, bytes, size);        // the EE and the host are both little-endian
+@@ -145,6 +154,7 @@ void Memory::Write(u32 address, u64 value, u32 size) {
+         for (u32 w : watched_)
+             if (w >= address && w < address + size) Watched(address, value, size);
+     u8* bytes = Translate(address, size);
++    if (!bytes && OpenGap(address)) return;    // (see OpenGap)
+     if (!bytes) throw MemoryFault{address, true};
+     if (address >= kBiosBase && address - kBiosBase < kBiosSize) return;   // ROM
+     std::memcpy(bytes, &value, size);

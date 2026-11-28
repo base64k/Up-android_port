@@ -1,0 +1,58 @@
+== original assembly of 0x002A7BF0
+/**************************************************************************
+ * func_002A7BF0
+ *
+ * address      : 0x002a7bf0 .. 0x002a7ca4  (180 bytes, 45 instructions)
+ * discovered by: called
+ * called from  : 0x002a84ac
+ */
+glabel func_002A7BF0
+  002a7bf0  addiu      $sp, $sp, -0x200
+  002a7bf4  lui        $at, 0x79
+  002a7bf8  sd         $ra, 0xa0($sp)
+  002a7bfc  sq         $fp, 0x90($sp)
+  002a7c00  sq         $s7, 0x80($sp)
+  002a7c04  daddu      $fp, $a0, $zero
+  002a7c08  sq         $s6, 0x70($sp)
+  002a7c0c  daddu      $s7, $a1, $zero
+  002a7c10  sq         $s5, 0x60($sp)
+  002a7c14  sq         $s4, 0x50($sp)
+  002a7c18  daddu      $s5, $a2, $zero
+  002a7c1c  sq         $s3, 0x40($sp)
+  002a7c20  sq         $s2, 0x30($sp)
+  002a7c24  sq         $s1, 0x20($sp)
+  002a7c28  sq         $s0, 0x10($sp)
+  002a7c2c  swc1       $f22, 0x8($sp)
+  002a7c30  swc1       $f21, 0x4($sp)
+  002a7c34  swc1       $f20, 0x0($sp)
+  002a7c38  lw         $v1, 0x4($a2)
+  002a7c3c  lw         $a0, 0x5f70($at)
+  002a7c40  dsll32     $v1, $v1, 0
+  002a7c44  dsra32     $a1, $v1, 8
+  002a7c48  lw         $v1, 0x8($a0)
+  002a7c4c  dsll32     $v1, $v1, 0
+  002a7c50  dsrl32     $v1, $v1, 14
+  002a7c54  slt        $at, $a1, $v1
+  002a7c58  beq        $at, $zero, .L000
+  002a7c5c  daddu      $s4, $a3, $zero                         # delay slot
+.L000:
+  002a7c60  lw         $v1, 0xc($a0)
+  002a7c64  sll        $a1, $a1, 4
+  002a7c68  lbu        $a2, 0x4($s5)
+  002a7c6c  addu       $a1, $v1, $a1
+  002a7c70  lbu        $v1, 0x0($a1)
+  002a7c74  bne        $v1, $a2, 0x002a7ca8
+  002a7c78  daddu      $s2, $zero, $zero                       # delay slot
+  002a7c7c  lhu        $a2, 0xe($a1)
+  002a7c80  ori        $v1, $zero, 0xffff
+  002a7c84  beq        $a2, $v1, .L001
+  002a7c88  nop                                                # delay slot
+  002a7c8c  jal        func_0030CB40
+  002a7c90  nop                                                # delay slot
+  002a7c94  b          0x002a7ca8
+  002a7c98  daddu      $s2, $v0, $zero                         # delay slot
+.L001:
+  002a7c9c  b          0x002a7ca8
+  002a7ca0  lw         $s2, 0x4($a1)                           # delay slot
+/* end of func_002A7BF0 */
+

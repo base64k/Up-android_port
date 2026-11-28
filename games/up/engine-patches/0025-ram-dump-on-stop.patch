@@ -1,0 +1,24 @@
+diff --git a/host/src/host.cpp b/host/src/host.cpp
+index ef94d7f..c2e3ab9 100644
+--- a/host/src/host.cpp
++++ b/host/src/host.cpp
+@@ -1,4 +1,5 @@
+ #include "ps2host/host.h"
++#include "ps2host/hang_report.h"
+ 
+ #include "ps2host/platform.h"
+ #ifndef _WIN32
+@@ -980,6 +981,13 @@ int Run(const Options& options) {
+     } catch (const Unimplemented& missing) {
+         if (outcome.empty()) outcome = "stopped: " + missing.what;
+     }
++    // PS2HOST_RAM_DUMP=path: the guest's RAM as the run leaves it (the EE's
++    // 32 MiB at path, the IOP's 2 MiB at path.iop) - for comparing with a
++    // reference's memory (scripts/ram_compare.py). Written however the run ended.
++    if (const char* dump = std::getenv("PS2HOST_RAM_DUMP")) {
++        SaveMemories(dump, (std::string(dump) + ".iop").c_str());
++        std::fprintf(stderr, "[host] guest RAM saved to %s\n", dump);
++    }
+     timeline::Finish();
+     Report(options, outcome);
+     return code;

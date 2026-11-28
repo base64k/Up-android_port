@@ -1,0 +1,71 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index c3aa433..2befa19 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -76,6 +76,19 @@ std::string Vm::Where() {
+     return " (IOP thread " + std::to_string(current) + ", $ra " + Hex(threads[current].c.r[31]) + ")";
+ }
+ 
++u32 Vm::HardwareRead(u32 address, u32 size) {
++    u32 value = 0;
++    for (u32 i = 0; i < size && i < 4; ++i) {
++        const auto it = hardware.find(address + i);
++        if (it != hardware.end()) value |= u32(it->second) << (8 * i);
++    }
++    return value;
++}
++
++void Vm::HardwareWrite(u32 address, u32 value, u32 size) {
++    for (u32 i = 0; i < size && i < 4; ++i) hardware[address + i] = u8(value >> (8 * i));
++}
++
+ void Vm::ReadFault(u32 address) {
+     Stop("a read of " + Hex(address) + " (IOP hardware or unmapped), by the instruction at " + Hex(executing) +
+          Where());
+diff --git a/host/src/iop_vm_internal.h b/host/src/iop_vm_internal.h
+index 643a5e4..d366c37 100644
+--- a/host/src/iop_vm_internal.h
++++ b/host/src/iop_vm_internal.h
+@@ -162,7 +162,10 @@ struct Vm {
+     }
+     u32 Read(u32 address, u32 size) {
+         const u8* p = At(address, size);
+-        if (!p) ReadFault(address);
++        if (!p) {
++            if (IsIopHardware(address)) return HardwareRead(address, size);
++            ReadFault(address);
++        }
+         if (size == 4) { u32 value; std::memcpy(&value, p, 4); return value; }
+         if (size == 2) { u16 value; std::memcpy(&value, p, 2); return value; }
+         if (size == 1) return *p;
+@@ -172,12 +175,29 @@ struct Vm {
+     }
+     void Write(u32 address, u32 value, u32 size) {
+         u8* p = At(address, size);
+-        if (!p) WriteFault(address, value);
++        if (!p) {
++            if (IsIopHardware(address)) {
++                HardwareWrite(address, value, size);
++                return;
++            }
++            WriteFault(address, value);
++        }
+         if (size == 4) std::memcpy(p, &value, 4);
+         else if (size == 2) { const u16 half = u16(value); std::memcpy(p, &half, 2); }
+         else if (size == 1) *p = u8(value);
+         else std::memcpy(p, &value, size);
+     }
++    // IOP hardware registers (0x1F80_0000-0x1FA0_0000 physical, seen as 0xBF80_0000
++    // by the kseg1 window): a module's timers, DMA and SPU2 registers. They are
++    // kept as written, unset ones read as 0, so a module's own writes never stop
++    // the IOP (the sound hardware itself is the host's libsd and spu2 model).
++    std::map<u32, u8> hardware;
++    static bool IsIopHardware(u32 address) {
++        const u32 physical = address & 0x1FFFFFFFu;
++        return physical >= 0x1F800000u && physical < 0x1FA00000u;
++    }
++    u32 HardwareRead(u32 address, u32 size);
++    void HardwareWrite(u32 address, u32 value, u32 size);
+     [[noreturn]] void ReadFault(u32 address);
+     [[noreturn]] void WriteFault(u32 address, u32 value);
+     std::string String(u32 address, u32 limit = 1024);

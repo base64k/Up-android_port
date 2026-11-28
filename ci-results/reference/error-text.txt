@@ -1,0 +1,300 @@
+== error window at 15s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 30s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 45s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 60s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 75s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 90s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 105s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 120s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 135s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 150s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 165s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 180s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 195s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 210s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 225s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 240s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 255s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 270s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 285s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 300s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 315s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 330s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 345s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 360s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 375s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 390s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 405s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 420s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 435s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 450s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 465s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 480s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 495s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 510s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 525s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 540s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 555s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 570s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 585s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 600s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 615s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 630s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 645s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 660s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 675s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 690s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 705s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 720s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 735s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 750s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 765s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 780s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 795s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 810s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 825s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 840s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 855s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 870s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 885s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)
+== error window at 900s
+output. The error was:
+
+Failed to create or configure audio stream, falling back to null
+cubeb_stream init() failed: CUBEB_ERROR (-1)

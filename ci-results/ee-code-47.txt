@@ -1,0 +1,78 @@
+/**************************************************************************
+ * range_0047DA80
+ *
+ * address      : 0x0047da80 .. 0x0047db80  (256 bytes, 64 instructions)
+ * discovered by: --range
+ * called from  : no direct calls (indirect or unreferenced)
+ */
+glabel range_0047DA80
+  0047da80  bne        $v1, $v0, .L000
+  0047da84  addiu      $v1, $zero, 0x2                         # delay slot
+  0047da88  addiu      $v0, $zero, 0x1
+  0047da8c  sw         $v1, 0xc($a0)
+  0047da90  jr         $ra
+  0047da94  nop                                                # delay slot
+.L000:
+  0047da98  jr         $ra
+  0047da9c  daddu      $v0, $zero, $zero                       # delay slot
+  0047daa0  beq        $a0, $zero, .L002
+  0047daa4  nop                                                # delay slot
+  0047daa8  lw         $v0, 0xc($a0)
+  0047daac  addiu      $a1, $zero, 0x1
+  0047dab0  beq        $v0, $a1, .L001
+  0047dab4  nop                                                # delay slot
+  0047dab8  lw         $v1, 0xc($a0)
+  0047dabc  addiu      $v0, $zero, 0x2
+  0047dac0  bne        $v1, $v0, .L002
+  0047dac4  nop                                                # delay slot
+.L001:
+  0047dac8  sw         $a1, 0xc($a0)
+  0047dacc  jr         $ra
+  0047dad0  addiu      $v0, $zero, 0x1                         # delay slot
+.L002:
+  0047dad4  jr         $ra
+  0047dad8  daddu      $v0, $zero, $zero                       # delay slot
+  0047dadc  nop
+  0047dae0  addiu      $sp, $sp, -0x50
+  0047dae4  sd         $s2, 0x10($sp)
+  0047dae8  sd         $s0, 0x0($sp)
+  0047daec  lui        $s2, 0x7b
+  0047daf0  sd         $s1, 0x8($sp)
+  0047daf4  addiu      $s0, $s2, -0x6900
+  0047daf8  sd         $s3, 0x18($sp)
+  0047dafc  daddu      $s1, $zero, $zero
+  0047db00  sd         $s4, 0x20($sp)
+  0047db04  daddu      $s3, $t0, $zero
+  0047db08  sd         $s5, 0x28($sp)
+  0047db0c  daddu      $s4, $a3, $zero
+  0047db10  sd         $s6, 0x30($sp)
+  0047db14  daddu      $s5, $a2, $zero
+  0047db18  sd         $s7, 0x38($sp)
+  0047db1c  daddu      $s6, $a1, $zero
+  0047db20  sd         $fp, 0x40($sp)
+  0047db24  daddu      $s7, $a0, $zero
+  0047db28  sd         $ra, 0x48($sp)
+  0047db2c  lui        $fp, 0x3e
+  0047db30  lui        $v1, 0x7b
+  0047db34  nop
+.L003:
+  0047db38  lw         $v0, -0x67d4($v1)
+  0047db3c  nop
+  0047db40  nop
+  0047db44  nop
+  0047db48  nop
+  0047db4c  beq        $v0, $zero, .L003
+  0047db50  nop                                                # delay slot
+  0047db54  lui        $v1, 0x72
+  0047db58  lw         $v0, 0x8($v1)                           # 0x00720008
+  0047db5c  addiu      $v1, $zero, 0x5
+  0047db60  sw         $s7, 0x10($s0)
+  0047db64  sw         $v1, 0xc($s0)
+  0047db68  sw         $s6, 0x14($s0)
+  0047db6c  sw         $s5, 0x18($s0)
+  0047db70  sw         $s4, 0x1c($s0)
+  0047db74  beq        $v0, $zero, 0x0047db88
+  0047db78  sw         $s3, 0x20($s0)                          # delay slot
+  0047db7c  lui        $v1, 0x3e
+/* end of range_0047DA80 */
+

@@ -1,0 +1,45 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index 6c1d3dd..f529b24 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -684,6 +684,9 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     std::snprintf(line, sizeof line, "IOP: running %s at 0x%08X (%u bytes), entry 0x%08X",
+                   path.c_str(), unsigned(base), unsigned(memsz), unsigned(base + entry));
+     Note("iop run " + path, line);
++    std::fprintf(stderr, "[host] IOP: %s start begins, at %lld ms (wall)\n", path.c_str(),
++                 (long long)std::chrono::duration_cast<std::chrono::milliseconds>(
++                     std::chrono::steady_clock::now().time_since_epoch()).count() % 10000000);
+     // _start runs as a thread, as the IOP's module loader runs it: it may wait,
+     // and it may ask for its own thread id. Its return value is the result.
+     Thread loader;
+@@ -736,7 +739,9 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     g_probe_thread = 0;
+     std::fprintf(stderr, "[host] IOP: %s's start returned %d; running the IOP until it waits\n", path.c_str(), int(*result));
+     Run();
+-    std::fprintf(stderr, "[host] IOP: %s loaded\n", path.c_str());
++    std::fprintf(stderr, "[host] IOP: %s loaded, at %lld ms (wall)\n", path.c_str(),
++                 (long long)std::chrono::duration_cast<std::chrono::milliseconds>(
++                     std::chrono::steady_clock::now().time_since_epoch()).count() % 10000000);
+     return true;
+ }
+ 
+diff --git a/host/src/threads.cpp b/host/src/threads.cpp
+index a85f315..4ad200c 100644
+--- a/host/src/threads.cpp
++++ b/host/src/threads.cpp
+@@ -1094,7 +1094,15 @@ void RunThreads(const lifted::Context& initial, u32 entry, s64 loop_budget) {
+                 if (!TakeVblank(s)) continue;
+             }
+             DeliverFrame();
++            if (idle == 0)
++                std::fprintf(stderr, "[host] EE idle: every thread waits, from %lld ms (wall)\n",
++                             (long long)std::chrono::duration_cast<std::chrono::milliseconds>(
++                                 std::chrono::steady_clock::now().time_since_epoch()).count() % 10000000);
+             if (++idle > kIdleFrames) {
++                std::fprintf(stderr, "[host] EE idle: giving up after %llu frames, at %lld ms (wall)\n",
++                             (unsigned long long)idle,
++                             (long long)std::chrono::duration_cast<std::chrono::milliseconds>(
++                                 std::chrono::steady_clock::now().time_since_epoch()).count() % 10000000);
+                 std::string states;
+                 for (auto& [id, t] : s.threads)
+                     states += "\n    thread " + std::to_string(id) + ": " + StateName(t->state);

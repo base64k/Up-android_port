@@ -1,0 +1,26 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index e3ff3d1..6436ac3 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -686,8 +686,20 @@ bool LoadModule(const std::string& path, const std::vector<u8>& image,
+     Thread& started = vm.threads[loader.id] = loader;
+     vm.MakeReady(started);
+     const u64 deadline = vm.NowUs() + 5000000;      // it may wait on timers: real time
++    const auto wall_start = std::chrono::steady_clock::now();
++    bool dumped = false;
+     while (vm.threads[loader.id].wait != Wait::Dormant && vm.NowUs() < deadline) {
+-        Run();
++        Run(1000000);       // short slices, so the look below comes soon after a spin starts
++        if (!dumped && std::chrono::steady_clock::now() - wall_start > std::chrono::milliseconds(200)) {
++            // Where the module's start is, if it has not returned: the code around its pc.
++            dumped = true;
++            const Thread& lt = vm.threads[loader.id];
++            std::fprintf(stderr, "[host] IOP: %s still in its start at pc %08X (ra %08X, sp %08X, wait %d, ready %d)\n",
++                         path.c_str(), unsigned(lt.c.pc), unsigned(lt.c.r[31]), unsigned(lt.c.r[29]),
++                         int(lt.wait), int(lt.ready));
++            for (u32 a = lt.c.pc - 0x100; a <= lt.c.pc + 0x40; a += 4)
++                std::fprintf(stderr, "[host] DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
++        }
+         if (vm.threads[loader.id].wait != Wait::Dormant)
+             std::this_thread::sleep_for(std::chrono::microseconds(200));
+     }

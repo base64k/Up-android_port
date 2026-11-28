@@ -1,0 +1,6 @@
+/tmp/ee-asm/func_002DD6B0.s:191:  002dd950  addiu      $a0, $a0, -0x65e8                       # 0x00729a18 "Path : %s\n"
+/tmp/ee-asm/func_002DD6B0.s:205:  002dd988  addiu      $a0, $a0, -0x65e8                       # 0x00729a18 "Path : %s\n"
+/tmp/ee-asm/func_002F6470.s:45:  002f64fc  addiu      $a2, $a2, -0x5e70                       # delay slot; 0x0072a190 "Path1/2"
+/tmp/ee-asm/func_002F6470.s:78:  002f657c  addiu      $a2, $a2, -0x5e68                       # delay slot; 0x0072a198 "Path3"
+/tmp/ee-asm/func_002F6470.s:176:  002f66fc  addiu      $a2, $a2, -0x5e60                       # delay slot; 0x0072a1a0 "Path 1/2"
+/tmp/ee-asm/func_002F6470.s:209:  002f677c  addiu      $a2, $a2, -0x5e50                       # delay slot; 0x0072a1b0 "Path 3"

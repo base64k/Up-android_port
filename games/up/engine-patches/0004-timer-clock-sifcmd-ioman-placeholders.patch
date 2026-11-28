@@ -1,0 +1,77 @@
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index 48d434e..38e06d7 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -438,13 +438,17 @@ Outcome SetTimerCounter(Vm& vm, Context& c) {
+     HardTimer* t = TimerOf(vm, c);
+     if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
+     t->counter = A(vm, c, 1);
++    t->started_us = vm.NowUs();
+     return Ret(c, KE_OK);
+ }
+ 
++// GetTimerCounter(id): the count - from the set value, rising one a microsecond
++// while the timer runs (a module polls it to time a wait).
+ Outcome GetTimerCounter(Vm& vm, Context& c) {
+     HardTimer* t = TimerOf(vm, c);
+     if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
+-    return Ret(c, t->counter);
++    const u32 now = t->running ? t->counter + u32(vm.NowUs() - t->started_us) : t->counter;
++    return Ret(c, now);
+ }
+ 
+ // SetTimerCompare(id, compare)
+@@ -479,6 +483,7 @@ Outcome StartHardTimer(Vm& vm, Context& c) {
+     HardTimer* t = TimerOf(vm, c);
+     if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
+     t->running = true;
++    t->started_us = vm.NowUs();
+     t->due_us = vm.NowUs() + HardTimerPeriodUs(*t);
+     return Ret(c, KE_OK);
+ }
+@@ -486,6 +491,7 @@ Outcome StartHardTimer(Vm& vm, Context& c) {
+ Outcome StopHardTimer(Vm& vm, Context& c) {
+     HardTimer* t = TimerOf(vm, c);
+     if (!t) return Ret(c, u32(KE_ILLEGAL_TIMERID));
++    if (t->running) t->counter += u32(vm.NowUs() - t->started_us);     // the count where it stopped
+     t->running = false;
+     return Ret(c, KE_OK);
+ }
+@@ -499,6 +505,16 @@ Outcome SifGetOtherData(Vm& vm, Context& c) {
+     return Ret(c, 0);
+ }
+ 
++// sceSifBindRpc(client, server id, mode) and sceSifCallRpc(client, ...) as an IOP
++// client: not modelled yet. The answer is "not bound" / "not called" (0), and the
++// trace shows the arguments, which name the server the module is looking for.
++Outcome SifBindRpcClient(Vm&, Context& c) { return Ret(c, 0); }
++Outcome SifCallRpcClient(Vm&, Context& c) { return Ret(c, 0); }
++
++// The IOP file manager (ioman) is not modelled: an open fails (-1, no such file),
++// and the calls on an open file fail too. The trace shows what was asked.
++Outcome IomanFail(Vm&, Context& c) { return Ret(c, u32(-1)); }
++
+ // ---------------------------------------------------------------- semaphores
+ 
+ Outcome CreateSema(Vm& vm, Context& c) {
+@@ -1404,6 +1420,8 @@ const Map& Table() {
+         {{"thmsgbx", 6}, SendMbx}, {{"thmsgbx", 7}, SendMbx},
+         {{"thmsgbx", 8}, ReceiveMbx}, {{"thmsgbx", 9}, PollMbx},
+         {{"timrman", 4}, AllocHardTimer}, {{"timrman", 6}, FreeHardTimer},
++        {{"sifcmd", 15}, SifBindRpcClient}, {{"sifcmd", 16}, SifCallRpcClient},
++        {{"ioman", 4}, IomanFail}, {{"ioman", 5}, IomanFail}, {{"ioman", 6}, IomanFail}, {{"ioman", 8}, IomanFail},
+         {{"timrman", 7}, SetTimerMode}, {{"timrman", 9}, SetTimerCounter}, {{"timrman", 10}, GetTimerCounter},
+         {{"timrman", 11}, SetTimerCompare}, {{"timrman", 20}, SetTimerHandler}, {{"timrman", 21}, SetOverflowHandler},
+         {{"timrman", 22}, SetupHardTimer},
+diff --git a/host/src/iop_vm_internal.h b/host/src/iop_vm_internal.h
+index a566faf..d9b0a1a 100644
+--- a/host/src/iop_vm_internal.h
++++ b/host/src/iop_vm_internal.h
+@@ -94,6 +94,7 @@ struct HardTimer {
+     u32 overflow = 0, overflow_common = 0;     // SetOverflowHandler's (stored; not run)
+     bool running = false;
+     u64 due_us = 0;
++    u64 started_us = 0;                        // when the counter last started, for GetTimerCounter
+ };
+ 
+ /* The time between a hardware timer's interrupts. */

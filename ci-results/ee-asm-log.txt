@@ -1,0 +1,2 @@
+disasm exit: see below; files: 19502
+wrote 19,502 function(s) to /tmp/ee-asm

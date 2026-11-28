@@ -1,0 +1,86 @@
+--- a/host/src/iop.cpp
++++ b/host/src/iop.cpp
+@@ -46,6 +46,8 @@
+ struct Reply {
+     std::vector<u8> packet;
+     u64 due_ns = 0;                      // not before (ClockNs); 0: at once
++    // EE memory written when the packet is delivered (DelayRpcWrite).
++    std::vector<std::pair<u32, std::vector<u8>>> writes;
+ };
+ 
+ struct Iop {
+@@ -54,6 +56,7 @@
+     std::map<u32, u32> servers;          // server id -> pretended IOP address
+     std::deque<Reply> replies;           // packets for the EE, not yet delivered
+     u64 next_delay_ns = 0;               // DelayRpcReply's, for the next RPC end
++    std::vector<std::pair<u32, std::vector<u8>>> next_writes;   // DelayRpcWrite's, likewise
+ };
+ 
+ Iop& I() {
+@@ -102,7 +105,8 @@
+     Iop& iop = I();
+     const u64 due = iop.next_delay_ns ? ClockNs() + iop.next_delay_ns : 0;
+     iop.next_delay_ns = 0;
+-    iop.replies.push_back({std::move(packet), due});
++    iop.replies.push_back({std::move(packet), due, std::move(iop.next_writes)});
++    iop.next_writes.clear();
+     std::fprintf(stderr, "[host] SIF reply queued for the EE: procedure-answer %08X, due %llu ns, %zu queued\n",
+                  unsigned(answered), (unsigned long long)due, iop.replies.size());
+     RequestDelivery();
+@@ -286,6 +290,10 @@
+ 
+ void DelayRpcReply(u64 ns) { I().next_delay_ns = ns; }
+ 
++void DelayRpcWrite(u32 address, std::vector<u8> bytes) {
++    I().next_writes.emplace_back(address, std::move(bytes));
++}
++
+ // Deliver one queued answer: into the EE's receive buffer, then the SIF0 DMA
+ // interrupt. False when none is waiting - or the first is not due yet (the
+ // IOP answers in order: nothing overtakes it).
+@@ -300,10 +308,12 @@
+     Iop& iop = I();
+     if (!IopReplyPending()) return false;
+     std::vector<u8> packet = std::move(iop.replies.front().packet);
++    auto writes = std::move(iop.replies.front().writes);
+     iop.replies.pop_front();
+     std::fprintf(stderr, "[host] SIF reply delivered to the EE: %zu bytes, %zu left, at %llu ns\n",
+                  packet.size(), iop.replies.size(), (unsigned long long)ClockNs());
+     Memory& m = GuestMemory();
++    for (const auto& w : writes) m.WriteBytes(w.first, w.second.data(), w.second.size());
+     m.WriteBytes(iop.receive_buffer, packet.data(), packet.size());
+     RaiseDmac(kSif0Channel);
+     return true;
+--- a/host/src/cdvd.cpp
++++ b/host/src/cdvd.cpp
+@@ -165,10 +165,13 @@
+                           sectors, lsn, buffer, pattern, ends, ok ? "" : " - past the disc's end");
+             Note("cd read " + std::to_string(lsn) + " " + std::to_string(buffer), text);
+             if (!ok) return Word(0);
+-            m.WriteBytes(buffer, bytes.data(), bytes.size());
+-            if (ends)
+-                for (u32 k = 0; k < 16; ++k) m.Write(ends + k, 0, 1);
+-            DelayRpcReply(ReadTimeNs(bytes.size()));
++            // The sectors reach the buffer when the read ends, with the reply
++            // (DelayRpcWrite), as on the drive: the game may still use the buffer
++            // until then. Written at once, a read's data showed up early.
++            const std::size_t size = bytes.size();
++            DelayRpcWrite(buffer, std::move(bytes));
++            if (ends) DelayRpcWrite(ends, std::vector<u8>(16, 0));
++            DelayRpcReply(ReadTimeNs(size));
+             return Word(1);
+         }
+         case 13: {
+--- a/host/include/ps2host/run.h
++++ b/host/include/ps2host/run.h
+@@ -124,6 +124,10 @@
+    the host clock (virtual under --virtual-time) - a device's time, such as a
+    CD read's. */
+ void DelayRpcReply(u64 ns);
++/* Memory a host RPC server writes at the RPC end (a read's data): it is written
++   when the end is delivered, with the reply that DelayRpcReply delays, not when
++   the server is asked - the game may use the buffer until then. */
++void DelayRpcWrite(u32 address, std::vector<u8> bytes);
+ /* Ask for interrupts to be delivered at the running thread's next loop head. */
+ void RequestDelivery();
+ /* The RPC-end packet answering an RPC request packet, for a server at

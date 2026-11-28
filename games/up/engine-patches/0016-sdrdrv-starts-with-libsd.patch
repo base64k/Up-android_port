@@ -1,0 +1,27 @@
+diff --git a/host/src/loadfile.cpp b/host/src/loadfile.cpp
+index 1097e74..b3a8963 100644
+--- a/host/src/loadfile.cpp
++++ b/host/src/loadfile.cpp
+@@ -150,7 +150,21 @@ std::vector<u8> LoadFile(u32 procedure, const std::vector<u8>& data) {
+         const std::string path(begin, strnlen(begin, 252));
+         const s32 id = next_id++;
+         Loaded().push_back({NameFromPath(path), id});
+-        if (iop::RunsModule(path)) return RunFromDisc(id, path, data);
++        if (iop::RunsModule(path)) {
++            // The sound driver's own module (SDRDRV.IRX) comes first, and the EE never loads
++            // it: it registers the RPC server 0x01000002 that ZNASND binds. It starts here,
++            // when the EE loads the library it belongs with (LIBSD.IRX), and only once.
++            static bool sound_driver_started = false;
++            if (!sound_driver_started && NameFromPath(path) == "libsd" && iop::RunsModule("SDRDRV.IRX")) {
++                sound_driver_started = true;
++                const std::string driver = "cdrom0:\\MODULES\\SDRDRV.IRX;1";
++                const std::vector<u8> no_args(0x104, 0);
++                const s32 driver_id = next_id++;
++                Loaded().push_back({NameFromPath(driver), driver_id});
++                RunFromDisc(driver_id, driver, no_args);
++            }
++            return RunFromDisc(id, path, data);
++        }
+         Note("module " + path, "IOP: module " + path + " loaded as " + std::to_string(id) +
+                                    " (its services are the host's)");
+         return Words(id, kResidentEnd);

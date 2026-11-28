@@ -1,0 +1,14 @@
+the two runs, the wall-clock lines taken out
+FAILED: run 1 ended without a report (exit 3)
+the first times in run 1: [host] SIF reply queued for the EE: procedure-answer 80000009, due 0 ns, 1 queued|[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 3186516623 ns|[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued|
+the first times in run 2: 
+lines: run 1 6397, run 2 0
+stop in run 1: (none)
+stop in run 2: (none)
+DIFFERENT: first difference at 1,6397d0
+--- run 1 around it:
+[port] Up, version 0.1.0-alpha
+[host] SDK routine sceGsSyncPath runs on the host
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+--- run 2 around it:

@@ -1,0 +1,20 @@
+diff --git a/host/src/memory.cpp b/host/src/memory.cpp
+--- a/host/src/memory.cpp
++++ b/host/src/memory.cpp
+@@ -95,9 +95,14 @@
+ /* Physical 0x02000000-0x0FFFFFFF is no memory on the PS2 (only 32 MB of RDRAM is
+    fitted). PCSX2 maps that range to a null handler (memMapPhy in Memory.cpp: a read
+    finds nothing, a write goes nowhere), and so does this: the access is not a fault.
+-   The device registers at 0x10000000 and above still fault when unmapped. */
++   The device registers past their 64 KB window (0x10010000-0x1FFFFFFF) are the same
++   for PCSX2: an unknown hardware read logs "Unknown Hardware Read" and returns 0
++   (HwRead.cpp, the default case), and a write is ignored. The game's own table
++   holds 0x10010000 (the reference has it too), so this read is one the reference
++   makes as well; it must not stop the run. */
+ static bool OpenGap(u32 physical) {
+-    return physical >= kRdramSize && physical < kEeRegisterBase;
++    return (physical >= kRdramSize && physical < kEeRegisterBase) ||
++           (physical >= kEeRegisterBase + kEeRegisterSize && physical < 0x20000000u);
+ }
+ 
+ u64 Memory::Read(u32 address, u32 size) {

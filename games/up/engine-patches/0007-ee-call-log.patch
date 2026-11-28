@@ -1,0 +1,26 @@
+diff --git a/host/src/iop.cpp b/host/src/iop.cpp
+index 49976c4..e1ab604 100644
+--- a/host/src/iop.cpp
++++ b/host/src/iop.cpp
+@@ -159,6 +159,21 @@ void Command(const std::vector<u8>& packet, const std::vector<u8>& data) {
+             // rpc_number, send_size, receive, recv_size, rmode, server
+             const u32 procedure = Word(packet, 32), receive = Word(packet, 40);
+             const u32 receive_size = Word(packet, 44), server = Word(packet, 52);
++            {
++                // Every distinct call (server address, procedure) once, with the
++                // EE calls that lead to it: the call the EE waits on is in these.
++                u32 call_sid = 0;
++                for (const auto& [id, address] : iop.servers)
++                    if (address == server) call_sid = id;
++                std::string callers;
++                const std::vector<u32>& calls = CurrentCalls();
++                for (std::size_t i = calls.size() > 5 ? calls.size() - 5 : 0; i < calls.size(); ++i)
++                    callers += " " + Hex(calls[i]);
++                Note("ee call " + Hex(server) + " " + std::to_string(procedure),
++                     "SIF: EE call, server " + Hex(call_sid) + " (at " + Hex(server) +
++                         "), procedure " + std::to_string(procedure) + ", " +
++                         std::to_string(Word(packet, 36)) + " bytes sent; from" + callers);
++            }
+             if (iop::OwnsServer(server)) {
+                 iop::RpcCall(server, procedure, Word(packet, 36), receive, receive_size, packet);
+                 return;

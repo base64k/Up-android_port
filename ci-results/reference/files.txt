@@ -1,0 +1,9 @@
+files under the PCSX2 folder (names and sizes):
+8650752 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/memcards/Mcd001.ps2
+8650752 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/memcards/Mcd002.ps2
+9729061 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/sstates/SLUS-21864 (F78D6593).resume.p2s
+44464 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/logs/emulog.txt
+75 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/inis/playtime.dat
+1831 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/inis/PCSX2.ini
+1053932 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/cache/gl_programs.bin
+5204 /home/runner/work/Jsjsnsbsjxsnnsnsjs/Jsjsnsbsjxsnnsnsjs/reference/squashfs-root/usr/bin/cache/gl_programs.idx

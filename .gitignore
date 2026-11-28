@@ -10,6 +10,13 @@ extracted/
 asm/
 build/
 bios/
+/reference/
+# PS2 BIOS dump files (ROM0, ROM1, NVM, MEC, DIFF)
+*.ROM0
+*.ROM1
+*.NVM
+*.MEC
+*.DIFF
 *.zip
 
 # A game's own code in C++ - lifted, derived and reconstructed - is the game's,

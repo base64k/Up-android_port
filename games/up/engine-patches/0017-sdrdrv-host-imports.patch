@@ -1,0 +1,29 @@
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -1231,6 +1231,15 @@
+ Outcome CheckInit(Vm&, Context& c) { return Ret(c, 1); }
+ Outcome GetSreg(Vm&, Context& c) { return Ret(c, 0); }
+ 
++// ReferThreadStatus(id, info): the thread's status. The host keeps no thread status to
++// give, so the info block is zeros (a module reading it sees no thread in any state).
++Outcome ReferThreadStatusZero(Vm& vm, Context& c) {
++    const u32 info = A(vm, c, 1);
++    if (info)
++        for (u32 i = 0; i < 0x30; i += 4) vm.Write(info + i, 0, 4);
++    return Ret(c, KE_OK);
++}
++
+ // ---------------------------------------------------------------- libsd
+ 
+ struct Sound {
+@@ -1521,6 +1530,10 @@
+         {{"thbase", 11}, TerminateThread}, {{"thbase", 14}, ChangeThreadPriority},
+         {{"thbase", 15}, ChangeThreadPriority}, {{"thbase", 16}, RotateThreadReadyQueue},
+         {{"thbase", 18}, ReleaseWaitThread}, {{"thbase", 19}, ReleaseWaitThread},
++        {{"thbase", 22}, ReferThreadStatusZero}, {{"thbase", 23}, ReferThreadStatusZero},
++        // SDRDRV's start (its server 0x80000701 is the host's to keep) takes these: the
++        // host keeps no library entries and no RPC queue to take apart, so they succeed.
++        {{"loadcore", 7}, Succeed}, {{"sifcmd", 24}, Succeed}, {{"sifcmd", 25}, Succeed},
+         {{"thbase", 20}, GetThreadId}, {{"thbase", 24}, SleepThread},
+         {{"thbase", 25}, WakeupThread}, {{"thbase", 26}, WakeupThread},
+         {{"thbase", 27}, CancelWakeupThread}, {{"thbase", 28}, CancelWakeupThread},

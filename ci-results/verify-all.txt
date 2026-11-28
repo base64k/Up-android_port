@@ -1,0 +1,35 @@
+  seeded 1948 null global pointers for testing, and 357 more found by running (95s)
+lifted 19492 of 19502 functions; refused 10
+      4  unsupported instruction psubh
+      3  unsupported instruction plzcw
+      1  cfc2 of an unmodelled VU0 flag register
+      1  unsupported instruction tlbwi
+      1  invalid instruction
+    a worker has verified 500 of 4873
+    a worker has verified 500 of 4873
+    a worker has verified 500 of 4873
+    a worker has verified 500 of 4873
+    a worker has verified 1000 of 4873
+    a worker has verified 1000 of 4873
+    a worker has verified 1000 of 4873
+    a worker has verified 1000 of 4873
+    a worker has verified 1500 of 4873
+    a worker has verified 1500 of 4873
+    a worker has verified 1500 of 4873
+    a worker has verified 1500 of 4873
+    a worker has verified 2000 of 4873
+    a worker has verified 2000 of 4873
+    a worker has verified 2000 of 4873
+    a worker has verified 2000 of 4873
+    a worker has verified 2500 of 4873
+    a worker has verified 2500 of 4873
+    a worker has verified 2500 of 4873
+    a worker has verified 2500 of 4873
+    a worker has verified 3000 of 4873
+    a worker has verified 3000 of 4873
+    a worker has verified 3000 of 4873
+    a worker has verified 3000 of 4873
+    a worker has verified 3500 of 4873
+    a worker has verified 3500 of 4873
+    a worker has verified 3500 of 4873
+    a worker has verified 3500 of 4873

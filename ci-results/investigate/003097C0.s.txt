@@ -1,0 +1,65 @@
+== original assembly of 0x003097C0
+/**************************************************************************
+ * func_003097C0
+ *
+ * address      : 0x003097c0 .. 0x00309880  (192 bytes, 48 instructions)
+ * discovered by: called
+ * called from  : 0x00309704, 0x00309770, 0x00309934, 0x00309964, 0x00309d2c, 0x00309e04 (+10 more)
+ */
+glabel func_003097C0
+  003097c0  lw         $v0, 0x8($a0)
+  003097c4  bne        $v0, $zero, .L000
+  003097c8  daddu      $v0, $zero, $zero                       # delay slot
+  003097cc  b          .L005
+  003097d0  nop                                                # delay slot
+.L000:
+  003097d4  lw         $a1, 0x0($a1)
+  003097d8  lw         $a2, 0x0($a0)
+  003097dc  sltu       $v0, $zero, $a1
+  003097e0  xori       $v1, $v0, 0x1
+  003097e4  lw         $v0, 0x8($a2)
+  003097e8  addiu      $t2, $v0, -0x1
+  003097ec  bne        $v1, $zero, .L001
+  003097f0  and        $t3, $t2, $a1                           # delay slot
+  003097f4  addiu      $v1, $v1, 0x1
+.L001:
+  003097f8  lw         $t0, 0x4($a2)
+  003097fc  sra        $v0, $t3, 5
+  00309800  sll        $t1, $v0, 2
+  00309804  andi       $a3, $t3, 0x1f
+  00309808  addiu      $v0, $zero, 0x1
+  0030980c  sllv       $a3, $v0, $a3
+  00309810  addu       $v0, $t0, $t1
+  00309814  lw         $v0, 0x0($v0)
+  00309818  and        $v0, $a3, $v0
+  0030981c  bne        $v0, $zero, .L002
+  00309820  nop                                                # delay slot
+  00309824  lw         $v0, 0x4($a0)
+  00309828  sll        $a3, $t3, 3
+  0030982c  addu       $v0, $v0, $a3
+  00309830  lw         $v0, 0x4($v0)
+  00309834  bne        $v0, $zero, .L004
+  00309838  addu       $v0, $t3, $v1                           # delay slot
+  0030983c  b          .L005
+  00309840  daddu      $v0, $zero, $zero                       # delay slot
+.L002:
+  00309844  lw         $v0, 0x4($a0)
+  00309848  sll        $a3, $t3, 3
+  0030984c  addu       $v0, $v0, $a3
+  00309850  lw         $a3, 0x0($v0)
+  00309854  xor        $a3, $a1, $a3
+  00309858  sltiu      $a3, $a3, 0x1
+  0030985c  beq        $a3, $zero, .L003
+  00309860  nop                                                # delay slot
+  00309864  b          .L005
+  00309868  nop                                                # delay slot
+.L003:
+  0030986c  addu       $v0, $t3, $v1
+.L004:
+  00309870  b          .L001
+  00309874  and        $t3, $t2, $v0                           # delay slot
+.L005:
+  00309878  jr         $ra
+  0030987c  nop                                                # delay slot
+/* end of func_003097C0 */
+

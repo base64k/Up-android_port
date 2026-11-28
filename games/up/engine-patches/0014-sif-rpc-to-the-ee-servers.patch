@@ -1,0 +1,271 @@
+diff --git a/host/include/ps2host/iop_vm.h b/host/include/ps2host/iop_vm.h
+index ec7f1cb..34bbb44 100644
+--- a/host/include/ps2host/iop_vm.h
++++ b/host/include/ps2host/iop_vm.h
+@@ -57,6 +57,17 @@ bool OwnsServer(std::uint32_t server);
+ void RpcCall(std::uint32_t server, std::uint32_t procedure, std::uint32_t size,
+              std::uint32_t receive, std::uint32_t receive_size,
+              const std::vector<std::uint8_t>& packet);
++/* A bind or a call the IOP makes of a server the EE registered (sceSifRegisterRpc
++   on the EE): the EE's own sifrpc answers it. The IOP's client (SifRpcClientData_t
++   at `client`) waits for the answer when `blocking`; the request goes to the EE
++   as a packet, and the EE's answer (its RPC-end packet) comes back to EeRpcEnd. */
++void SendEeBind(std::uint32_t client, std::uint32_t sid, bool blocking);
++void SendEeCall(std::uint32_t client, std::uint32_t server, std::uint32_t procedure,
++                std::uint32_t send, std::uint32_t size, std::uint32_t receive,
++                std::uint32_t receive_size, bool blocking, std::uint32_t end_function,
++                std::uint32_t end_param, std::uint32_t client_gp);
++/* The EE's answer (RPC-end, 0x80000008) to a request of SendEeBind or SendEeCall. */
++void EeRpcEnd(const std::vector<std::uint8_t>& packet);
+ 
+ /* Runs the IOP until every thread waits, or it has run `instructions` (a
+    busy IOP can't hang the EE; the EE's idle wait gives it a short slice, so
+diff --git a/host/src/iop.cpp b/host/src/iop.cpp
+index 6b37164..d302ad4 100644
+--- a/host/src/iop.cpp
++++ b/host/src/iop.cpp
+@@ -207,6 +207,11 @@ void Command(const std::vector<u8>& packet, const std::vector<u8>& data) {
+             QueueEnd(packet, kRpcCall, server, server + 0x100, server + 0x200);
+             return;
+         }
++        case kRpcEnd:
++            // The EE's answer to a bind or a call the IOP made of its server
++            // (sceSifRegisterRpc on the EE): the IOP's client gets it.
++            iop::EeRpcEnd(packet);
++            return;
+         default:
+             if (!(command & 0x80000000u)) {
+                 // A command for a module's own handler (sceSifAddCmdHandler on
+diff --git a/host/src/iop_libs.cpp b/host/src/iop_libs.cpp
+index 2a6173d..63703d3 100644
+--- a/host/src/iop_libs.cpp
++++ b/host/src/iop_libs.cpp
+@@ -32,6 +32,7 @@
+ #include <sstream>
+ 
+ #include "iop_vm_internal.h"
++#include "ps2host/iop_vm.h"
+ #include "spu2.h"
+ #include "ps2host/disc.h"
+ #include "ps2host/memory.h"
+@@ -512,10 +513,11 @@ constexpr u32 kClientCommand = 16, kClientBuf = 20, kClientCbuf = 24, kClientSer
+ constexpr u32 kSifRpcNoWait = 1;
+ 
+ // sceSifBindRpc(client, sid, mode): the client takes the server a module
+-// registered for `sid`; with none, server stays NULL and the caller waits
+-// for one (the bind returns 0 either way, as the library's does).
++// registered for `sid`. A server of the IOP's is taken at once; one the EE
++// registered is the EE's to answer (SendEeBind), and a blocking bind waits for
++// the answer, as the library's does. With no answer yet the server is NULL.
+ Outcome SifBindRpcClient(Vm& vm, Context& c) {
+-    const u32 client = A(vm, c, 0), sid = A(vm, c, 1);
++    const u32 client = A(vm, c, 0), sid = A(vm, c, 1), mode = A(vm, c, 2);
+     u32 server = 0, buffer = 0, cbuffer = 0;
+     for (const auto& [address, entry] : vm.rpc_servers)
+         if (entry.sid == sid) {
+@@ -528,19 +530,11 @@ Outcome SifBindRpcClient(Vm& vm, Context& c) {
+     vm.Write(client + kClientBuf, buffer, 4);
+     vm.Write(client + kClientCbuf, cbuffer, 4);
+     vm.Write(client + kClientServer, server, 4);
+-    if (!server) {
+-        // The server is not there yet. The library's bind waits for the other
+-        // side's answer, so the caller's loop must not spin: this thread waits a
+-        // millisecond, and the rest of the system (the EE's answer to the load
+-        // that started this module, the EE's registrations) runs before it asks again.
+-        if (Thread* t = vm.Current()) {
+-            t->until_us = vm.NowUs() + 1000;
+-            Return(c, 0);
+-            vm.Block(c, Wait::Delay, 0);
+-            return Outcome::Block;
+-        }
+-    }
+-    return Ret(c, 0);
++    if (server) return Ret(c, 0);
++    bool blocking = !(mode & kSifRpcNoWait);
++    if (blocking && !vm.Block(c, Wait::RpcReply, client)) blocking = false;
++    iop::SendEeBind(client, sid, blocking);
++    return blocking ? Outcome::Block : Ret(c, 0);
+ }
+ 
+ // sceSifCallRpc(client, procedure, mode, send, ssize, recv, rsize, end, end_param).
+@@ -551,8 +545,16 @@ Outcome SifCallRpcClient(Vm& vm, Context& c) {
+     const u32 send = A(vm, c, 3), ssize = A(vm, c, 4), recv = A(vm, c, 5), rsize = A(vm, c, 6);
+     const u32 end_function = A(vm, c, 7), end_param = A(vm, c, 8);
+     const u32 server = vm.Read(client + kClientServer, 4);
++    if (!server) return Ret(c, u32(-1));                                    // not bound
++    if (vm.rpc_servers.find(server) == vm.rpc_servers.end()) {
++        // A server of the EE's: its sifrpc answers the call (SendEeCall).
++        bool blocking = !(mode & kSifRpcNoWait);
++        if (blocking && !vm.Block(c, Wait::RpcReply, client)) blocking = false;
++        iop::SendEeCall(client, server, procedure, send, ssize, recv, rsize, blocking, end_function,
++                        end_param, c.r[28]);
++        return blocking ? Outcome::Block : Ret(c, 0);
++    }
+     const auto entry = vm.rpc_servers.find(server);
+-    if (!server || entry == vm.rpc_servers.end()) return Ret(c, u32(-1));    // not bound
+     for (u32 i = 0; i < ssize; ++i) vm.Write(entry->second.buffer + i, vm.Read(send + i, 1), 1);
+     RpcRequest request;
+     request.procedure = procedure;
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+index 6a99b6e..fa1ad3e 100644
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -836,6 +836,158 @@ void RpcCall(u32 server, u32 procedure, u32 size, u32 receive, u32 receive_size,
+     Run();
+ }
+ 
++// ------------------------------------------------ the EE's servers, for the IOP
++// A bind or call the IOP makes of a server the EE registered goes to the EE as
++// a packet, and the EE's own sifrpc answers it (ps2sdk's _request_bind and
++// _request_call): the answer is an RPC-end packet (0x80000008) that comes back
++// through EeRpcEnd. The IOP's client waits for it, as the library's bind and
++// call do.
++namespace {
++
++// The IOP clients waiting for the EE, by client (SifRpcClientData_t).
++std::map<u32, RpcRequest>& EeRequests() {
++    static std::map<u32, RpcRequest> requests;
++    return requests;
++}
++
++// SifRpcClientData_t: hdr (pkt_addr, rpc_id, sema_id, mode), command, buf,
++// cbuf, end_function, end_param, server.
++constexpr u32 kEeClientBuf = 20, kEeClientCbuf = 24, kEeClientServer = 36;
++// The EE's request commands; its RPC-end (0x80000008) answers them (SifRpcRendPkt_t).
++constexpr u32 kEeBindCommand = 0x80000009u, kEeCallCommand = 0x8000000Au;
++
++void PutEeWord(std::vector<u8>& bytes, std::size_t at, u32 value) {
++    std::memcpy(bytes.data() + at, &value, 4);
++}
++
++u32 EeWord(const std::vector<u8>& bytes, std::size_t at) {
++    u32 value = 0;
++    if (at + 4 <= bytes.size()) std::memcpy(&value, bytes.data() + at, 4);
++    return value;
++}
++
++// The EE's bind and call traffic, in order: each line as "[host]" (the report
++// keeps those), a few dozen of them - Note would keep only the first of each.
++void EeLog(const char* text) {
++    static int logged = 0;
++    if (logged++ < 60) std::fprintf(stderr, "[host] %s\n", text);
++}
++
++// A request for the EE: 64 bytes, its size and command in the header, then the
++// client (cd) the EE echoes back in its answer.
++std::vector<u8> EeRequestPacket(u32 command, u32 client) {
++    std::vector<u8> packet(0x40, 0);
++    PutEeWord(packet, 0, 0x40);         // packet size; no extra data
++    PutEeWord(packet, 8, command);
++    PutEeWord(packet, 20, client);      // pkt_addr: echoed back, not used
++    PutEeWord(packet, 28, client);      // cd: the IOP's client
++    return packet;
++}
++
++}  // namespace
++
++void SendEeBind(u32 client, u32 sid, bool blocking) {
++    Vm& vm = TheVm();
++    RpcRequest request;
++    request.iop_client = true;
++    request.blocking = blocking;
++    request.client = vm.current;
++    EeRequests()[client] = request;
++    char text[128];
++    std::snprintf(text, sizeof text, "IOP: binds RPC 0x%08X on the EE (client 0x%08X)", unsigned(sid), unsigned(client));
++    EeLog(text);
++    std::vector<u8> packet = EeRequestPacket(kEeBindCommand, client);
++    PutEeWord(packet, 32, sid);         // sid
++    QueueIopPacket(std::move(packet));
++}
++
++void SendEeCall(u32 client, u32 server, u32 procedure, u32 send, u32 size, u32 receive,
++                u32 receive_size, bool blocking, u32 end_function, u32 end_param, u32 client_gp) {
++    Vm& vm = TheVm();
++    // The arguments go where the EE's server takes them: its buffer, from the
++    // bind (the library DMAs them there).
++    const u32 buffer = vm.Read(client + kEeClientBuf, 4);
++    if (size && buffer) {
++        std::vector<u8> bytes(size);
++        for (u32 i = 0; i < size; ++i) bytes[i] = u8(vm.Read(send + i, 1));
++        GuestMemory().WriteBytes(buffer, bytes.data(), size);
++    }
++    RpcRequest request;
++    request.server = server;
++    request.procedure = procedure;
++    request.size = size;
++    request.receive = receive;
++    request.receive_size = receive_size;
++    request.iop_client = true;
++    request.blocking = blocking;
++    request.client = vm.current;
++    request.client_gp = client_gp;
++    request.end_function = end_function;
++    request.end_param = end_param;
++    EeRequests()[client] = request;
++    char text[160];
++    std::snprintf(text, sizeof text, "IOP: RPC procedure %u on the EE (%u bytes in, %u out, client 0x%08X)",
++                  unsigned(procedure), unsigned(size), unsigned(receive_size), unsigned(client));
++    EeLog(text);
++    std::vector<u8> packet = EeRequestPacket(kEeCallCommand, client);
++    PutEeWord(packet, 32, procedure);   // rpc_number
++    PutEeWord(packet, 36, size);        // send_size
++    // recvbuf: the EE answers its data there (none without a buffer to take it).
++    PutEeWord(packet, 40, receive);
++    PutEeWord(packet, 44, receive ? receive_size : 0);
++    PutEeWord(packet, 48, 1);           // rmode: the answer's data comes with its packet
++    PutEeWord(packet, 52, server);      // sd: the EE's server, from the bind
++    QueueIopPacket(std::move(packet));
++}
++
++void EeRpcEnd(const std::vector<u8>& packet) {
++    Vm& vm = TheVm();
++    const u32 client = EeWord(packet, 28), answered = EeWord(packet, 32);
++    const auto found = EeRequests().find(client);
++    if (found == EeRequests().end()) {
++        char text[128];
++        std::snprintf(text, sizeof text, "IOP: the EE answered command 0x%08X for no IOP client (0x%08X)",
++                      unsigned(answered), unsigned(client));
++        EeLog(text);
++        return;
++    }
++    const RpcRequest done = found->second;
++    EeRequests().erase(found);
++    if (answered == kEeBindCommand) {
++        // SifRpcRendPkt_t: sd (36), buf (40), cbuf (44). The server is the EE's
++        // sd, which the call names; NULL: no server is registered for the sid yet.
++        const u32 server = EeWord(packet, 36), buffer = EeWord(packet, 40), cbuffer = EeWord(packet, 44);
++        vm.Write(client + kEeClientBuf, buffer, 4);
++        vm.Write(client + kEeClientCbuf, cbuffer, 4);
++        vm.Write(client + kEeClientServer, server, 4);
++        char text[128];
++        std::snprintf(text, sizeof text, "IOP: the EE's bind answer: server 0x%08X (client 0x%08X)",
++                      unsigned(server), unsigned(client));
++        EeLog(text);
++        if (!server && done.blocking) {
++            // Not yet: the caller's loop asks again in a millisecond, not at once,
++            // so the EE runs in the meantime.
++            auto caller = vm.threads.find(done.client);
++            if (caller != vm.threads.end() && caller->second.wait == Wait::RpcReply) {
++                caller->second.wait = Wait::Delay;
++                caller->second.object = 0;
++                caller->second.until_us = vm.NowUs() + 1000;
++                return;
++            }
++        }
++        if (done.blocking) WakeRpcCaller(vm, done.client);
++        return;
++    }
++    if (answered == kEeCallCommand) {
++        // Its data is in the IOP's buffer already (the EE DMA'd it there).
++        char text[128];
++        std::snprintf(text, sizeof text, "IOP: the EE answered the call of client 0x%08X", unsigned(client));
++        EeLog(text);
++        IopRpcAnswer(vm, done, 0);
++        return;
++    }
++}
++
+ u32 Allocate(u32 size) { return TheVm().Allocate(size); }
+ void Free(u32 address) { TheVm().Free(address); }
+ 

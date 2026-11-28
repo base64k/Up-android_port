@@ -1,0 +1,70 @@
+diff --git a/gpu/src/vulkan_display.cpp b/gpu/src/vulkan_display.cpp
+index ca79abc..92df67b 100644
+--- a/gpu/src/vulkan_display.cpp
++++ b/gpu/src/vulkan_display.cpp
+@@ -94,6 +94,8 @@ public:
+ private:
+     bool Check(VkResult result, const char* what);
+     bool CreateSwapchain();
++    bool RecreateSurface();
++    bool surface_lost_ = false;     // VK_ERROR_SURFACE_LOST_KHR: made again before the next picture
+     void DestroySwapchain();
+     bool EnsurePicture(std::uint32_t width, std::uint32_t height);
+     void DestroyPicture();
+@@ -460,6 +462,25 @@ bool VulkanDisplay::MakeDevice() {
+     return CreateSwapchain();
+ }
+ 
++// VK_ERROR_SURFACE_LOST_KHR: the surface is gone (Android took the window away, the screen was
++// turned in a way the driver cannot follow). The surface and the swapchain are made again from the
++// window; until then the pictures are not shown, and the display goes on (it did not, before:
++// the first lost picture ended the game's screen).
++bool VulkanDisplay::RecreateSurface() {
++    DestroySwapchain();
++    if (surface_) vkDestroySurfaceKHR(instance_, surface_, nullptr);
++    surface_ = VK_NULL_HANDLE;
++    if (!SDL_Vulkan_CreateSurface(window_, instance_, nullptr, &surface_)) {
++        std::fprintf(stderr, "[display] the surface not made again yet: %s\n", SDL_GetError());
++        surface_ = VK_NULL_HANDLE;
++        return false;
++    }
++    std::fprintf(stderr, "[display] the surface made again\n");
++    surface_lost_ = false;
++    stale_ = true;
++    return true;
++}
++
+ bool VulkanDisplay::CreateSwapchain() {
+     VkSurfaceCapabilitiesKHR caps;
+     vkGetPhysicalDeviceSurfaceCapabilitiesKHR(gpu_, surface_, &caps);
+@@ -690,6 +711,7 @@ bool VulkanDisplay::BeginPresent(std::uint32_t* index, bool* ok) {
+         }
+         return false;
+     };
++    if (surface_lost_ && !RecreateSurface()) return miss("the surface lost, not made again yet", VK_ERROR_SURFACE_LOST_KHR);
+     auto t0 = stamp();
+     if (stale_ && !CreateSwapchain()) {
+         *ok = false;
+@@ -721,6 +743,10 @@ bool VulkanDisplay::BeginPresent(std::uint32_t* index, bool* ok) {
+         ++skipped_;
+         return miss("no image of the swapchain's", r);      // (nothing acquired: the semaphore and the fence untouched)
+     }
++    if (r == VK_ERROR_SURFACE_LOST_KHR) {
++        surface_lost_ = true;
++        return miss("the surface lost", r);
++    }
+     slot_ = next;
+     cmd_ = cmds_[slot_];
+     acquired_ = acquireds_[slot_];
+@@ -1793,6 +1819,11 @@ bool VulkanDisplay::Submit(std::uint32_t index) {
+ #else
+     const bool remake = r == VK_ERROR_OUT_OF_DATE_KHR || r == VK_SUBOPTIMAL_KHR;
+ #endif
++    if (r == VK_ERROR_SURFACE_LOST_KHR) {
++        // Not shown: the surface made again before the next picture (BeginPresent).
++        surface_lost_ = true;
++        return true;
++    }
+     if (remake) stale_ = true;
+     else if (!Check(r, "vkQueuePresentKHR")) return false;
+     return true;

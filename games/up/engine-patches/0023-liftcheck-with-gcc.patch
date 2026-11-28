@@ -1,0 +1,124 @@
+diff --git a/ps2decomp/liftcheck.py b/ps2decomp/liftcheck.py
+index be31196..8f09fc3 100644
+--- a/ps2decomp/liftcheck.py
++++ b/ps2decomp/liftcheck.py
+@@ -13,6 +13,7 @@ from __future__ import annotations
+ import ctypes
+ import os
+ import re
++import shutil
+ import subprocess
+ 
+ # The runtime rounds floats as the console does (toward zero, denormals
+@@ -63,6 +64,11 @@ def harness_source(names) -> str:
+     syscalls = " ".join("case %d: value = 0x%Xu; break;" % (service, result & 0xFFFFFFFF)
+                         for service, result in sorted(SYSCALL_RESULTS.items()))
+     lines = [
++        '#if defined(_MSC_VER)',
++        '#define LIFT_EXPORT __declspec(dllexport)',
++        '#else',
++        '#define LIFT_EXPORT __attribute__((visibility("default")))',
++        '#endif',
+         '#pragma optimize("", off)',
+         '#include "ps2rt/lifted.h"',
+         "",
+@@ -110,12 +116,12 @@ def harness_source(names) -> str:
+     lines += ["void %s(lifted::Context& c);" % name for name in names]
+     lines += [
+         "",
+-        'extern "C" __declspec(dllexport) void lift_set_host(ReadFn r, WriteFn w, CallFn c) {',
++        'extern "C" LIFT_EXPORT void lift_set_host(ReadFn r, WriteFn w, CallFn c) {',
+         "    g_read = r; g_write = w; g_call = c;",
+         "}",
+         "",
+         "/* 1 ran, 0 unknown address, 2 abandoned (*reason says why). */",
+-        'extern "C" __declspec(dllexport) int lift_run(u32 address, lifted::Context* c, u32* reason) {',
++        'extern "C" LIFT_EXPORT int lift_run(u32 address, lifted::Context* c, u32* reason) {',
+         "    try {",
+         "        switch (address) {",
+     ]
+@@ -154,7 +160,11 @@ def build(sources, work_dir: str, parallel: int = 8) -> str:
+ 
+ 
+ def _build(sources, work_dir: str, parallel: int) -> str:
+-    vcvars = cppcheck.find_vcvars()
++    on_windows = os.name == "nt"
++    if on_windows:
++        vcvars = cppcheck.find_vcvars()
++    elif not shutil.which("g++"):
++        raise cppcheck.CompilerUnavailable("no g++ on this machine")
+     # Absolute: the build script changes into it, and a relative path (from a
+     # relative --game) would then name a directory inside itself.
+     work_dir = os.path.abspath(work_dir)
+@@ -171,25 +181,54 @@ def _build(sources, work_dir: str, parallel: int) -> str:
+         harness, os.path.join(runtime, "eefpu.cpp"), os.path.join(runtime, "lifted_support.cpp"),
+         os.path.join(runtime, "vu0.cpp")]
+     cppcheck._BUILDS += 1
+-    dll = os.path.join(work_dir, "lifted_%d_%d.dll" % (os.getpid(), cppcheck._BUILDS))
+-    script = os.path.join(work_dir, "lift_build.bat")
+-    with open(script, "w", encoding="utf-8") as handle:
+-        handle.write("@echo off\n")
+-        handle.write('call "%s" >nul\n' % cppcheck.find_vcvars())
+-        handle.write('cd /d "%s"\n' % work_dir)
+-        # /O2 for the same reason as the derived code's check; /EHsc for Abort;
+-        # /bigobj because a lifted file has far more sections than the default allows.
+-        handle.write('cl /nologo /std:c++17 /O2 /EHsc /bigobj /MP%d /W3 /LD /I"%s" %s /Fe"%s" '
+-                     '>lift_build.log 2>&1\n'
+-                     % (parallel, os.path.join(cppcheck.RUNTIME, "include"),
+-                        " ".join('"%s"' % p for p in all_sources), dll))
+-        handle.write("exit /b %errorlevel%\n")
+-    result = subprocess.run(["cmd", "/c", script], capture_output=True, text=True)
++    suffix = "dll" if on_windows else "so"
++    dll = os.path.join(work_dir, "lifted_%d_%d.%s" % (os.getpid(), cppcheck._BUILDS, suffix))
++    log_path = os.path.join(work_dir, "lift_build.log")
++    if on_windows:
++        script = os.path.join(work_dir, "lift_build.bat")
++        with open(script, "w", encoding="utf-8") as handle:
++            handle.write("@echo off\n")
++            handle.write('call "%s" >nul\n' % vcvars)
++            handle.write('cd /d "%s"\n' % work_dir)
++            # /O2 for the same reason as the derived code's check; /EHsc for Abort;
++            # /bigobj because a lifted file has far more sections than the default allows.
++            handle.write('cl /nologo /std:c++17 /O2 /EHsc /bigobj /MP%d /W3 /LD /I"%s" %s /Fe"%s" '
++                         '>lift_build.log 2>&1\n'
++                         % (parallel, os.path.join(cppcheck.RUNTIME, "include"),
++                            " ".join('"%s"' % p for p in all_sources), dll))
++            handle.write("exit /b %errorlevel%\n")
++        result = subprocess.run(["cmd", "/c", script], capture_output=True, text=True)
++    else:
++        # The same -O2 and C++17 as on Windows; each file compiled on its own, a few
++        # at once, then linked into one shared library. (One g++ run over the whole
++        # set would compile them one after another.)
++        include = ["-I" + os.path.join(cppcheck.RUNTIME, "include")]
++        def compile_one(path):
++            obj = os.path.join(work_dir, "obj_%d_%s.o" % (os.getpid(), os.path.basename(path)))
++            done = subprocess.run(["g++", "-std=c++17", "-O2", "-fPIC", "-w", "-c", "-o", obj,
++                                   path] + include, capture_output=True, text=True)
++            return obj, done
++        from concurrent.futures import ThreadPoolExecutor
++        objects, failures = [], []
++        with ThreadPoolExecutor(max_workers=max(1, parallel)) as pool:
++            for obj, done in pool.map(compile_one, all_sources):
++                if done.returncode != 0:
++                    failures.append(done.stdout + done.stderr)
++                else:
++                    objects.append(obj)
++        with open(log_path, "w", encoding="utf-8") as handle:
++            handle.write("\n".join(failures))
++        if failures:
++            result = subprocess.CompletedProcess([], 1)
++        else:
++            result = subprocess.run(["g++", "-shared", "-o", dll] + objects, capture_output=True, text=True)
++            with open(log_path, "a", encoding="utf-8") as handle:
++                handle.write(result.stdout + result.stderr)
+     if result.returncode != 0:
+-        with open(os.path.join(work_dir, "lift_build.log"), encoding="utf-8",
+-                  errors="replace") as handle:
++        with open(log_path, encoding="utf-8", errors="replace") as handle:
+             log = handle.read()
+-        errors = [line for line in log.splitlines() if " error " in line]
++        # MSVC: "file(line): error C...", g++: "file:line:col: error: ..."
++        errors = [line for line in log.splitlines() if " error " in line or ": error:" in line]
+         raise cppcheck.CompileError("\n".join(errors) or log[-2000:])
+     return dll
+ 

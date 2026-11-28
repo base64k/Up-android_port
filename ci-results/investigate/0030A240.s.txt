@@ -1,0 +1,72 @@
+== original assembly of 0x0030A240
+/**************************************************************************
+ * func_0030A240
+ *
+ * address      : 0x0030a240 .. 0x0030a324  (228 bytes, 57 instructions)
+ * discovered by: called
+ * called from  : 0x00307950, 0x003aa7d4, 0x003aa828, 0x003aa87c, 0x003aa8d0, 0x003aa924 (+10 more)
+ */
+glabel func_0030A240
+  0030a240  addiu      $sp, $sp, -0x50
+  0030a244  sd         $ra, 0x30($sp)
+  0030a248  sq         $s2, 0x20($sp)
+  0030a24c  sq         $s1, 0x10($sp)
+  0030a250  daddu      $s2, $a0, $zero
+  0030a254  sq         $s0, 0x0($sp)
+  0030a258  daddu      $s1, $a2, $zero
+  0030a25c  lw         $v0, 0x0($a1)
+  0030a260  addiu      $a0, $s2, 0x19c
+  0030a264  sw         $v0, 0x48($sp)
+  0030a268  jal        func_003097C0
+  0030a26c  addiu      $a1, $sp, 0x48                          # delay slot
+  0030a270  beq        $v0, $zero, .L000
+  0030a274  nop                                                # delay slot
+  0030a278  b          .L001
+  0030a27c  lh         $v0, 0x4($v0)                           # delay slot
+.L000:
+  0030a280  addiu      $v0, $zero, -0x1
+.L001:
+  0030a284  dsll32     $s0, $v0, 16
+  0030a288  dsra32     $s0, $s0, 16
+  0030a28c  lw         $v0, 0x198($s2)
+  0030a290  sll        $v1, $s0, 2
+  0030a294  addu       $v1, $v1, $s0
+  0030a298  sll        $v1, $v1, 1
+  0030a29c  addu       $v1, $v1, $s0
+  0030a2a0  sll        $v1, $v1, 2
+  0030a2a4  addu       $v1, $v0, $v1
+  0030a2a8  lw         $v0, 0x28($v1)
+  0030a2ac  addiu      $v0, $v0, 0x1
+  0030a2b0  sw         $v0, 0x28($v1)
+  0030a2b4  lw         $v0, 0x8($v1)
+  0030a2b8  beq        $v0, $zero, .L002
+  0030a2bc  nop                                                # delay slot
+  0030a2c0  jalr       $v0
+  0030a2c4  nop                                                # delay slot
+  0030a2c8  daddu      $a0, $s2, $zero
+  0030a2cc  daddu      $a2, $s1, $zero
+  0030a2d0  daddu      $a3, $s0, $zero
+  0030a2d4  daddu      $a1, $v0, $zero
+  0030a2d8  jal        func_0030B0D0
+  0030a2dc  addiu      $t0, $zero, 0x8                         # delay slot
+  0030a2e0  b          .L003
+  0030a2e4  ld         $ra, 0x30($sp)                          # delay slot
+.L002:
+  0030a2e8  lw         $v0, 0xc($v1)
+  0030a2ec  jalr       $v0
+  0030a2f0  nop                                                # delay slot
+  0030a2f4  daddu      $a0, $s2, $zero
+  0030a2f8  daddu      $a2, $s1, $zero
+  0030a2fc  daddu      $a3, $s0, $zero
+  0030a300  daddu      $a1, $v0, $zero
+  0030a304  jal        func_0030B0D0
+  0030a308  addiu      $t0, $zero, 0x8                         # delay slot
+  0030a30c  ld         $ra, 0x30($sp)
+.L003:
+  0030a310  lq         $s2, 0x20($sp)
+  0030a314  lq         $s1, 0x10($sp)
+  0030a318  lq         $s0, 0x0($sp)
+  0030a31c  jr         $ra
+  0030a320  addiu      $sp, $sp, 0x50                          # delay slot
+/* end of func_0030A240 */
+
