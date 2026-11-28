@@ -58,3 +58,5 @@ missing func_004B6E40
 missing func_004B7840
 missing func_004B6E40
 missing func_004B7840
+missing func_004B6E40
+missing func_004B7840
