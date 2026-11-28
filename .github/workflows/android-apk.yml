@@ -547,7 +547,9 @@ jobs:
           # The smoke test now runs past the old wait, and stops at a write outside guest
           # memory (the call stack innermost last: 0x426350 does the write). Its code and its
           # callers: ci-results/ee-code-crash.txt.
-          for a in 0x00426350 0x00426E00 0x0032EAA0; do
+          # Run 46181473420 (virtual time, --virtual-time): the stop is deeper - 0x2DCC40 and
+          # 0x4B66F0 (the read at 0x33680004), called from 0x32DF60 / 0x4C49A0 / 0x3078A0.
+          for a in 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x00426350 0x00426E00 0x0032EAA0; do
             echo "=== EE function at $a ==="
             timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 300 || true
           done > ci-results/ee-code-crash.txt 2>&1 || true
