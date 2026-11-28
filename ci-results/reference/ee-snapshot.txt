@@ -1,20 +1,20 @@
 entries:
   PCSX2 Savestate Version.id  size=36  compressed=36  method=0
-  PCSX2 Internal Structures.dat  size=129962  compressed=2625  method=93
-  eeMemory.bin  size=33554432  compressed=1886275  method=93
-  iopMemory.bin  size=2097152  compressed=92230  method=93
-  eeHwRegs.bin  size=65536  compressed=173  method=93
-  iopHwRegs.bin  size=65536  compressed=202  method=93
-  Scratchpad.bin  size=16384  compressed=159  method=93
+  PCSX2 Internal Structures.dat  size=129962  compressed=2413  method=93
+  eeMemory.bin  size=33554432  compressed=1887087  method=93
+  iopMemory.bin  size=2097152  compressed=99508  method=93
+  eeHwRegs.bin  size=65536  compressed=188  method=93
+  iopHwRegs.bin  size=65536  compressed=173  method=93
+  Scratchpad.bin  size=16384  compressed=157  method=93
   vu0Memory.bin  size=4096  compressed=18  method=93
   vu1Memory.bin  size=16384  compressed=18  method=93
-  vu0MicroMem.bin  size=4096  compressed=18  method=93
+  vu0MicroMem.bin  size=4096  compressed=863  method=93
   vu1MicroMem.bin  size=16384  compressed=25  method=93
   SPU2.bin  size=2178992  compressed=281  method=93
   USB.bin  size=8491  compressed=85  method=93
   PAD.bin  size=228  compressed=86  method=93
-  GS.bin  size=4194813  compressed=8954  method=93
-  Screenshot.png  size=17908  compressed=17908  method=0
+  GS.bin  size=4194813  compressed=8942  method=93
+  Screenshot.png  size=17965  compressed=17965  method=0
 eeMemory: 33554432 bytes
 0x00795F70 = 0x00000000
 0x00795F74 = 0x00000000
@@ -38,7 +38,7 @@ eeMemory: 33554432 bytes
 0x00331230 = 0x27BDFFD0
 0x0043E880 = 0x27BDFFA0
 0x009E40B0 = 0x00000000
-non-zero pages: 1511 of 8192
+non-zero pages: 1512 of 8192
   0x00000000..0x00018000
   0x00019000..0x00025000
   0x00075000..0x00077000
@@ -46,8 +46,7 @@ non-zero pages: 1511 of 8192
   0x0007F000..0x00080000
   0x00081000..0x00094000
   0x00095000..0x00096000
-  0x00200000..0x00716000
-  0x00717000..0x00798000
+  0x00200000..0x00798000
   0x00799000..0x0079C000
   0x0079D000..0x007A3000
   0x007A4000..0x007A5000
