@@ -549,7 +549,9 @@ jobs:
           # callers: ci-results/ee-code-crash.txt.
           # Run 46181473420 (virtual time, --virtual-time): the stop is deeper - 0x2DCC40 and
           # 0x4B66F0 (the read at 0x33680004), called from 0x32DF60 / 0x4C49A0 / 0x3078A0.
-          for a in 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x00426350 0x00426E00 0x0032EAA0; do
+          # The frame that fills the object the free takes (0x32DE80 in 0x3079C0 at sp+0x70, the
+          # unpacker's wrapper), the allocator it calls (0x2DCA90) and the calls in 0x3079C0.
+          for a in 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x0032DE80 0x0032DFA0 0x002DCA90 0x0030B9A0 0x002E05B0 0x0030CA70 0x00426350 0x00426E00 0x0032EAA0; do
             echo "=== EE function at $a ==="
             timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 300 || true
           done > ci-results/ee-code-crash.txt 2>&1 || true
