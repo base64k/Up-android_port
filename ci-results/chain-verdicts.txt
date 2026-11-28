@@ -1,7 +1,7 @@
   seeded 1948 null global pointers for testing, and 0 more found by running (0s)
 lifted 15 of 15 functions; refused 0
   0 verdicts remembered, 15 verified afresh
-  building and verifying took 85s (4 processes)
+  building and verifying took 75s (4 processes)
 lifted and verified: 14 functions, 5,660 bytes (0.12% of code)
       1  untestable: original, every memory profile: ExecutionLimit: exceeded N instructions; likely an infinite loop
-  elapsed 105s
+  elapsed 93s

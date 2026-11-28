@@ -66,7 +66,7 @@ threads:
 VIF1 commands: NOP 171399 STCYCL 3 OFFSET 3 BASE 3 ITOP 3 STMOD 3 MSKPATH3 3422 FLUSH 5857 FLUSHA 1952 STMASK 3 DIRECT 10741; VU: 0 instruction pairs (0 compiled: 0 entered, 0 stale, 0 MB checked), 0 XGKICKs; started at
 GS: 294338 primitives, 420725580 pixels written
 GIF tags: PATH1 0, PATH2 21009, PATH3 2077; image 566336 quadwords; register writes: 00:11246 01:978 03:19520 04:1952 05:332444 06:489 07:489 08:977 09:489 14:489 15:977 16:1 17:1 18:3542 19:1954 1A:2566 1B:1955 34:1 35:489 36:1 37:489 3B:978 3D:1 3F:977 40:4518 41:1954 42:489 43:489 44:489 45:1589 46:122 47:4518 48:1954 49:1 4A:1 4B:1 4C:3542 4D:1954 4E:3542 4F:1954 50:1466 51:3 52:1466 53:1466 7F:1952
-time: 14.8 s; GS drawing 89.3%, GS image transfers 0.0%, VU1 0.0%, VU0 0.0%, DMA and VIF 0.0%, IOP 0.1%, SPU2 0.1%, waiting for the GS thread 87.9%
+time: 11.9 s; GS drawing 92.0%, GS image transfers 0.0%, VU1 0.0%, VU0 0.0%, DMA and VIF 0.1%, IOP 0.1%, SPU2 0.1%, waiting for the GS thread 90.3%
 kernel services used:
   -120  SifSetDChain             x855
   -119  SifSetDma                x1

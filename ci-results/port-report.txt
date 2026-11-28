@@ -532,7 +532,7 @@ no sound device: running silent
 [disc] read lsn 265 count 1 crc 4F94C502
 [disc] read lsn 161366 count 5 crc 3A8A10A6
 [host] IOP: running cdrom0:\MODULES\SDRDRV.IRX;1 at 0x00010000 (7368 bytes), entry 0x000103A0
-[host] IOP: cdrom0:\MODULES\SDRDRV.IRX;1 start begins, at 746161 ms (wall)
+[host] IOP: cdrom0:\MODULES\SDRDRV.IRX;1 start begins, at 826528 ms (wall)
 [iop] t1 intrman#17 CpuSuspendIntr(00012CB8, 00011CD0, 00000000, 00000000) -> 00000000 from 00010020
 [host] IOP: a module exports the library sdrdrv
 [iop] t1 loadcore#6 RegisterLibraryEntries(00011080, 00011CD0, 00000000, 00000000) -> 00000000 from 00010030
@@ -550,13 +550,13 @@ no sound device: running silent
 [iop] t2 sifcmd#17 sceSifRegisterRpc(000115E0, 80000701, 00010588, 00011C30) -> 00000000 from 00010538
 [iop] t2 sifcmd#22 sceSifRpcLoop(000115C0, 80000701, 00010588, 00011C30) -> 00000040 (waits) from 0001056C
 [host] IOP: cdrom0:\MODULES\SDRDRV.IRX;1's start returned 2; running the IOP until it waits
-[host] IOP: cdrom0:\MODULES\SDRDRV.IRX;1 loaded, at 746162 ms (wall)
+[host] IOP: cdrom0:\MODULES\SDRDRV.IRX;1 loaded, at 826528 ms (wall)
 [disc] read lsn 16 count 1 crc 3D4503F8
 [disc] read lsn 261 count 1 crc CD1FA763
 [disc] read lsn 265 count 1 crc 4F94C502
 [disc] read lsn 161273 count 14 crc 7608E0AD
 [host] IOP: running cdrom0:\MODULES\LIBSD.IRX;1 at 0x00013500 (22912 bytes), entry 0x000135B0
-[host] IOP: cdrom0:\MODULES\LIBSD.IRX;1 start begins, at 746162 ms (wall)
+[host] IOP: cdrom0:\MODULES\LIBSD.IRX;1 start begins, at 826528 ms (wall)
 [iop] t3 intrman#17 CpuSuspendIntr(00019E60, 00011D00, 00000000, 00000000) -> 00000000 from 000135BC
 [host] IOP: a module exports the library libsd
 [iop] t3 loadcore#6 RegisterLibraryEntries(00013500, 00011D00, 00000000, 00000000) -> 00000000 from 000135CC
@@ -564,7 +564,7 @@ no sound device: running silent
 [iop] t3 intrman#17 CpuSuspendIntr(00019E40, BF80140C, BF801404, 00000000) -> 00000000 from 00014A7C
 [iop] t3 intrman#18 CpuResumeIntr(00000001, BF801570, BF801404, 00000000) -> 00000000 from 00014AB0
 [host] IOP: cdrom0:\MODULES\LIBSD.IRX;1's start returned 0; running the IOP until it waits
-[host] IOP: cdrom0:\MODULES\LIBSD.IRX;1 loaded, at 746162 ms (wall)
+[host] IOP: cdrom0:\MODULES\LIBSD.IRX;1 loaded, at 826528 ms (wall)
 [host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 4755516623 ns
 [disc] read lsn 16 count 1 crc 3D4503F8
@@ -572,7 +572,7 @@ no sound device: running silent
 [disc] read lsn 265 count 1 crc 4F94C502
 [disc] read lsn 161375 count 31 crc 80A4E599
 [host] IOP: running cdrom0:\MODULES\ZNASND.IRX;1 at 0x00018E80 (92256 bytes), entry 0x0001919C
-[host] IOP: cdrom0:\MODULES\ZNASND.IRX;1 start begins, at 746162 ms (wall)
+[host] IOP: cdrom0:\MODULES\ZNASND.IRX;1 start begins, at 826529 ms (wall)
 [iop] t4 intrman#9 CpuEnableIntr(00000001, 00011D30, 00000000, 00000000) -> 00000000 from 000191B0
 [iop] t4 libsd#4 sceSdInit(00000000, 00011D30, 00000000, 00000000) -> 00000000 from 00019F64
 [iop] t4 libsd#11 sceSdSetCoreAttr(00000002, 00000000, 00000000, 00000000) -> 00000000 from 00019F78
@@ -4498,653 +4498,7 @@ no sound device: running silent
 [iop] t4 sysclib#30 strncpy(0005C7A0, 00031F9D, 0000000C, 00030584) -> 0005C7A0 from 0001D5EC
 [iop] t4 sysclib#27 strlen(00031FD9, 000597A0, 0000000C, 00030584) -> 0000000C from 0001D2C0
 [iop] t4 sysclib#22 strcmp(00031FE3, 00022968, 0000000C, 00030584) -> 00000000 from 0001D2D8
-... 6072 lines left out (the full report is in the up-smoke artifact) ...
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6282483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 000617C0, 000294B4) -> 00000000 from 0001CB44
-[iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 000617C0, 000294B4) -> 00000000 from 0001CBF8
-[iop] t7 cdvdman#11 sceCdSync(00000001, 00000000, 000617C0, 000294B4) -> 00000000 from 0001CC30
-[iop] t7 cdvdman#8 sceCdGetError(00000001, 00000101, 00000181, 000294B4) -> 00000000 from 0001CD30
-[iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000221E0
-[iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000181, 000294B4) -> 0002F5D4 from 00022274
-[iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000181, 000294B4) -> 00000000 (waits) from 0001C2FC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6283483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 thsemap#9 PollSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000222AC
-[iop] t7 sysclib#23 strcpy(0002F4D4, 00022840, 00000181, 000294B4) -> 0002F4D4 from 00022438
-[iop] t7 timrman#10 GetTimerCounter(00000100, 00022840, 00000181, 000294B4) -> 0017509E from 00019AC0
-[iop] t7 thbase#33 DelayThread(00000002, 00000000, 00000181, 000294B4) -> 00000000 (waits) from 0001C4AC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6284483468 ns
-[iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 00000181, 000294B4) -> 00000000 from 0001CB44
-[iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 00000181, 000294B4) -> 00000000 from 0001CBF8
-[iop] t7 cdvdman#8 sceCdGetError(0000000B, 00000000, 00000181, 000294B4) -> 00000000 from 0001CD30
-[iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000221E0
-[iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000181, 000294B4) -> 0002F5D4 from 00022274
-[iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000181, 000294B4) -> 00000000 (waits) from 0001C2FC
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6289594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6290594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 thsemap#9 PollSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000222AC
-[iop] t7 sysclib#23 strcpy(0002F4D4, 00022840, 00000181, 000294B4) -> 0002F4D4 from 00022438
-[iop] t7 timrman#10 GetTimerCounter(00000100, 00022840, 00000181, 000294B4) -> 0017687D from 00019AC0
-[iop] t7 thbase#33 DelayThread(00000002, 00000000, 00000181, 000294B4) -> 00000000 (waits) from 0001C4AC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6290594580 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6290594580 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6290594580 ns
-[iop] RPC 0x01000001 procedure 1811: 007A7C00 207AA680 00000800 00000000 00000001 01010101 00000001 00031674  ".|z...z ....................t..."
-[iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000000, 000294B4) -> FFFFFE5D from 000222AC
-[iop] t5 thbase#33 DelayThread(0000000A, 00022DDC, 00000000, 000294B4) -> 00000000 (waits) from 000222C0
-[iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000000, 000294B4) -> FFFFFE5D from 000222AC
-[iop] t5 thbase#33 DelayThread(0000000A, 00022DDC, 00000000, 000294B4) -> 00000000 (waits) from 000222C0
-[iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 00000181, 000294B4) -> 00000000 from 0001CB44
-[iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 00000181, 000294B4) -> 00000000 from 0001CBF8
-[iop] t7 cdvdman#8 sceCdGetError(0000000B, 00000000, 00000181, 000294B4) -> 00000000 from 0001CD30
-[iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000221E0
-[iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000181, 000294B4) -> 0002F5D4 from 00022274
-[iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000181, 000294B4) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 751188 ms (wall)
-[iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000000, 000294B4) -> 00000000 from 000222AC
-[iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000000, 000294B4) -> 0002F4D4 from 00022438
-[iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
-[iop] t5 sysclib#23 strcpy(0002F5D4, 00022DDC, 00008001, 000294B4) -> 0002F5D4 from 00022274
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 thsemap#9 PollSema(00000006, 00022840, 00000181, 000294B4) -> 00000000 from 000222AC
-[iop] t7 sysclib#23 strcpy(0002F4D4, 00022840, 00000181, 000294B4) -> 0002F4D4 from 00022438
-[iop] t7 timrman#10 GetTimerCounter(00000100, 00022840, 00000181, 000294B4) -> 0017E31A from 00019AC0
-[iop] t7 intrman#17 CpuSuspendIntr(000C2F5C, 207AA680, 00000800, 00000000) -> 00000000 from 00019E08
-[iop] t7 sifman#7 sceSifSetDma(000C2F4C, 00000001, 00000800, 00000000) -> 00000001 from 00019E14
-[iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 00000800, 00000000) -> 00000000 from 00019E20
-[iop] t7 thbase#33 DelayThread(00000002, 00000000, 00000800, 00000000) -> 00000000 (waits) from 0001C4AC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6321983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 00000800, 00000000) -> 00000000 from 0001CB44
-[iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 00000800, 00000000) -> 00000000 from 0001CBF8
-[iop] t7 cdvdman#8 sceCdGetError(0000000B, 00000000, 00000800, 00000000) -> 00000000 from 0001CD30
-[iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000800, 00000000) -> 00000000 from 000221E0
-[iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000800, 00000000) -> 0002F5D4 from 00022274
-[iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6322983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 thsemap#9 PollSema(00000006, 00022840, 00000800, 00000000) -> 00000000 from 000222AC
-[iop] t7 sysclib#23 strcpy(0002F4D4, 00022840, 00000800, 00000000) -> 0002F4D4 from 00022438
-[iop] t7 timrman#10 GetTimerCounter(00000100, 00022840, 00000800, 00000000) -> 0017EAEA from 00019AC0
-[iop] t7 intrman#17 CpuSuspendIntr(000C2F7C, 000007D0, 00000800, 00000000) -> 00000000 from 00019F14
-[iop] t7 sifman#8 sceSifDmaStat(00000001, 000007D0, 00000800, 00000000) -> FFFFFFFF from 00019F1C
-[iop] t7 intrman#18 CpuResumeIntr(00000001, 000007D0, 00000800, 00000000) -> 00000000 from 00019F3C
-[iop] t7 thbase#33 DelayThread(00000002, 00000000, 00000800, 00000000) -> 00000000 (waits) from 0001C4AC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6323983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 00000800, 00000000) -> 00000000 from 0001CB44
-[iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 00000800, 00000000) -> 00000000 from 0001CBF8
-[iop] t7 cdvdman#8 sceCdGetError(0000000B, 00000000, 00000800, 00000000) -> 00000000 from 0001CD30
-[iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000800, 00000000) -> 00000000 from 000221E0
-[iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000800, 00000000) -> 0002F5D4 from 00022274
-[iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
-[iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
-[iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
-[iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[host] SIF reply queued for the EE: procedure-answer 8000000A, due 0 ns, 1 queued
-[host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6324983227 ns
-[iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
-[iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
-[iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
-[iop] t5 libsd#5 sceSdSetParam(0000002D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C294
+... 6775 lines left out (the full report is in the up-smoke artifact) ...
 [iop] t5 libsd#5 sceSdSetParam(0000012D, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2A0
 [iop] t5 libsd#5 sceSdSetParam(0000002F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2AC
 [iop] t5 libsd#5 sceSdSetParam(0000012F, 00000000, 00000020, 000294B4) -> 00000000 from 0001C2B8
@@ -5196,7 +4550,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000800, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000800, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 752088 ms (wall)
+[host] EE idle: every thread waits, from 831313 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000001, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000001, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -5564,7 +4918,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0001C000, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0001C000, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0001C000, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 752935 ms (wall)
+[host] EE idle: every thread waits, from 832006 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000039, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000039, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -5582,14 +4936,20 @@ no sound device: running silent
 [call] 0x003609A0
 [call] 0x004530D0
 [call] 0x004530B0
+[write] 0x007BD3F4 <- 0xD (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x13 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00452FF0
 [call] 0x00453040
+[write] 0x007BD3F4 <- 0xC (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x14 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002DEAE0
 [call] 0x00373960
 [call] 0x00373D30
 [call] 0x003743D0
 [call] 0x00374090
 [call] 0x00373DA0
+[write] 0x007BD3F4 <- 0xB (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x15 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00394F00
 [call] 0x0040F6C0
 [call] 0x00394F80
@@ -5601,9 +4961,15 @@ no sound device: running silent
 [call] 0x0030C990
 [call] 0x003D78C0
 [call] 0x00307EC0
+[write] 0x007BD3F4 <- 0xA (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x16 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x9 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x17 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002DEB80
 [call] 0x002E8570
 [call] 0x00386980
+[write] 0x007BD3F4 <- 0x8 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x18 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002E93A0
 [call] 0x00414E50
 [call] 0x00415B90
@@ -5905,7 +5271,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0000E800, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0000E800, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0000E800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 753710 ms (wall)
+[host] EE idle: every thread waits, from 832573 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000056, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000056, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -5923,15 +5289,77 @@ no sound device: running silent
 [call] 0x002E1E50
 [call] 0x003791D0
 [call] 0x002E1EE0
+[write] 0x007BD3F4 <- 0x7 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x19 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3E8 <- 0xADA6A0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3EC <- 0xB2CFD0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x40 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x3A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x39 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x38 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x37 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x36 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x35 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x34 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x33 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x32 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x31 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x30 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x10 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x11 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x12 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x13 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x14 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x15 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x2A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x16 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x29 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x17 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x28 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x18 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x27 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x19 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
 [call] 0x0040A7E0
 [call] 0x00395190
 [call] 0x00459110
+[write] 0x007BD3F4 <- 0x26 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x25 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00336550
 [call] 0x00336910
 [call] 0x003368C0
 [call] 0x00336870
 [call] 0x00336820
 [call] 0x003367D0
+[write] 0x007BD3F4 <- 0x24 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x0040AF10
 [call] 0x003C5EF0
 [call] 0x0040E590
@@ -6091,7 +5519,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0001C000, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0001C000, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0001C000, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 754074 ms (wall)
+[host] EE idle: every thread waits, from 832817 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 0000008E, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 0000008E, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -6105,9 +5533,13 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 0000E800, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 0000E800, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6488816557 ns
+[write] 0x007BD3F4 <- 0x23 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002DE600
 [call] 0x003FD6C0
 [call] 0x0030F470
+[write] 0x007BD3F4 <- 0x22 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00410C60
 [call] 0x00410FF0
 [call] 0x004468C0
@@ -6120,6 +5552,18 @@ no sound device: running silent
 [call] 0x0035B140
 [call] 0x0040E9D0
 [call] 0x0035AB20
+[write] 0x007BD3F4 <- 0x21 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x1F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x20 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x20 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x1F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x21 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x1E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x22 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x1D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x23 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x1C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x24 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -6265,7 +5709,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0000E800, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0000E800, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0000E800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 754427 ms (wall)
+[host] EE idle: every thread waits, from 833058 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 000000AB, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 000000AB, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -6282,27 +5726,45 @@ no sound device: running silent
 [call] 0x002DE3F0
 [call] 0x0030FFD0
 [call] 0x00395060
+[write] 0x007BD3F4 <- 0x1B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x25 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00411870
 [call] 0x003106A0
 [call] 0x00310620
 [call] 0x00310810
+[write] 0x007BD3F4 <- 0x1A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x26 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x19 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x27 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x0022CA10
 [call] 0x002DEA80
 [call] 0x00374B20
+[write] 0x007BD3F4 <- 0x18 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x28 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x0040FAE0
 [call] 0x00375440
 [call] 0x00410150
 [call] 0x00395030
+[write] 0x007BD3F4 <- 0x17 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x29 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x16 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x003D79B0
 [call] 0x003D7D10
 [call] 0x003D7CF0
 [call] 0x003D8860
+[write] 0x007BD3F4 <- 0x15 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00410200
 [call] 0x0040EB10
 [call] 0x0040EE40
 [call] 0x0035B790
 [call] 0x0040F330
 [call] 0x0040ED10
+[write] 0x007BD3F4 <- 0x14 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x13 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002DEA40
 [call] 0x002E15E0
 [call] 0x003775D0
@@ -6330,6 +5792,8 @@ no sound device: running silent
 [call] 0x00456C70
 [call] 0x002E44D0
 [call] 0x00456F50
+[write] 0x007BD3F4 <- 0x12 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00408130
 [call] 0x00405270
 [call] 0x002E2570
@@ -6344,6 +5808,8 @@ no sound device: running silent
 [call] 0x00467330
 [call] 0x004B4920
 [call] 0x002E1A40
+[write] 0x007BD3F4 <- 0x11 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x2F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -7061,7 +6527,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000181, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000181, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000181, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 756298 ms (wall)
+[host] EE idle: every thread waits, from 834454 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 000000E4, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 000000E4, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -7077,9 +6543,131 @@ no sound device: running silent
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6572233222 ns
 [call] 0x00336A20
 [call] 0x003D5160
+[write] 0x007BD3F4 <- 0x10 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x30 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x003D5400
 [call] 0x004C0130
 [call] 0x004BFFE0
+[write] 0x007BD3F4 <- 0xF (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x31 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3E8 <- 0xB799B0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3EC <- 0xB79A70 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x80 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x7A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x79 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x78 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x77 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x76 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x75 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x74 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x73 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x72 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x71 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x70 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x10 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x11 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x12 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x13 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x14 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x15 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x6A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x16 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x69 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x17 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x68 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x18 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x67 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x19 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x66 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x65 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x64 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x63 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x62 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x61 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x60 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x20 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x21 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x22 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x23 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x24 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x25 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x5A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x26 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x59 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x27 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x58 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x28 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x57 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x29 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x56 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x55 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x54 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x53 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x52 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x51 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x50 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x30 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x4F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x31 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x4E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x32 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x4D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x33 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x4C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x34 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x4B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x35 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x4A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x36 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x49 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x37 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x48 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x38 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x47 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x39 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -7314,7 +6902,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0000F000, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0000F000, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0000F000, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 756826 ms (wall)
+[host] EE idle: every thread waits, from 834991 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000102, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000102, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -7328,6 +6916,24 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 0001C800, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 0001C800, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6605599888 ns
+[write] 0x007BD3F4 <- 0x46 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x45 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x44 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x43 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x42 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x41 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x3F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x40 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x40 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x3F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x41 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x3E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x42 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -7622,7 +7228,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0001C800, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0001C800, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0001C800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 757505 ms (wall)
+[host] EE idle: every thread waits, from 835705 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 0000013B, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 0000013B, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -7636,6 +7242,60 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 0000F000, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 0000F000, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6655649887 ns
+[write] 0x007BD3F4 <- 0x3D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x43 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x3C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x44 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x3B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x45 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x3A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x46 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x39 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x47 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x38 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x48 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x37 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x49 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x36 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x35 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x34 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x33 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x32 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x31 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x4F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x30 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x50 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x51 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x52 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x53 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x54 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x55 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x2A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x56 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x29 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x57 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x28 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x58 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x27 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x59 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x26 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x25 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x24 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x23 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -7921,7 +7581,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0000F000, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0000F000, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0000F000, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 758160 ms (wall)
+[host] EE idle: every thread waits, from 836337 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000159, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000159, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008001, 000294B4) -> 00000000 from 000221E0
@@ -7935,10 +7595,222 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 00013800, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 00013800, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6689016553 ns
+[write] 0x007BD3F4 <- 0x22 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x21 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x5F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x20 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x60 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x1F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x61 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3E8 <- 0xBE4E20 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3EC <- 0xBE52A0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x100 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xFA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0xF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xF0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x10 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xEF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x11 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xEE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x12 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xED (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x13 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xEC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x14 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xEB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x15 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xEA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x16 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x17 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x18 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x19 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x1F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xE0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x20 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x21 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x22 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x23 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x24 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x25 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xDA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x26 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x27 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x28 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x29 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x2F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xD0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x30 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x31 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x32 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x33 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x34 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x35 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xCA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x36 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x37 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x38 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x39 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x3F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xC0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x40 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x41 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x42 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x43 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x44 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x45 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xBA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x46 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x47 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x48 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x49 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x4F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xB0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x50 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAF (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x51 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAE (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x52 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAD (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x53 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAC (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x54 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAB (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x55 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xAA (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x56 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA9 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x57 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA8 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x58 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA7 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x59 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA6 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5A (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA5 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5B (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA4 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5C (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA3 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5D (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA2 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5E (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA1 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x5F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0xA0 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x60 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x9F (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F0 <- 0x61 (4 bytes) in 0x00308BA0 < 0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350
+[write] 0x007BD3F4 <- 0x9E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x62 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x9D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x63 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002DEB40
 [call] 0x002EBEE0
 [call] 0x0037FED0
 [call] 0x003804B0
+[write] 0x007BD3F4 <- 0x9C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x64 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x002EC390
 [call] 0x004124A0
 [call] 0x002AF1C0
@@ -7949,6 +7821,20 @@ no sound device: running silent
 [call] 0x003C47C0
 [call] 0x00414A10
 [call] 0x00414C30
+[write] 0x007BD3F4 <- 0x9B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x65 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x9A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x66 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x99 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x67 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x98 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x68 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x97 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x69 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x96 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x95 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -8499,7 +8385,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 00000181, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 00000181, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 00000181, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 759468 ms (wall)
+[host] EE idle: every thread waits, from 837493 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 00000192, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 00000192, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008201, 000294B4) -> 00000000 from 000221E0
@@ -8513,9 +8399,73 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 0000F800, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 0000F800, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6739066552 ns
+[write] 0x007BD3F4 <- 0x94 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x93 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x92 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x91 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x6F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x90 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x70 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x8F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x71 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x8E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x72 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x8D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x73 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x003837E0
 [call] 0x0040A200
 [call] 0x003817A0
+[write] 0x007BD3F4 <- 0x8C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x74 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x8B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x75 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x8A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x76 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x89 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x77 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x88 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x78 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x87 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x79 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x86 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x85 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x84 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x83 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x82 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x81 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x7F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x80 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x80 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x81 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x82 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x83 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x84 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x85 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x7A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x86 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x79 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x87 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x78 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x88 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x77 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x89 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x76 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x75 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] RPC 0x01000001 procedure 772: 007A7C00 00011E70 00000000 00000000 00000000 00000000 00000000 00031674  ".|z.p.......................t..."
 [iop] t5 libsd#5 sceSdSetParam(00000F80, 00000000, 00000020, 000294B4) -> 00000000 from 0001C190
 [iop] t5 libsd#5 sceSdSetParam(00001080, 00000000, 00000020, 000294B4) -> 00000000 from 0001C19C
@@ -8721,7 +8671,7 @@ no sound device: running silent
 [iop] t7 thsemap#6 SignalSema(00000006, 00022840, 0000F800, 00000000) -> 00000000 from 000221E0
 [iop] t7 sysclib#23 strcpy(0002F5D4, 00022840, 0000F800, 00000000) -> 0002F5D4 from 00022274
 [iop] t7 thbase#33 DelayThread(000001F4, 00022840, 0000F800, 00000000) -> 00000000 (waits) from 0001C2FC
-[host] EE idle: every thread waits, from 759915 ms (wall)
+[host] EE idle: every thread waits, from 837889 ms (wall)
 [iop] t5 thsemap#9 PollSema(00000006, 00022DDC, 000001B1, 000294B4) -> 00000000 from 000222AC
 [iop] t5 sysclib#23 strcpy(0002F4D4, 00022DDC, 000001B1, 000294B4) -> 0002F4D4 from 00022438
 [iop] t5 thsemap#6 SignalSema(00000006, 00022DDC, 00008201, 000294B4) -> 00000000 from 000221E0
@@ -8735,7 +8685,57 @@ no sound device: running silent
 [iop] t7 intrman#18 CpuResumeIntr(00000001, 00000001, 00019000, 00000000) -> 00000000 from 00019E20
 [iop] t7 thbase#33 DelayThread(00000002, 00000000, 00019000, 00000000) -> 00000000 (waits) from 0001C4AC
 [host] SIF reply delivered to the EE: 64 bytes, 0 left, at 6789116551 ns
+[write] 0x007BD3F4 <- 0x74 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x73 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x72 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x71 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x8F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x70 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x90 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x91 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x92 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x93 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x94 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x95 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x6A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x96 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x69 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x97 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x68 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x98 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x67 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x99 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x66 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9A (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x65 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9B (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x64 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x63 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x62 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x61 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0x9F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [call] 0x00410F60
+[write] 0x007BD3F4 <- 0x60 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0xA0 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x5F (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0xA1 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x5E (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0xA2 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x5D (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0xA3 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F4 <- 0x5C (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
+[write] 0x007BD3F0 <- 0xA4 (4 bytes) in 0x0030B800 < 0030B0D0 < 0030A240 < 003078F0 < 003078A0 < 004C49A0 < 0041B550 < 00356A60 < 00426E00 < 00426350 < 0032EAA0
 [iop] t7 cdvdman#28 sceCdStatus(00000002, 00000000, 00019000, 00000000) -> 00000000 from 0001CB44
 [iop] t7 cdvdman#11 sceCdSync(0000000B, 00000000, 00019000, 00000000) -> 00000000 from 0001CBF8
 [iop] t7 cdvdman#8 sceCdGetError(0000000B, 00000000, 00019000, 00000000) -> 00000000 from 0001CD30
@@ -8833,7 +8833,7 @@ threads:
 VIF1 commands: NOP 171399 STCYCL 3 OFFSET 3 BASE 3 ITOP 3 STMOD 3 MSKPATH3 3422 FLUSH 5857 FLUSHA 1952 STMASK 3 DIRECT 10741; VU: 0 instruction pairs (0 compiled: 0 entered, 0 stale, 0 MB checked), 0 XGKICKs; started at
 GS: 294338 primitives, 420725580 pixels written
 GIF tags: PATH1 0, PATH2 21009, PATH3 2077; image 566336 quadwords; register writes: 00:11246 01:978 03:19520 04:1952 05:332444 06:489 07:489 08:977 09:489 14:489 15:977 16:1 17:1 18:3542 19:1954 1A:2566 1B:1955 34:1 35:489 36:1 37:489 3B:978 3D:1 3F:977 40:4518 41:1954 42:489 43:489 44:489 45:1589 46:122 47:4518 48:1954 49:1 4A:1 4B:1 4C:3542 4D:1954 4E:3542 4F:1954 50:1466 51:3 52:1466 53:1466 7F:1952
-time: 14.8 s; GS drawing 89.3%, GS image transfers 0.0%, VU1 0.0%, VU0 0.0%, DMA and VIF 0.0%, IOP 0.1%, SPU2 0.1%, waiting for the GS thread 87.9%
+time: 11.9 s; GS drawing 92.0%, GS image transfers 0.0%, VU1 0.0%, VU0 0.0%, DMA and VIF 0.1%, IOP 0.1%, SPU2 0.1%, waiting for the GS thread 90.3%
 kernel services used:
   -120  SifSetDChain             x855
   -119  SifSetDma                x1

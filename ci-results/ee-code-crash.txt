@@ -1,3 +1,183 @@
+=== EE function at 0x004C4F40 ===
+/**************************************************************************
+ * func_004C4F40
+ *
+ * address      : 0x004c4f40 .. 0x004c50f8  (440 bytes, 110 instructions)
+ * discovered by: called
+ * called from  : 0x004c4af0, 0x004c4b5c
+ * string hint  : "BigFileHeaders_Z.h"
+ */
+glabel func_004C4F40
+  004c4f40  addiu      $sp, $sp, -0x80
+  004c4f44  lui        $at, 0x7b
+  004c4f48  sd         $ra, 0x70($sp)
+  004c4f4c  sq         $s6, 0x60($sp)
+  004c4f50  sq         $s5, 0x50($sp)
+  004c4f54  sq         $s4, 0x40($sp)
+  004c4f58  sq         $s3, 0x30($sp)
+  004c4f5c  sq         $s2, 0x20($sp)
+  004c4f60  sq         $s1, 0x10($sp)
+  004c4f64  sq         $s0, 0x0($sp)
+  004c4f68  lw         $v1, -0x587c($at)
+  004c4f6c  beq        $a1, $v1, .L006
+  004c4f70  daddu      $s5, $a0, $zero                         # delay slot
+  004c4f74  sll        $v0, $a1, 1
+  004c4f78  lui        $v1, 0x7b
+  004c4f7c  addu       $v0, $v0, $a1
+  004c4f80  lui        $at, 0x7b
+  004c4f84  sll        $a0, $v0, 3
+  004c4f88  addiu      $v1, $v1, -0x5980
+  004c4f8c  lw         $v0, -0x5880($at)
+  004c4f90  addu       $v1, $v1, $a0
+  004c4f94  andi       $s1, $a1, 0x1
+  004c4f98  andi       $v0, $v0, 0x1
+  004c4f9c  bne        $v0, $zero, .L002
+  004c4fa0  addiu      $s0, $v1, 0x120                         # delay slot
+  004c4fa4  sll        $v1, $s1, 1
+  004c4fa8  addiu      $v0, $s5, 0x10
+  004c4fac  addu       $v1, $v1, $s1
+  004c4fb0  sll        $s4, $v1, 2
+  004c4fb4  addu       $s2, $v0, $s4
+  004c4fb8  lw         $a0, 0x0($s2)
+  004c4fbc  beq        $a0, $zero, .L000
+  004c4fc0  addiu      $v0, $s5, 0x18                          # delay slot
+  004c4fc4  jal        func_002DCC40
+  004c4fc8  nop                                                # delay slot
+  004c4fcc  addiu      $v0, $s5, 0x18
+.L000:
+  004c4fd0  sw         $zero, 0x0($s2)
+  004c4fd4  addu       $s3, $v0, $s4
+  004c4fd8  addiu      $v0, $s5, 0x14
+  004c4fdc  sw         $zero, 0x0($s3)
+  004c4fe0  addu       $s4, $v0, $s4
+  004c4fe4  sw         $zero, 0x0($s4)
+  004c4fe8  lw         $a0, 0x0($s2)
+  004c4fec  beq        $a0, $zero, .L001
+  004c4ff0  lw         $s6, 0x4($s0)                           # delay slot
+  004c4ff4  jal        func_002DCC40
+  004c4ff8  nop                                                # delay slot
+.L001:
+  004c4ffc  sw         $zero, 0x0($s2)
+  004c5000  lui        $a1, 0x73
+  004c5004  sw         $zero, 0x0($s3)
+  004c5008  lui        $a2, 0x73
+  004c500c  sw         $zero, 0x0($s4)
+  004c5010  daddu      $a0, $s6, $zero
+  004c5014  addiu      $a1, $a1, 0x7f20                        # 0x00737f20 "Anonymous Alloc"
+  004c5018  addiu      $a2, $a2, 0x7f40                        # 0x00737f40 "BigFileHeaders_Z.h"
+  004c501c  addiu      $a3, $zero, 0x64
+  004c5020  addiu      $t0, $zero, 0x80
+  004c5024  jal        func_002DCBA0
+  004c5028  sw         $s6, 0x0($s4)                           # delay slot
+  004c502c  sw         $v0, 0x0($s2)
+  004c5030  lw         $v0, 0x0($s2)
+  004c5034  b          .L003
+  004c5038  sw         $v0, 0x0($s3)                           # delay slot
+.L002:
+  004c503c  sll        $v0, $s1, 1
+  004c5040  addiu      $a0, $s5, 0x10
+  004c5044  addu       $v0, $v0, $s1
+  004c5048  lw         $v1, 0xc($s0)
+  004c504c  sll        $a1, $v0, 2
+  004c5050  addu       $a0, $a0, $a1
+  004c5054  addiu      $v0, $s5, 0x18
+  004c5058  lw         $a0, 0x0($a0)
+  004c505c  addu       $v0, $v0, $a1
+  004c5060  addu       $v1, $a0, $v1
+  004c5064  sw         $v1, 0x0($v0)
+.L003:
+  004c5068  sll        $v0, $s1, 1
+  004c506c  addiu      $v1, $s5, 0x18
+  004c5070  addu       $a0, $v0, $s1
+  004c5074  lw         $v0, 0x4($s0)
+  004c5078  sll        $a0, $a0, 2
+  004c507c  addu       $v1, $v1, $a0
+  004c5080  bgez       $v0, .L004
+  004c5084  sra        $a3, $v0, 11                            # delay slot
+  004c5088  addiu      $v0, $v0, 0x7ff
+  004c508c  sra        $a3, $v0, 11
+.L004:
+  004c5090  lw         $t9, 0x154($s5)
+  004c5094  lw         $a1, 0x0($v1)
+  004c5098  lw         $a2, 0xc($s5)
+  004c509c  lw         $t9, 0x20($t9)
+  004c50a0  jalr       $t9
+  004c50a4  addiu      $a0, $s5, 0x14c                         # delay slot
+  004c50a8  lw         $a0, 0x4($s0)
+  004c50ac  bgez       $a0, .L005
+  004c50b0  sra        $v1, $a0, 11                            # delay slot
+  004c50b4  addiu      $v1, $a0, 0x7ff
+  004c50b8  sra        $v1, $v1, 11
+.L005:
+  004c50bc  mtc1       $v1, $f1
+  004c50c0  lwc1       $f0, -0x71d4($gp)
+  004c50c4  cvt.s.w    $f1, $f1
+  004c50c8  add.s      $f0, $f0, $f1
+  004c50cc  swc1       $f0, -0x71d4($gp)
+.L006:
+  004c50d0  ld         $ra, 0x70($sp)
+  004c50d4  lq         $s6, 0x60($sp)
+  004c50d8  lq         $s5, 0x50($sp)
+  004c50dc  lq         $s4, 0x40($sp)
+  004c50e0  lq         $s3, 0x30($sp)
+  004c50e4  lq         $s2, 0x20($sp)
+  004c50e8  lq         $s1, 0x10($sp)
+  004c50ec  lq         $s0, 0x0($sp)
+  004c50f0  jr         $ra
+  004c50f4  addiu      $sp, $sp, 0x80                          # delay slot
+/* end of func_004C4F40 */
+
+=== EE function at 0x004C4EB0 ===
+/**************************************************************************
+ * func_004C4EB0
+ *
+ * address      : 0x004c4eb0 .. 0x004c4f40  (144 bytes, 36 instructions)
+ * discovered by: called
+ * called from  : 0x004c4c18
+ * string hint  : "DynPtrArray_Z.h"
+ */
+glabel func_004C4EB0
+  004c4eb0  addiu      $sp, $sp, -0x20
+  004c4eb4  sd         $ra, 0x10($sp)
+  004c4eb8  sq         $s0, 0x0($sp)
+  004c4ebc  beq        $a1, $zero, .L001
+  004c4ec0  daddu      $s0, $a0, $zero                         # delay slot
+  004c4ec4  lw         $a0, 0x4($s0)
+  004c4ec8  beq        $a0, $zero, .L000
+  004c4ecc  lui        $a2, 0x73                               # delay slot
+  004c4ed0  lui        $a3, 0x73
+  004c4ed4  sll        $a1, $a1, 2
+  004c4ed8  addiu      $a2, $a2, 0x7f20
+  004c4edc  addiu      $a3, $a3, 0x7f30                        # 0x00737f30 "DynPtrArray_Z.h"
+  004c4ee0  jal        func_002DCC10
+  004c4ee4  addiu      $t0, $zero, 0xf0                        # delay slot
+  004c4ee8  b          .L002
+  004c4eec  sw         $v0, 0x4($s0)                           # delay slot
+.L000:
+  004c4ef0  sll        $a0, $a1, 2
+  004c4ef4  lui        $a2, 0x73
+  004c4ef8  lui        $a1, 0x73
+  004c4efc  addiu      $a2, $a2, 0x7f30                        # 0x00737f30 "DynPtrArray_Z.h"
+  004c4f00  addiu      $a1, $a1, 0x7f20                        # 0x00737f20 "Anonymous Alloc"
+  004c4f04  addiu      $a3, $zero, 0xf6
+  004c4f08  jal        func_002DCB70
+  004c4f0c  addiu      $t0, $zero, 0x4                         # delay slot
+  004c4f10  b          .L002
+  004c4f14  sw         $v0, 0x4($s0)                           # delay slot
+.L001:
+  004c4f18  lw         $a0, 0x4($s0)
+  004c4f1c  beq        $a0, $zero, .L002
+  004c4f20  nop                                                # delay slot
+  004c4f24  jal        func_002DCC40
+  004c4f28  nop                                                # delay slot
+  004c4f2c  sw         $zero, 0x4($s0)
+.L002:
+  004c4f30  ld         $ra, 0x10($sp)
+  004c4f34  lq         $s0, 0x0($sp)
+  004c4f38  jr         $ra
+  004c4f3c  addiu      $sp, $sp, 0x20                          # delay slot
+/* end of func_004C4EB0 */
+
 === EE function at 0x004B66F0 ===
 /**************************************************************************
  * func_004B66F0
