@@ -330,7 +330,7 @@ jobs:
         if: ${{ env.UP_SMOKE == 'true' }}
         continue-on-error: true
         env:
-          UP_SMOKE_WATCH: "0x007A982C,0x00795F94,0x00795F70"   # the flag the main thread waits on at 0x47DB38; the ManipulatorMgr's globals (0x795F94 its object, 0x795F70 the one the update walks)
+          UP_SMOKE_WATCH: "0x007A982C,0x00795F94,0x00795F70,0x007BD3E0,0x007BD3E4,0x007BD3E8,0x007BD3EC,0x007BD3F0,0x007BD3F4,0x007BD3F8,0x007BD3FC,0x007BD400,0x007BD404,0x007BD408,0x007BD40C,0x007BD410"   # the streaming ring of the context 0x7BD3D0 (run 46186597454: its dst 0x33680008 at ctx+0x30). the flag the main thread waits on at 0x47DB38; the ManipulatorMgr's globals (0x795F94 its object, 0x795F70 the one the update walks)
           UP_SMOKE_VIRTUAL: "1"                                  # the run's own time (--virtual-time): the same run every time
           PS2HOST_IOP_WATCH: "0x000C2D00-0x000C2FD0"            # the IOP stack of cdvdman (thread 7, sp 0xC2FA8 at the stop): every change, with its thread and instruction
         run: bash scripts/smoke_test.sh
@@ -551,7 +551,7 @@ jobs:
           # 0x4B66F0 (the read at 0x33680004), called from 0x32DF60 / 0x4C49A0 / 0x3078A0.
           # The frame that fills the object the free takes (0x32DE80 in 0x3079C0 at sp+0x70, the
           # unpacker's wrapper), the allocator it calls (0x2DCA90) and the calls in 0x3079C0.
-          for a in 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x0032DE80 0x0032DFA0 0x002DCA90 0x0030B9A0 0x002E05B0 0x0030CA70 0x00426350 0x00426E00 0x0032EAA0; do
+          for a in 0x004C4F40 0x004C4EB0 0x004B66F0 0x002DCC40 0x0032DF60 0x0032DE20 0x003079C0 0x003078A0 0x004C49A0 0x0032DE80 0x0032DFA0 0x002DCA90 0x0030B9A0 0x002E05B0 0x0030CA70 0x00426350 0x00426E00 0x0032EAA0; do
             echo "=== EE function at $a ==="
             timeout 120 python3 engine/tools/disasm.py --game games/up --addr "$a" 2>&1 | head -n 300 || true
           done > ci-results/ee-code-crash.txt 2>&1 || true
