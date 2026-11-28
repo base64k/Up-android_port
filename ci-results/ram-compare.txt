@@ -1,35 +1,35 @@
 entries:
   PCSX2 Savestate Version.id  size=36  compressed=36  method=0
-  PCSX2 Internal Structures.dat  size=129962  compressed=2738  method=93
-  eeMemory.bin  size=33554432  compressed=1887081  method=93
-  iopMemory.bin  size=2097152  compressed=98664  method=93
-  eeHwRegs.bin  size=65536  compressed=188  method=93
-  iopHwRegs.bin  size=65536  compressed=173  method=93
-  Scratchpad.bin  size=16384  compressed=157  method=93
+  PCSX2 Internal Structures.dat  size=129962  compressed=2625  method=93
+  eeMemory.bin  size=33554432  compressed=1886275  method=93
+  iopMemory.bin  size=2097152  compressed=92230  method=93
+  eeHwRegs.bin  size=65536  compressed=173  method=93
+  iopHwRegs.bin  size=65536  compressed=202  method=93
+  Scratchpad.bin  size=16384  compressed=159  method=93
   vu0Memory.bin  size=4096  compressed=18  method=93
   vu1Memory.bin  size=16384  compressed=18  method=93
-  vu0MicroMem.bin  size=4096  compressed=863  method=93
+  vu0MicroMem.bin  size=4096  compressed=18  method=93
   vu1MicroMem.bin  size=16384  compressed=25  method=93
-  SPU2.bin  size=2178992  compressed=280  method=93
+  SPU2.bin  size=2178992  compressed=281  method=93
   USB.bin  size=8491  compressed=85  method=93
   PAD.bin  size=228  compressed=86  method=93
-  GS.bin  size=4194813  compressed=8942  method=93
-  Screenshot.png  size=17965  compressed=17965  method=0
+  GS.bin  size=4194813  compressed=8954  method=93
+  Screenshot.png  size=17908  compressed=17908  method=0
 pages differing: 799 of 8192
 runs of differing pages: 46
   0x00000000..0x00018000: 0x00000000 ref=0x3C1A8001 port=0x00000000; 0x00000004 ref=0xFF595938 port=0x00000000; 0x00000008 ref=0x40196800 port=0x00000000
   0x00019000..0x00025000: 0x00019230 ref=0x800073B0 port=0x00000000; 0x00019250 ref=0x00000003 port=0x00000000; 0x00019260 ref=0x800073B0 port=0x00000000
-  0x00078000..0x00079000: 0x00078010 ref=0x80020000 port=0x00000000; 0x00078014 ref=0xFFFFFFFF port=0x00000000; 0x00078020 ref=0xFFFFFFFF port=0x00000000
+  0x00078000..0x00079000: 0x00078010 ref=0x006C0000 port=0x00000000; 0x00078020 ref=0xFFFFFFF6 port=0x00000000; 0x00078024 ref=0xFFFFFFFF port=0x00000000
   0x0007F000..0x00080000: 0x0007FD84 ref=0x01000001 port=0x00000000
-  0x00081000..0x00094000: 0x00081E70 ref=0x0079BB70 port=0x00000000; 0x00081E80 ref=0x007A27A8 port=0x00000000; 0x00081E90 ref=0x00081F20 port=0x00000000
+  0x00081000..0x00094000: 0x00081E70 ref=0x0079BB70 port=0x00000000; 0x00081E80 ref=0x0079E780 port=0x00000000; 0x00081E90 ref=0x00081F20 port=0x00000000
   0x00095000..0x00096000: 0x00095040 ref=0x00000004 port=0x00000000; 0x00095044 ref=0x20093840 port=0x00000000; 0x00095048 ref=0x00000020 port=0x00000000
   0x00710000..0x00711000: 0x00710340 ref=0x00FFFFFF port=0x7FFF7FFF; 0x00710344 ref=0x00FFFFFF port=0x7FFF7FFF; 0x00710348 ref=0x00FFFFFF port=0x7FFF7FFF
   0x00712000..0x00718000: 0x00712344 ref=0x00000000 port=0x009AF790; 0x00713704 ref=0x001B0000 port=0x00000000; 0x00713708 ref=0x00000000 port=0x002F4330
   0x0071E000..0x0071F000: 0x0071EED4 ref=0x00000000 port=0x0035CC90; 0x0071EED8 ref=0x00000000 port=0x0035CCE0
   0x00793000..0x00796000: 0x00793DB4 ref=0x3F800000 port=0x3F892492; 0x00793DBC ref=0x3D4CCCCD port=0x3D4CCCCC; 0x00793EA8 ref=0xFFFFFFFF port=0x00000001
   0x00797000..0x00799000: 0x00797228 ref=0x00045000 port=0x00045040; 0x00797248 ref=0x00000000 port=0x000001E9; 0x0079724C ref=0x00000000 port=0x3FAE1F5D
-  0x0079A000..0x0079F000: 0x0079A734 ref=0x3F7FB110 port=0x3F7FB10F; 0x0079A738 ref=0x3F7EC46E port=0x3F7EC46D; 0x0079A73C ref=0x3F7D3AAC port=0x3F7D3AAB
-  0x007A2000..0x007A3000: 0x007A25A0 ref=0x00000000 port=0x00000001; 0x007A25A4 ref=0x00000000 port=0x00200008; 0x007A25B8 ref=0x00000000 port=0x00000001
+  0x0079A000..0x0079F000: 0x0079A630 ref=0x00000000 port=0x3C000015; 0x0079A634 ref=0x00000000 port=0x3C0F1BDA; 0x0079A638 ref=0x00000000 port=0x3C1CC497
+  0x007A2000..0x007A3000: 0x007A2598 ref=0x00000000 port=0x00000001; 0x007A25A0 ref=0x00000000 port=0x00000001; 0x007A25A4 ref=0x00000000 port=0x00200008
   0x007A4000..0x007A5000: 0x007A40C0 ref=0x00000000 port=0xFFFFFFF6; 0x007A40C4 ref=0x00000000 port=0x0000020A; 0x007A40C8 ref=0x00000000 port=0x0000020E
   0x007A7000..0x007AC000: 0x007A7730 ref=0x6F726463 port=0x554C535C; 0x007A7734 ref=0x5C3A306D port=0x31325F53; 0x007A7738 ref=0x53554C53 port=0x34362E38
   0x007AE000..0x007AF000: 0x007AEBC0 ref=0x00000000 port=0x00A97CB0; 0x007AEBC4 ref=0x00000000 port=0x00000002
