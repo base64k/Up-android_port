@@ -331,6 +331,7 @@ jobs:
         continue-on-error: true
         env:
           UP_SMOKE_WATCH: "0x007A982C,0x00795F94,0x00795F70"   # the flag the main thread waits on at 0x47DB38; the ManipulatorMgr's globals (0x795F94 its object, 0x795F70 the one the update walks)
+          UP_SMOKE_VIRTUAL: "1"                                  # the run's own time (--virtual-time): the same run every time
           PS2HOST_IOP_WATCH: "0x000C2D00-0x000C2FD0"            # the IOP stack of cdvdman (thread 7, sp 0xC2FA8 at the stop): every change, with its thread and instruction
         run: bash scripts/smoke_test.sh
 

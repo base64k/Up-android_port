@@ -1,0 +1,30 @@
+diff --git a/host/src/iop_vm.cpp b/host/src/iop_vm.cpp
+--- a/host/src/iop_vm.cpp
++++ b/host/src/iop_vm.cpp
+@@ -790,7 +790,12 @@
+     loader.c.npc = loader.entry + 4;
+     Thread& started = vm.threads[loader.id] = loader;
+     vm.MakeReady(started);
+-    const u64 deadline = vm.NowUs() + 5000000;      // it may wait on timers: real time
++    // It may wait on timers: in real time the wait is measured on the clock and
++    // slept through. In virtual time (--virtual-time) the clock moves only when it
++    // is advanced, so here it advances a millisecond a step, the same every run.
++    // (Measured on the clock and never advanced, the loop never ended.)
++    const bool virtual_time = VirtualClock();
++    const u64 deadline = vm.NowUs() + 5000000;
+     const auto wall_start = std::chrono::steady_clock::now();
+     bool dumped = false;
+     g_probe_thread = loader.id;
+@@ -809,8 +814,10 @@
+             for (u32 a = lt.c.pc - 0x100; a <= lt.c.pc + 0x40; a += 4)
+                 std::fprintf(stderr, "[host] DUMP %08X %08X\n", unsigned(a), unsigned(vm.Read(a, 4)));
+         }
+-        if (vm.threads[loader.id].wait != Wait::Dormant)
+-            std::this_thread::sleep_for(std::chrono::microseconds(200));
++        if (vm.threads[loader.id].wait != Wait::Dormant) {
++            if (virtual_time) AdvanceClock(1000000);
++            else std::this_thread::sleep_for(std::chrono::microseconds(200));
++        }
+     }
+     Thread& done = vm.threads[loader.id];
+     if (done.wait != Wait::Dormant) Stop(path + "'s start routine did not finish");
